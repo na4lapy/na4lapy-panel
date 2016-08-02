@@ -19,7 +19,6 @@ export function loginUser(credentials) {
       dispatch(receiveLogin());
       dispatch(push('list'));
     }).catch((error) => {
-      console.log(error);
       dispatch(loginError(error.response.data));
     });
   };

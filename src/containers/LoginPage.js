@@ -42,8 +42,6 @@ class LoginPage extends React.Component {
     if (this.props.errorDictionary && this.props.errorDictionary.password) {
       passwordClass+= " invalid";
     }
-    console.log(passwordClass);
-
     return (
 
       <div className="container ">
@@ -71,7 +69,8 @@ class LoginPage extends React.Component {
 }
 
 LoginPage.propTypes  = {
-  dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired,
+  errorDictionary: PropTypes.object
 };
 
 LoginPage.contextTypes = {

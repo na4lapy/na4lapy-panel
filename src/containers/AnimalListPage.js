@@ -1,4 +1,4 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 
 export default class AnimalListPage extends React.Component {
   constructor(props) {
@@ -11,5 +11,5 @@ export default class AnimalListPage extends React.Component {
 }
 
 AnimalListPage.propTypes = {
-  
+
 };
