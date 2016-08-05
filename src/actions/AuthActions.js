@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { push } from 'react-router-redux';
+import {ANIMALS_URL} from '../routes_urls';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCESS = 'LOGIN_SUCCESS';
@@ -17,7 +18,7 @@ export function loginUser(credentials) {
     }).then(response => {
       localStorage.setItem(TOKEN_KEY, response.data.token);
       dispatch(receiveLogin());
-      dispatch(push('list'));
+      dispatch(push(ANIMALS_URL));
     }).catch((error) => {
       dispatch(loginError(error.response.data));
     });
