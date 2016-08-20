@@ -4,17 +4,17 @@
 
 import {createStore, compose, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
-import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import { routerMiddleware } from 'react-router-redux';
 import {browserHistory} from 'react-router';
+import createLogger from 'redux-logger';
 import rootReducer from '../reducers/index';
 
 
-export default function configureStore(initialState = {}) {
-  const middleware = routerMiddleware(browserHistory);
+export default function configureStore(initialState = {animals:[]}) {
+  const routingMiddleware = routerMiddleware(browserHistory);
   const store = createStore(rootReducer, initialState, compose(
-    // Add other middleware on this line...
-    applyMiddleware(reduxImmutableStateInvariant(), thunk, middleware),
+    // Add other routingMiddleware on this line...
+    applyMiddleware(thunk , routingMiddleware,createLogger()),
     window.devToolsExtension ? window.devToolsExtension() : f => f // add support for Redux dev tools
     )
   );

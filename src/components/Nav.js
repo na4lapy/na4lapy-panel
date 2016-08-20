@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {ANIMALS_URL, STATISTIC_URL, SHELTER_URL} from '../routes_urls';
 
-class Nav extends React.Component {
+export default class Nav extends React.Component {
+  constructor(props) {
+    super(props);
+
+  }
 
   componentDidMount() {
      $(".button-collapse").sideNav();
@@ -22,11 +26,13 @@ class Nav extends React.Component {
             <li><Link to={ANIMALS_URL}>Lista zwierząt</Link></li>
             <li><Link to={STATISTIC_URL}>Statystyki</Link></li>
             <li><Link to={SHELTER_URL}>Statystyki</Link></li>
+            <li><a href="#" onClick={this.props.logoutUser}>Wyloguj</a></li>
           </ul>
           <ul className="side-nav" id="mobile-demo">
             <li><Link to={ANIMALS_URL} onClick={this.closeNav}>Lista zwierząt</Link></li>
             <li><Link to={STATISTIC_URL} onClick={this.closeNav}>Statystyki</Link></li>
             <li><Link to={SHELTER_URL} onClick={this.closeNav}>Statystyki</Link></li>
+            <li><a href="#" onClick={this.props.logoutUser}>Wyloguj</a></li>
           </ul>
         </div>
       </nav>
@@ -34,4 +40,6 @@ class Nav extends React.Component {
   }
 }
 
-export default Nav;
+Nav.propTypes = {
+  logoutUser: PropTypes.func
+};

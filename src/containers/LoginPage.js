@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {loginUser} from '../actions/AuthActions';
+import {ANIMALS_URL} from '../routes_urls';
 
 class LoginPage extends React.Component {
 
@@ -17,7 +18,7 @@ class LoginPage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.userAuth.isAuthenticated) {
-      this.context.router.push('/dashboard');
+      this.context.router.push(ANIMALS_URL);
     }
   }
 

@@ -6,6 +6,10 @@ export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 
+export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
+
 import API_URL, {TOKEN_KEY} from '../config';
 
 export function loginUser(credentials) {
@@ -25,12 +29,12 @@ export function loginUser(credentials) {
   };
 
     function requestLogin (creds) {
-    return {
-      type: LOGIN_REQUEST,
-      isFetching: true,
-      isAuthenticated: false,
-      creds
-    };
+      return {
+        type: LOGIN_REQUEST,
+        isFetching: true,
+        isAuthenticated: false,
+        creds
+      };
   }
 
   function receiveLogin () {
@@ -41,13 +45,55 @@ export function loginUser(credentials) {
     };
   }
 
-  function loginError(errorDictionary) {
+  function loginError(errors) {
     return {
       type: LOGIN_FAILURE,
       isFetching: false,
       isAuthenticated: false,
-      errorDictionary
+      errors
     };
   }
 
+}
+
+export function logoutUser(){
+
+  return dispatch => {
+    localStorage.removeItem(TOKEN_KEY);
+    dispatch(logoutRequest());
+    return axios.post(API_URL + 'logout',{
+      token: localStorage.getItem(TOKEN_KEY)
+    }).then( () => {
+      dispatch(logoutSuccess());
+      dispatch(push("/"));
+    }).catch((err) => {
+      dispatch(logoutFailure(err));
+    });
+
+  };
+
+  function logoutRequest() {
+    return {
+      type: LOGOUT_REQUEST,
+      isFetching: true,
+      isAuthenticated: true
+    };
+  }
+
+  function logoutSuccess() {
+    return {
+      type: LOGOUT_SUCCESS,
+      isFetching: false,
+      isAuthenticated: false,
+    };
+  }
+
+  function logoutFailure(errorData) {
+    return {
+      type: LOGOUT_FAILURE,
+      isFetching: false,
+      isAuthenticated: false,
+      errors: errorData.response
+    };
+  }
 }

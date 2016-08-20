@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {TOKEN_KEY} from '../config';
 import Nav from '../components/Nav';
-
+import {bindActionCreators} from 'redux';
 import {logoutUser} from '../actions/AuthActions';
 
 class AuthorizedMainLayout extends React.Component{
@@ -15,24 +15,24 @@ class AuthorizedMainLayout extends React.Component{
     this.redirectToLogin(this.props);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.redirectToLogin(nextProps);
+  componentWillReceiveProps() {
+    this.redirectToLogin();
   }
 
-  redirectToLogin(props){
-    if(!localStorage.getItem(TOKEN_KEY) && !props.userAuth.isAuthenticated) {
+  redirectToLogin(){
+    if(!localStorage.getItem(TOKEN_KEY)) {
       this.context.router.push("/");
     }
   }
 
   logout(){
-    this.props.dispatch(logoutUser());
+    this.props.logoutUser();
   }
 
   render() {
     return (
       <div className="main-layout">
-        <Nav/>
+        <Nav logoutUser={this.logout}/>
         <div className="main-content">
           {this.props.children}
         </div>
@@ -45,7 +45,7 @@ class AuthorizedMainLayout extends React.Component{
 AuthorizedMainLayout.propTypes = {
   children: PropTypes.object,
   userAuth: PropTypes.object,
-  dispatch: PropTypes.func.isRequired
+  logoutUser: PropTypes.func.isRequired
 };
 
 AuthorizedMainLayout.contextTypes = {
@@ -58,4 +58,10 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(AuthorizedMainLayout);
+function mapDispatchToProps(dispatch){
+  return {
+    logoutUser: bindActionCreators(logoutUser, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthorizedMainLayout);
