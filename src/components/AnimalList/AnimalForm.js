@@ -7,13 +7,19 @@ import {bindActionCreators} from 'redux';
 import * as animalActions from '../../actions/AnimalActions';
 import moment from 'moment';
 import {DATE_FORMAT} from '../../config';
-import UploadedPhotosWrapper from './UploadedPhotosWrapper';
+import {deletePhoto} from '../../actions/PhotoActions';
+
 
 class AnimalForm extends React.Component {
   constructor(props) {
     super(props);
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.removePhoto = this.removePhoto.bind(this);
+    this.deletePhoto = this.deletePhoto.bind(this);
+    this.state = {
+      uploadedFileToBeRemoved: null
+    };
   }
 
   componentDidMount() {
@@ -24,7 +30,7 @@ class AnimalForm extends React.Component {
     });
 
     $(ReactDOM.findDOMNode(this.refs.animal_gender)).on('change',this.handleSelectChange);
-    $(ReactDOM.findDOMNode(this.refs.animal_spiecies)).on('change',this.handleSelectChange);
+    $(ReactDOM.findDOMNode(this.refs.animal_species)).on('change',this.handleSelectChange);
     $(ReactDOM.findDOMNode(this.refs.animal_birthDate)).on('change',this.handleSelectChange);
     $(ReactDOM.findDOMNode(this.refs.animal_admittanceDate)).on('change',this.handleSelectChange);
     $(ReactDOM.findDOMNode(this.refs.animal_activity)).on('change',this.handleSelectChange);
@@ -47,15 +53,21 @@ class AnimalForm extends React.Component {
     this.props.changeModel(e.target.name, value);
   }
 
-  renderUploadedPhotos(){
-    if (this.props.animal && this.props.animal.photos && this.props.animal.photos.length != 0) {
-       return (<UploadedPhotosWrapper photos={this.props.animal.photos} />);
-    }
+
+
+  removePhoto(event,id) {
+
+    this.setState({uploadedFileToBeRemoved: this.props.animal.photos[id]}, () => {
+        $('#removingFileModal').openModal();
+    });
+  }
+
+  deletePhoto(id) {
+    console.log("Delete photo with id: " + id);
   }
 
   render() {
     let {animal} = this.props;
-    console.log(animal);
     return (
       <Form model="animal" onSubmit={(animal) => this.handleSubmit(animal)}>
       <div className="row">
@@ -68,7 +80,7 @@ class AnimalForm extends React.Component {
           <label>Płeć</label>
         </div>
         <div className ="input-field col s12 m6" >
-            <select  name="animal.spiecies" ref="animal_spiecies" defaultValue={animal.spiecies} onChange={this.handleSelectChange} >
+            <select  name="animal.species" ref="animal_species" defaultValue={animal.species} onChange={this.handleSelectChange} >
               <option value={"DOG"}>Pies</option>
               <option value={"CAT"}>Kot</option>
               <option value={"OTHER"}>Inne</option>
@@ -149,11 +161,10 @@ class AnimalForm extends React.Component {
           <input name="animal.chip" type="text" placeholder="Chip"/>
           <label htmlFor="animal.chip">Chip</label>
         </Field>
-        {this.renderUploadedPhotos()}
         <hr />
-        <div className="file-field input-field col s12">
-          <ImageUploader />
-        </div>
+
+      <ImageUploader deletePhoto={this.props.deletePhoto} photos={this.props.animal.photos} animalId={this.props.animal.id}/>
+
       </div>
       <div className="row">
         <div className="center">
@@ -182,7 +193,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch){
   return {
     saveAnimal: bindActionCreators(animalActions.saveAnimal, dispatch ),
-    changeModel: bindActionCreators(actions.change, dispatch)
+    changeModel: bindActionCreators(actions.change, dispatch),
+    deletePhoto: bindActionCreators(deletePhoto, dispatch)
   };
 }
 

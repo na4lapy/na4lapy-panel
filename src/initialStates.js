@@ -1,6 +1,6 @@
 export const animalInitialState = {
   gender: 'MALE',
-  spiecies: 'DOG',
+  species: 'DOG',
   activity: 'HIGH',
   training: 'BASIC',
   vaccination: 'BASIC',

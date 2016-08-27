@@ -33,7 +33,7 @@ import {push} from 'react-router-redux';
 
   render() {
     return (<div>
-      <div className="container">
+      <div className="main_wrapper">
         <h1>Lista zwierząt</h1>
         <FilterPanel />
       </div>
