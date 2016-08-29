@@ -5,11 +5,13 @@
  import {animalInitialState} from '../initialStates';
  import AnimalListReducer from './AnimalListReducer';
  import AuthReducer from './AuthReducer';
+ import FilterReducer from './FilterReducer';
 
  const rootReducer = combineReducers({
    userAuth: AuthReducer,
    routing: routerReducer,
    animalListState: AnimalListReducer,
+   animalFilter: FilterReducer,
    animal:  modelReducer('animal', animalInitialState),
    animalForm: formReducer('animal', animalInitialState)
 });

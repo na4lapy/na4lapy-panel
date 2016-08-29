@@ -4,11 +4,10 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import {TOKEN_KEY} from './config';
 import axios from 'axios';
-import {push} from 'react-router-redux';
+import {push, syncHistoryWithStore} from 'react-router-redux';
 /* eslint-disable */
 import configureStore from './store/configureStore';
 /* eslint-enable */
-import { syncHistoryWithStore } from 'react-router-redux';
 
 import 'materialize-css/dist/css/materialize.css';
 import 'materialize-css/dist/js/materialize.js';
@@ -16,8 +15,9 @@ import 'materialize-css/dist/js/materialize.js';
 import './styles/index.sass';
 
 import routes from './routes';
+import {filterInitialState} from './initialStates';
 
-const store = configureStore({});
+const store = configureStore(filterInitialState);
 
 const history = syncHistoryWithStore(browserHistory, store);
 

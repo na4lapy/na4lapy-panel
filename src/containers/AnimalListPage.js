@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ANIMALS_URL, ANIMALS_ADD_URL} from '../routes_urls';
 import {push} from 'react-router-redux';
+import {setFilter} from '../actions/FilterActions';
 
  class AnimalListPage extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ import {push} from 'react-router-redux';
     this.onDeleteClick = this.onDeleteClick.bind(this);
     this.onEditClick = this.onEditClick.bind(this);
     this.onAddClick = this.onAddClick.bind(this);
+    this.setFilter = this.setFilter.bind(this);
   }
 
   componentDidMount() {
@@ -31,11 +33,15 @@ import {push} from 'react-router-redux';
     this.props.push(ANIMALS_ADD_URL);
   }
 
+  setFilter(e) {
+    this.props.setFilter(e.target.name, e.target.value);
+  }
+
   render() {
     return (<div>
       <div className="main_wrapper">
         <h1>Lista zwierząt</h1>
-        <FilterPanel />
+        <FilterPanel setFilter={this.setFilter}/>
       </div>
       <Table
         data={this.props.animals || []}
@@ -55,6 +61,7 @@ AnimalListPage.propTypes = {
   deleteAnimal: PropTypes.func.isRequired,
   getAnimals: PropTypes.func.isRequired,
   push: PropTypes.func,
+  setFilter: PropTypes.func,
   animals: PropTypes.array
 };
 
@@ -62,7 +69,8 @@ function mapDispatchToProps(dispatch) {
   return {
     push: bindActionCreators(push, dispatch),
     getAnimals: bindActionCreators(animalActions.getAnimals, dispatch),
-    deleteAnimal: bindActionCreators(animalActions.deleteAnimal, dispatch)
+    deleteAnimal: bindActionCreators(animalActions.deleteAnimal, dispatch),
+    setFilter: bindActionCreators(setFilter, dispatch)
   };
 }
 
