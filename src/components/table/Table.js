@@ -11,9 +11,14 @@ class Table extends React.Component {
     let that = this;
     return (
       <div  className="table_wrapper">
-        <table className="responsive-table highlight striped">
+        <table className="responsive-table highlight striped centered">
           <thead><tr>{this.props.headers.map((header, idx) => {
-            return <th key={idx}>{header}</th>;
+            let arrowClass = '';
+            if(header.sortingKey == that.props.sortingKey){
+              arrowClass = that.props.sortingOrder == 'DESC' ? 'desc' : 'asc';
+            }
+            console.log(arrowClass);
+            return (header.label !== 'Edycja' && header.label !=='Zdjęcie')  ? <th key={idx} className={"sorting hvr-underline-from-center " + arrowClass} onClick={(event) => this.props.onHeaderClick(event, header.sortingKey)}>{header.label}</th> : <th key={idx} >{header.label}</th> ;
             })}
           </tr></thead>
           <tbody>
@@ -37,6 +42,7 @@ class Table extends React.Component {
 Table.propTypes = {
   data: PropTypes.array.isRequired,
   headers: PropTypes.array.isRequired,
+  onHeaderClick: PropTypes.func
 };
 
 export default Table;

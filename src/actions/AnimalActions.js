@@ -1,6 +1,8 @@
 import axios from 'axios';
 import API_URL from '../config';
+import {push} from 'react-router-redux';
 import {actions} from 'react-redux-form';
+import {ANIMALS_URL} from '../routes_urls';
 
 export const SAVE_ANIMAL_REQUEST = 'SAVE_ANIMAL_REQUEST';
 export const SAVE_ANIMAL_SUCCESS = 'SAVE_ANIMAL_SUCCESS';
@@ -46,9 +48,13 @@ export function saveAnimal(animal) {
         })
       ).then(() => {
         dispatch(saveAnimalSuccess());
+        dispatch(push(ANIMALS_URL));
       }).catch((err) => {
         dispatch(saveAnimalFailure(err.resposne.data));
       });
+    } else {
+        dispatch(saveAnimalSuccess());
+        dispatch(push(ANIMALS_URL));
       }
     });
   };

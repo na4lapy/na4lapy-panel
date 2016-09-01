@@ -40,7 +40,7 @@ export default class FilterPanel extends React.Component {
               <option value="ANY">Wszystkie</option>
               <option value="MALE">Samiec</option>
               <option value="FEMALE">Suczka</option>
-              <option value="UNKNOWN">Nieznan</option>
+              <option value="UNKNOWN">Nieznany</option>
             </select>
             <label>Płeć</label>
           </div>

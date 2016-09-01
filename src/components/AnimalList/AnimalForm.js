@@ -16,7 +16,6 @@ class AnimalForm extends React.Component {
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.removePhoto = this.removePhoto.bind(this);
-    this.deletePhoto = this.deletePhoto.bind(this);
     this.state = {
       uploadedFileToBeRemoved: null
     };
@@ -38,6 +37,7 @@ class AnimalForm extends React.Component {
     $(ReactDOM.findDOMNode(this.refs.animal_vaccination)).on('change',this.handleSelectChange);
     $(ReactDOM.findDOMNode(this.refs.animal_sterilization)).on('change',this.handleSelectChange);
     $(ReactDOM.findDOMNode(this.refs.animal_status)).on('change',this.handleSelectChange);
+    $(ReactDOM.findDOMNode(this.refs.animal_size)).on('change',this.handleSelectChange);
     // Materialize.updateTextFields(); //eslint-disable-line
   }
 
@@ -46,6 +46,7 @@ class AnimalForm extends React.Component {
   }
 
   handleSelectChange(e){
+    console.log(e);
     let value = e.target.value;
     if(e.target.classList.contains('datepicker')){
      value = moment(value, DATE_FORMAT).valueOf();
@@ -53,17 +54,11 @@ class AnimalForm extends React.Component {
     this.props.changeModel(e.target.name, value);
   }
 
-
-
   removePhoto(event,id) {
 
     this.setState({uploadedFileToBeRemoved: this.props.animal.photos[id]}, () => {
         $('#removingFileModal').openModal();
     });
-  }
-
-  deletePhoto(id) {
-    console.log("Delete photo with id: " + id);
   }
 
   render() {
@@ -110,7 +105,7 @@ class AnimalForm extends React.Component {
         </div>
       </div>
       <div className="row">
-        <div className ="input-field col s12 m6" >
+        <div className ="input-field col s12 m4" >
             <select  name="animal.activity" ref="animal_activity" defaultValue={animal.activity} onChange={this.handleSelectChange} >
               <option value={"HIGH"}>Wysoka</option>
               <option value={"LOW"}>Niska</option>
@@ -118,7 +113,7 @@ class AnimalForm extends React.Component {
             </select>
           <label>Aktywność</label>
         </div>
-        <div className ="input-field col s12 m6" >
+        <div className ="input-field col s12 m4" >
             <select  name="animal.training" ref="animal_training" defaultValue={animal.training} onChange={this.handleSelectChange} >
               <option value={"BASIC"}>Podstawowy</option>
               <option value={"ADVANCED"}>Zaawansowany</option>
@@ -126,6 +121,14 @@ class AnimalForm extends React.Component {
               <option value={"UNKNOWN"}>Nieokreślony</option>
             </select>
           <label>Trening</label>
+        </div>
+        <div className ="input-field col s12 m4" >
+            <select  name="animal.size" ref="animal_size" defaultValue={animal.size} onChange={this.handleSelectChange} >
+              <option value={"SMALL"}>Mały</option>
+              <option value={"MEDIUM"}>Średni</option>
+              <option value={"LARGE"}>Duży</option>
+            </select>
+          <label>Rozmiar</label>
         </div>
       </div>
       <div className="row">
@@ -155,7 +158,7 @@ class AnimalForm extends React.Component {
               <option value={"ADOPTED"}>Adoptowany</option>
               <option value={"DELETED"}>Usunięty</option>
             </select>
-          <label>Szczepienie</label>
+          <label>Status</label>
         </div>
         <Field className="input-field col s12 m6" model="animal.chip">
           <input name="animal.chip" type="text" placeholder="Chip"/>

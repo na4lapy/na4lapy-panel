@@ -25,13 +25,13 @@ export default class Nav extends React.Component {
           <ul className="right hide-on-med-and-down">
             <li><Link to={ANIMALS_URL}>Lista zwierząt</Link></li>
             <li><Link to={STATISTIC_URL}>Statystyki</Link></li>
-            <li><Link to={SHELTER_URL}>Statystyki</Link></li>
+            <li><Link to={SHELTER_URL}>Dane schroniska</Link></li>
             <li><a href="#" onClick={this.props.logoutUser}>Wyloguj</a></li>
           </ul>
           <ul className="side-nav" id="mobile-demo">
             <li><Link to={ANIMALS_URL} onClick={this.closeNav}>Lista zwierząt</Link></li>
             <li><Link to={STATISTIC_URL} onClick={this.closeNav}>Statystyki</Link></li>
-            <li><Link to={SHELTER_URL} onClick={this.closeNav}>Statystyki</Link></li>
+            <li><Link to={SHELTER_URL} onClick={this.closeNav}>Dane schroniska</Link></li>
             <li><a href="#" onClick={this.props.logoutUser}>Wyloguj</a></li>
           </ul>
         </div>
