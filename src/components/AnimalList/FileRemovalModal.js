@@ -1,7 +1,6 @@
 import React, {PropTypes} from 'react';
 
 const FileRemovalModal = ({fileName, removeCallback, photosType}) => {
-  console.log(removeCallback);
   return (
     <div id="removingFileModal" className="modal bottom-sheet">
      <div className="modal-content">

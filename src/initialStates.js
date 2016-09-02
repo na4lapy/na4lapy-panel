@@ -1,10 +1,10 @@
 export const animalInitialState = {
-  gender: 'MALE',
+  gender: 'UNKNOWN',
   species: 'DOG',
-  activity: 'HIGH',
-  training: 'BASIC',
-  vaccination: 'BASIC',
-  sterilization: 'STERILIZED',
+  activity: 'UNKNOWN',
+  training: 'UNKNOWN',
+  vaccination: 'UNKNOWN',
+  sterilization: 'UNKNOWN',
   status: 'FOR_ADOPTION'
 };
 

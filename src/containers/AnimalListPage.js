@@ -9,6 +9,8 @@ import {push} from 'react-router-redux';
 import {setFilter} from '../actions/FilterActions';
 import {setSorting} from '../actions/SortingActions';
 import AnimalSelector from '../selectors/AnimalSelector';
+import AnimalRemovalModal from '../components/AnimalList/AnimalRemovalModal';
+import _ from 'lodash';
 
 
  class AnimalListPage extends React.Component {
@@ -19,14 +21,21 @@ import AnimalSelector from '../selectors/AnimalSelector';
     this.onAddClick = this.onAddClick.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.onHeaderClick = this.onHeaderClick.bind(this);
+
+    this.state = {
+      animalToBeRemoved: null
+    };
   }
 
   componentDidMount() {
     this.props.getAnimals();
   }
 
-  onDeleteClick(event, idx) {
-    this.props.deleteAnimal(idx);
+  onDeleteClick(event, id) {
+    const animalToBeRemoved = _.find(this.props.animals, {id});
+    this.setState({animalToBeRemoved: animalToBeRemoved}, () => {
+      $('#removingAnimalModal').openModal();
+    });
   }
 
   onEditClick(event, idx) {
@@ -48,7 +57,7 @@ import AnimalSelector from '../selectors/AnimalSelector';
   render() {
     return (<div>
       <div className="main_wrapper">
-        <h1>Lista zwierząt</h1>
+        <h1 className="center">Liczba zwierząt - {this.props.animals.length}</h1>
         <FilterPanel setFilter={this.setFilter}/>
       </div>
       <Table
@@ -74,6 +83,7 @@ import AnimalSelector from '../selectors/AnimalSelector';
        <div className="fixed-action-btn" onClick={() => this.onAddClick()}>
          <a className="btn-floating btn-large waves-effect waves-light light-blue" ><i className="material-icons">add</i></a>
       </div>
+      <AnimalRemovalModal animal={this.state.animalToBeRemoved} removeCallback={this.props.deleteAnimal}/>
 
     </div>);
   }

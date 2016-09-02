@@ -12,6 +12,7 @@ export default class FilterPanel extends React.Component {
     $(ReactDOM.findDOMNode(this.refs.animal_species)).on('change',this.handleSelectChange);
     $(ReactDOM.findDOMNode(this.refs.animal_gender)).on('change',this.handleSelectChange);
     $(ReactDOM.findDOMNode(this.refs.animal_size)).on('change',this.handleSelectChange);
+    $(ReactDOM.findDOMNode(this.refs.animal_status)).on('change',this.handleSelectChange);
   }
 
   handleSelectChange(e){
@@ -20,12 +21,14 @@ export default class FilterPanel extends React.Component {
 
   render(){
     return (
-      <div className="row">
         <form>
-          <div className="input-field col s3">
-              <input  name="name" type="text" onChange={this.props.setFilter}/>
-              <label htmlFor="first_name">Szukaj</label>
+            <div className="row">
+              <div className="input-field col s12">
+                  <input  name="name" type="text" placeholder="Imię" onChange={this.props.setFilter}/>
+                  <label htmlFor="first_name">Szukaj</label>
+              </div>
           </div>
+        <div className="row">
           <div className="input-field col s3" >
             <select ref="animal_species" name="species">
               <option value="ANY">Wszystkie</option>
@@ -53,8 +56,18 @@ export default class FilterPanel extends React.Component {
             </select>
             <label>Wielkość</label>
           </div>
-        </form>
+          <div className="input-field col s3">
+            <select ref="animal_status" name="status">
+              <option value="ANY">Wszystkie</option>
+              <option value="UNPUBLISHED">Nieopublikowany</option>
+              <option value="FOR_ADOPTION">Do adpocji</option>
+              <option value="ADOPTED">Adoptowany</option>
+              <option value="DELETED">Usunięty</option>
+            </select>
+            <label>Status</label>
+          </div>
       </div>
+    </form>
     );
   }
 }
