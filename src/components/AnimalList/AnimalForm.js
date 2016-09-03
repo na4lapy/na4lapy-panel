@@ -64,9 +64,10 @@ class AnimalForm extends React.Component {
     let {animal} = this.props;
     return (
       <Form model="animal" onSubmit={(animal) => this.handleSubmit(animal)}>
+      <h1 className="center">Dodaj kudłacza!</h1>
       <div className="row">
         <div className ="input-field col s12 m6" >
-            <select  name="animal.gender" ref="animal_gender" defaultValue={animal.gender} onChange={this.handleSelectChange} >
+            <select  name="animal.gender" ref="animal_gender" defaultValue={animal.gender || 'UNKNOWN'} onChange={this.handleSelectChange} >
               <option value={"MALE"}>Samiec</option>
               <option value={"FEMALE"}>Samica</option>
               <option value={"UNKNOWN"}>Nieznana</option>
@@ -74,7 +75,7 @@ class AnimalForm extends React.Component {
           <label>Płeć</label>
         </div>
         <div className ="input-field col s12 m6" >
-            <select  name="animal.species" ref="animal_species" defaultValue={animal.species} onChange={this.handleSelectChange} >
+            <select  name="animal.species" ref="animal_species" defaultValue={animal.species || 'DOG'} onChange={this.handleSelectChange} >
               <option value={"DOG"}>Pies</option>
               <option value={"CAT"}>Kot</option>
               <option value={"OTHER"}>Inne</option>
@@ -105,7 +106,7 @@ class AnimalForm extends React.Component {
       </div>
       <div className="row">
         <div className ="input-field col s12 m4" >
-            <select  name="animal.activity" ref="animal_activity" defaultValue={animal.activity} onChange={this.handleSelectChange} >
+            <select  name="animal.activity" ref="animal_activity" defaultValue={animal.activity || 'UNKNOWN'} onChange={this.handleSelectChange} >
               <option value={"HIGH"}>Wysoka</option>
               <option value={"LOW"}>Niska</option>
               <option value={"UNKNOWN"}>Nieznana</option>
@@ -113,7 +114,7 @@ class AnimalForm extends React.Component {
           <label>Aktywność</label>
         </div>
         <div className ="input-field col s12 m4" >
-            <select  name="animal.training" ref="animal_training" defaultValue={animal.training} onChange={this.handleSelectChange} >
+            <select  name="animal.training" ref="animal_training" defaultValue={animal.training || 'UNKNOWN'} onChange={this.handleSelectChange} >
               <option value={"BASIC"}>Podstawowy</option>
               <option value={"ADVANCED"}>Zaawansowany</option>
               <option value={"NONE"}>Brak</option>
@@ -122,7 +123,7 @@ class AnimalForm extends React.Component {
           <label>Trening</label>
         </div>
         <div className ="input-field col s12 m4" >
-            <select  name="animal.size" ref="animal_size" defaultValue={animal.size} onChange={this.handleSelectChange} >
+            <select  name="animal.size" ref="animal_size" defaultValue={animal.size || 'SMALL'} onChange={this.handleSelectChange} >
               <option value={"SMALL"}>Mały</option>
               <option value={"MEDIUM"}>Średni</option>
               <option value={"LARGE"}>Duży</option>
@@ -132,7 +133,7 @@ class AnimalForm extends React.Component {
       </div>
       <div className="row">
         <div className ="input-field col s12 m6" >
-            <select  name="animal.vaccination" ref="animal_vaccination" defaultValue={animal.vaccination} onChange={this.handleSelectChange} >
+            <select  name="animal.vaccination" ref="animal_vaccination" defaultValue={animal.vaccination || 'UNKNOWN'} onChange={this.handleSelectChange} >
               <option value={"BASIC"}>Podstawowe</option>
               <option value={"EXTENDED"}>Rozszerzone</option>
               <option value={"NONE"}>Brak</option>
@@ -141,7 +142,7 @@ class AnimalForm extends React.Component {
           <label>Szczepienie</label>
         </div>
         <div className ="input-field col s12 m6" >
-            <select  name="animal.sterilization" ref="animal_sterilization" defaultValue={animal.sterilization} onChange={this.handleSelectChange} >
+            <select  name="animal.sterilization" ref="animal_sterilization" defaultValue={animal.sterilization || 'UNKNOWN'} onChange={this.handleSelectChange} >
               <option value={"STERILIZED"}>Sterylizowany</option>
               <option value={"NOT_STERILIZED"}>Nie sterylizowany</option>
               <option value={"UNKNOWN"}>Nieokreślony</option>
@@ -151,11 +152,10 @@ class AnimalForm extends React.Component {
       </div>
       <div className="row">
         <div className ="input-field col s12 m6" >
-            <select  name="animal.status" ref="animal_status" defaultValue={animal.status} onChange={this.handleSelectChange} >
+            <select  name="animal.status" ref="animal_status" defaultValue={animal.status || 'UNPUBLISHED'} onChange={this.handleSelectChange} >
               <option value={"UNPUBLISHED"}>Nieopublikowany</option>
               <option value={"FOR_ADOPTION"}>Do adopcji</option>
               <option value={"ADOPTED"}>Adoptowany</option>
-              <option value={"DELETED"}>Usunięty</option>
             </select>
           <label>Status</label>
         </div>
@@ -183,7 +183,8 @@ class AnimalForm extends React.Component {
 AnimalForm.propTypes = {
   animal: PropTypes.object,
   saveAnimal: PropTypes.func.isRequired,
-  changeModel: PropTypes.func.isRequired
+  changeModel: PropTypes.func.isRequired,
+  deletePhoto: PropTypes.func
 };
 
 function mapStateToProps(state) {

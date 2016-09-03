@@ -5,7 +5,7 @@ export const animalInitialState = {
   training: 'UNKNOWN',
   vaccination: 'UNKNOWN',
   sterilization: 'UNKNOWN',
-  status: 'FOR_ADOPTION'
+  status: 'UNPUBLISHED'
 };
 
 export const filterInitialState = {
@@ -16,3 +16,39 @@ export const filterInitialState = {
     size: 'ANY'
   }
 };
+
+
+export const shelterInitialState = {
+  accountNumber: '',
+  adoptionRules: '',
+  buildingNumber: '',
+  city: '',
+  email: '',
+  facebookProfile: '',
+  name: '',
+  phoneNumber: '',
+  postalCode: '',
+  street: '',
+  voivodeship: '',
+  website: ''
+};
+
+
+export const voivodeships = [
+  'dolnośląskie',
+  'kujawsko-pomorskie',
+  'lubelskie',
+  'lubuskie',
+  'łódzkie',
+  'małopolskie',
+  'mazowieckie',
+  'opolskie',
+  'podkarpackie',
+  'podlaskie',
+  'pomorskie',
+  'śląskie',
+  'świętokrzyskie',
+  'warmińsko-mazurskie',
+  'wielkopolskie',
+  'zachodniopomorskie'
+];

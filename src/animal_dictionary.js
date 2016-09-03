@@ -1,0 +1,26 @@
+export default  {
+  gender: {
+    MALE: 'Samiec',
+    FEMALE: 'Suczka',
+    UNKNOWN: 'Nieznana'
+  },
+
+  size: {
+    SMALL: 'Mały',
+    MEDIUM: 'Średni',
+    LARGE: 'Duży'
+  },
+
+  status: {
+    UNPUBLISHED: 'Nieopublikowany',
+    FOR_ADOPTION: 'Do adpocji',
+    ADOPTED: 'Adoptowany',
+  },
+
+  species:{
+    DOG: 'Pies',
+    CAT: 'Kot',
+    OTHER: 'Inne'
+  }
+
+};

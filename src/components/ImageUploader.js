@@ -79,7 +79,7 @@ export default class ImageUploader extends React.Component {
     let imagePreviews = null;
     if (imagePreviewUrls) {
         imagePreviews= [];
-        imagePreviews.push(<h3 className="center">Zdjęcia do wgrania</h3>);
+        imagePreviews.push(<h3 key="header" className="center">Zdjęcia do wgrania</h3>);
         imagePreviewUrls.map( (imagePreviewUrl,index) => {
           imagePreviews.push(
             <div key={index} className="col s4 previewWrapper">

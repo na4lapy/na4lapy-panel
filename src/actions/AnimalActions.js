@@ -53,6 +53,7 @@ export function saveAnimal(animal) {
         dispatch(saveAnimalFailure(err.resposne.data));
       });
     } else {
+        dispatch(getAnimals());
         dispatch(saveAnimalSuccess());
         dispatch(push(ANIMALS_URL));
       }

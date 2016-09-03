@@ -5,6 +5,7 @@ import {Route, IndexRoute } from 'react-router';
 import {
     ANIMALS_URL,
     ANIMALS_ADD_URL,
+    SHELTER_URL,
     STATISTIC_URL,
 } from './routes_urls';
 
@@ -13,6 +14,7 @@ import LoginPage from './containers/LoginPage';
 import AnimalListPage from './containers/AnimalListPage';
 import StatisticsPage from './containers/StatisticsPage';
 import AnimalAddPage from './containers/AnimalAddPage';
+import ShelterDetailPage from './containers/ShelterDetailPage';
 
 import App from './containers/App';
 import AuthorizedMainLayout from './containers/AuthorizedMainLayout';
@@ -25,6 +27,7 @@ export default (
         <IndexRoute component={AnimalListPage} />
         <Route path={ANIMALS_ADD_URL} component={AnimalAddPage} />
         <Route path={ANIMALS_URL + '/:animalId'} component={AnimalAddPage}/>
+        <Route path={SHELTER_URL} component={ShelterDetailPage} />
       </Route >
       <Route path={STATISTIC_URL} component={StatisticsPage} />
     </Route>

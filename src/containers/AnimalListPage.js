@@ -21,6 +21,7 @@ import _ from 'lodash';
     this.onAddClick = this.onAddClick.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.onHeaderClick = this.onHeaderClick.bind(this);
+    this.onPublishClick = this.onPublishClick.bind(this);
 
     this.state = {
       animalToBeRemoved: null
@@ -54,6 +55,12 @@ import _ from 'lodash';
     this.props.setSorting(header);
   }
 
+  onPublishClick(id) {
+    let animalToBePublished = _.find(this.props.animals, {id});
+    animalToBePublished.status = 'FOR_ADOPTION';
+    this.props.saveAnimal(animalToBePublished);
+  }
+
   render() {
     return (<div>
       <div className="main_wrapper">
@@ -79,6 +86,7 @@ import _ from 'lodash';
         onDeleteClick={this.onDeleteClick}
         onEditClick={this.onEditClick}
         onHeaderClick={this.onHeaderClick}
+        onPublishClick={this.onPublishClick}
          />
        <div className="fixed-action-btn" onClick={() => this.onAddClick()}>
          <a className="btn-floating btn-large waves-effect waves-light light-blue" ><i className="material-icons">add</i></a>
@@ -95,6 +103,7 @@ AnimalListPage.propTypes = {
   push: PropTypes.func,
   setFilter: PropTypes.func,
   setSorting: PropTypes.func,
+  saveAnimal: PropTypes.func,
   animals: PropTypes.array,
   sortingKey: PropTypes.string,
   sortingOrder: PropTypes.string
@@ -106,7 +115,9 @@ function mapDispatchToProps(dispatch) {
     getAnimals: bindActionCreators(animalActions.getAnimals, dispatch),
     deleteAnimal: bindActionCreators(animalActions.deleteAnimal, dispatch),
     setFilter: bindActionCreators(setFilter, dispatch),
-    setSorting: bindActionCreators(setSorting, dispatch)
+    setSorting: bindActionCreators(setSorting, dispatch),
+    saveAnimal: bindActionCreators(animalActions.saveAnimal, dispatch ),
+
   };
 }
 

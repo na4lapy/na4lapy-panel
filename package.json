@@ -42,7 +42,8 @@
     "react-router-redux": "4.0.5",
     "redux": "3.5.2",
     "redux-thunk": "2.1.0",
-    "reselect": "2.5.3"
+    "reselect": "2.5.3",
+    "sticky-table-headers": "0.1.19"
   },
   "devDependencies": {
     "autoprefixer": "6.3.7",

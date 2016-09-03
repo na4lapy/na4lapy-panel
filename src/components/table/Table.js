@@ -1,35 +1,20 @@
 import React, {PropTypes} from 'react';
 import TableRow from './TableRow';
 
+import {stickyTableHeaders} from 'sticky-table-headers'; //eslint-disable-line
+
 class Table extends React.Component {
 
   constructor(props, context) {
     super(props, context);
     this.tableHeaderClass = '';
-    this.state = {
-      tableHeaderClass: ''
-    };
     this.lastScrollTop = 0;
 
-    this.handleScroll = this.handleScroll.bind(this);
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-  }
+    $('table').stickyTableHeaders();
 
-  componentWillUnmount(){
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll(event){
-    // let scrollTop = event.srcElement.body.scrollTop;
-    // if(scrollTop > 200 & scrollTop > this.lastScrollTop) {
-    //   this.setState({tableHeaderClass: 'fixed'});
-    // } else if (scrollTop < 200 && scrollTop < this.lastScrollTop){
-    //   this.setState({tableHeaderClass: ''});
-    // }
-    // this.lastScrollTop = scrollTop;
   }
 
   render() {
@@ -37,8 +22,8 @@ class Table extends React.Component {
     return (
       <div  className="table_wrapper">
 
-        <table className="responsive-table highlight striped centered" >
-          <thead className={this.state.tableHeaderClass}><tr>{this.props.headers.map((header, idx) => {
+        <table id="orginalTable" className="responsive-table highlight striped centered" >
+          <thead><tr>{this.props.headers.map((header, idx) => {
             let arrowClass = '';
             if(header.sortingKey == that.props.sortingKey){
               arrowClass = that.props.sortingOrder == 'DESC' ? 'desc' : 'asc';
@@ -49,6 +34,7 @@ class Table extends React.Component {
           <tbody>
           {this.props.data.map((dataRow, idx) => {
               return (<TableRow
+                              onPublishClick={that.props.onPublishClick}
                                onDeleteClick={that.props.onDeleteClick}
                                onEditClick={that.props.onEditClick}
                                dataRow={dataRow}
