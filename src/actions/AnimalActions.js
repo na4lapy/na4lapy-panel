@@ -3,6 +3,7 @@ import API_URL from '../config';
 import {push} from 'react-router-redux';
 import {actions} from 'react-redux-form';
 import {ANIMALS_URL} from '../routes_urls';
+import toast, {SAVE_ANIMAL_MSG, DELETE_ANIMAL_MSG} from '../utils';
 
 export const SAVE_ANIMAL_REQUEST = 'SAVE_ANIMAL_REQUEST';
 export const SAVE_ANIMAL_SUCCESS = 'SAVE_ANIMAL_SUCCESS';
@@ -48,11 +49,13 @@ export function saveAnimal(animal) {
         })
       ).then(() => {
         dispatch(saveAnimalSuccess());
+        toast(SAVE_ANIMAL_MSG);
         dispatch(push(ANIMALS_URL));
       }).catch((err) => {
         dispatch(saveAnimalFailure(err.resposne.data));
       });
     } else {
+        toast(SAVE_ANIMAL_MSG);
         dispatch(getAnimals());
         dispatch(saveAnimalSuccess());
         dispatch(push(ANIMALS_URL));
@@ -139,6 +142,7 @@ export function deleteAnimal (id) {
     dispatch(deleteAnimalRequest());
     axios.delete(API_URL + 'v1/animals/' + id).then(() => {
       dispatch(deleteAnimalSuccess());
+      toast(DELETE_ANIMAL_MSG);
       dispatch(getAnimals());
     }).catch((err) => {
       dispatch(deleteAnimalFailure(err.response.data));

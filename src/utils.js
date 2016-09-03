@@ -6,3 +6,5 @@ export default function toast(message) {
 
 
 export const SAVE_SHELTER_MSG = 'Dane schroniska zostały zapisane';
+export const DELETE_ANIMAL_MSG = 'Zwierzę usunięto';
+export const SAVE_ANIMAL_MSG = 'Zwierzę zapisano';

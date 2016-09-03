@@ -49,19 +49,22 @@ class LoginPage extends React.Component {
         <form className="col s12" onSubmit={this.onLoginSubmit}>
           <div className="row">
             <h1 className="center">Admin pieseł</h1>
-            <div className="input-field col s12">
-              <input value={this.state.email} name="email" id="email" type="email" className={emailClass} onChange={this.onInputChange}/>
-              <label data-error={this.props.errorDictionary ? this.props.errorDictionary.email : ''} htmlFor="email">Email</label>
+            <div className="valign-wrapper">
+              <img className="valign circle responsive-img piesel" alt="pieseł" src="../img/pieseł.jpg" />
             </div>
-            <div className="input-field col s12 mt-50">
-              <input name="password" value={this.state.password} id="password" type="password" className={passwordClass} onChange={this.onInputChange}/>
-              <label data-error={this.props.errorDictionary ? this.props.errorDictionary.password : ''} htmlFor="password">Hasło</label>
+              <div className="input-field col s12">
+                <input value={this.state.email} name="email" id="email" type="email" className={emailClass} onChange={this.onInputChange}/>
+                <label data-error={this.props.errorDictionary ? this.props.errorDictionary.email : ''} htmlFor="email">Email</label>
+              </div>
+              <div className="input-field col s12 mt-50">
+                <input name="password" value={this.state.password} id="password" type="password" className={passwordClass} onChange={this.onInputChange}/>
+                <label data-error={this.props.errorDictionary ? this.props.errorDictionary.password : ''} htmlFor="password">Hasło</label>
+              </div>
+              <div className="col s12 mt-50">
+                <button className="btn btn-large waves-effect waves-light" type="submit" name="action">Zaloguj się
+                <i className="material-icons right">send</i>
+              </button>
             </div>
-            <div className="col s12 mt-50">
-              <button className="btn btn-large waves-effect waves-light" type="submit" name="action">Zaloguj się
-              <i className="material-icons right">send</i>
-            </button>
-          </div>
           </div>
         </form>
       </div>
