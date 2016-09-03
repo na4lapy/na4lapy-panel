@@ -4,7 +4,7 @@ import {Form, Field, actions} from 'react-redux-form';
 import {bindActionCreators} from 'redux';
 import {voivodeships} from '../../initialStates';
 import {connect} from 'react-redux';
-
+import 'materialize-css/dist/js/materialize.js';
 
 class ShelterForm extends React.Component {
 
@@ -29,43 +29,43 @@ class ShelterForm extends React.Component {
         <h1>Dane schroniska</h1>
 
         <div className="row">
-          <Field model="shelter.name" className="input-field col s8">
+          <Field model="shelter.name" className="input-field col s8 active">
             <input name="shelter.name" type="text" placeholder="Nazwa schroniska"/>
-            <label htmlFor="animal.name">Nazwa schroniska</label>
+            <label htmlFor="animal.name" className="active" >Nazwa schroniska</label>
           </Field>
           <Field model="shelter.phoneNumber" className="input-field col s4">
             <input name="shelter.phoneNumber" type="text" placeholder="Numer telefonu"/>
-            <label htmlFor="animal.phoneNumber">Numer telefonu</label>
+            <label htmlFor="animal.phoneNumber" className="active">Numer telefonu</label>
           </Field>
         </div>
 
         <div className="row">
           <Field model="shelter.street" className="input-field col s6">
             <input name="shelter.street" type="text" placeholder="Ulica"/>
-            <label htmlFor="shelter.street">Ulica</label>
+            <label htmlFor="shelter.street" className="active">Ulica</label>
           </Field>
           <Field model="shelter.buildingNumber" className="input-field col s2">
             <input name="shelter.buildingNumber" type="text" placeholder="Nr budynku"/>
-            <label htmlFor="shelter.buildingNumber">Nr budynku</label>
+            <label htmlFor="shelter.buildingNumber" className="active">Nr budynku</label>
           </Field>
           <Field model="shelter.email" className="input-field col s4">
             <input name="shelter.email" type="email" placeholder="Email"/>
-            <label htmlFor="shelter.email">Email</label>
+            <label htmlFor="shelter.email" className="active">Email</label>
           </Field>
         </div>
 
         <div className="row">
           <Field model="shelter.city" className="input-field col s6">
             <input name="shelter.city" type="text" placeholder="Miasto"/>
-            <label htmlFor="shelter.city">Miasto</label>
+            <label htmlFor="shelter.city" className="active">Miasto</label>
           </Field>
           <Field model="shelter.postalCode" className="input-field col s2">
             <input name="shelter.postalCode" type="text" placeholder="Kod pocztowy"/>
-            <label htmlFor="shelter.postalCode">Kod pocztowy</label>
+            <label htmlFor="shelter.postalCode" className="active">Kod pocztowy</label>
           </Field>
           <Field model="shelter.website" className="input-field col s4">
             <input name="shelter.website" type="text" placeholder="Adres www"/>
-            <label htmlFor="shelter.website">Adres www</label>
+            <label htmlFor="shelter.website" className="active">Adres www</label>
           </Field>
         </div>
 
@@ -76,16 +76,16 @@ class ShelterForm extends React.Component {
                 <option key={index} value={voivodeship}>{voivodeship}</option>
               )}
             </select>
-            <label>Województwo</label>
+            <label className="active">Województwo</label>
           </div>
           <Field model="shelter.accountNumber" className="input-field col s4">
             <input name="shelter.accountNumber" type="text" placeholder="Numer konta bankowego"/>
-            <label htmlFor="shelter.accountNumber">Numer konta bankowego</label>
+            <label htmlFor="shelter.accountNumber" className="active">Numer konta bankowego</label>
           </Field>
         <div className="row">
           <Field model="shelter.adoptionRules" className="input-field col s12">
             <textarea id="AdoptionRules" className="materialize-textarea" placeholder="Regulamin adopcji"/>
-            <label htmlFor="AdoptionRules">Regulamin adopcji</label>
+            <label htmlFor="AdoptionRules" className="active">Regulamin adopcji</label>
           </Field>
         </div>
         </div>

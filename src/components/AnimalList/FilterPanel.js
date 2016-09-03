@@ -25,7 +25,7 @@ export default class FilterPanel extends React.Component {
             <div className="row">
               <div className="input-field col s12">
                   <input  name="name" type="text" placeholder="Imię" onChange={this.props.setFilter}/>
-                  <label htmlFor="first_name">Szukaj</label>
+                  <label htmlFor="first_name" className="active">Szukaj</label>
               </div>
           </div>
         <div className="row">

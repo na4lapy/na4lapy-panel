@@ -20,7 +20,7 @@ export default class Nav extends React.Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <a href="#!" className="brand-logo">Logo</a>
+          <a href="#!" className="brand-logo"><img className="logo" src="../img/logo.jpg" /></a>
           <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
           <ul className="right hide-on-med-and-down">
             <li><Link to={ANIMALS_URL}>Lista zwierząt</Link></li>

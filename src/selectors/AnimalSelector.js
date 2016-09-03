@@ -13,6 +13,7 @@ const getAnimals = (animals, animalFilter, animalSorter) => {
   let filteredAnimals = animals;
   for (let key in animalFilter) {
     if (shouldFilterFeature(key)) {
+
       filteredAnimals = _.filter(filteredAnimals, animal => animal[key] === animalFilter[key] );
     } else if (shouldFilterName(key)) {
       filteredAnimals = _.filter(filteredAnimals, animal =>  doesFilterContainsAnimalName(animal));

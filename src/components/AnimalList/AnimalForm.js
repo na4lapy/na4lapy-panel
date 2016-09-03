@@ -8,6 +8,8 @@ import * as animalActions from '../../actions/AnimalActions';
 import moment from 'moment';
 import {DATE_FORMAT} from '../../config';
 import {deletePhoto} from '../../actions/PhotoActions';
+import {MONTHS_FULL, MONTHS_SHORT, WEEKDAYS_FULL, WEEKDAYS_SHORT, TODAY, CLEAR, CLOSE} from '../../utils';
+
 
 
 class AnimalForm extends React.Component {
@@ -24,8 +26,15 @@ class AnimalForm extends React.Component {
   componentDidMount() {
     $('select').material_select();
     $('.datepicker').pickadate({
-      selectMonths: true, // Creates a dropdown to control month
-      selectYears: 15 // Creates a dropdown of 15 years to control year
+      monthsFull: MONTHS_FULL,
+      monthsShort: MONTHS_SHORT,
+      weekdaysFull: WEEKDAYS_FULL,
+      weekdaysShort: WEEKDAYS_SHORT,
+      today: TODAY,
+      clear: CLEAR,
+      close: CLOSE,
+
+      format: 'yyyy-mm-dd'
     });
 
     $(ReactDOM.findDOMNode(this.refs.animal_gender)).on('change',this.handleSelectChange);
@@ -96,12 +105,12 @@ class AnimalForm extends React.Component {
 
       <div className="row">
         <div className="input-field col s12 m6">
-          <input ref="animal_birthDate" name="animal.birthDate" type="date" className="datepicker" />
-          <label htmlFor="animal.birthDate">Data urodzenia</label>
+          <input ref="animal_birthDate" name="animal.birthDate" type="date" className="datepicker" placeholder="yyyy-mm-dd"/>
+          <label htmlFor="animal.birthDate" className="active">Data urodzenia</label>
         </div>
         <div className="input-field col s12 m6">
-          <input ref="animal_admittanceDate" name="animal.admittanceDate" type="date" className="datepicker" />
-          <label htmlFor="animal.admittanceDate">Data przyjęcia do schroniska</label>
+          <input ref="animal_admittanceDate" name="animal.admittanceDate" type="date" className="datepicker" placeholder="yyyy-mm-dd" />
+          <label htmlFor="animal.admittanceDate" className="active">Data przyjęcia do schroniska</label>
         </div>
       </div>
       <div className="row">
