@@ -65,7 +65,7 @@ import _ from 'lodash';
     return (<div>
       <div className="main_wrapper">
         <h1 className="center">Liczba zwierząt - {this.props.animals.length}</h1>
-        <FilterPanel setFilter={this.setFilter}/>
+        <FilterPanel setFilter={this.setFilter} animalFilter={this.props.animalFilter}/>
       </div>
       <Table
         data={this.props.animals || []}
@@ -125,7 +125,8 @@ function mapStateToProps(state){
   return {
     sortingKey: state.sorting.sortingKey,
     sortingOrder: state.sorting.order,
-    animals: AnimalSelector(state)
+    animals: AnimalSelector(state),
+    animalFilter: state.animalFilter
   };
 }
 

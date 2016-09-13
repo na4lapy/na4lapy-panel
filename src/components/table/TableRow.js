@@ -1,5 +1,6 @@
 import React,{PropTypes} from 'react';
 import AnimalDictionary from '../../animal_dictionary';
+import API_URL from '../../config';
 
 class TableRow extends React.Component {
 
@@ -10,7 +11,7 @@ class TableRow extends React.Component {
 
   renderImage(){
     if(typeof this.props.dataRow.photos[0] != 'undefined') {
-      return (<img className="animal_photo" src= {this.props.dataRow.photos[0].url} />);
+      return (<img className="animal_photo" src={this.props.dataRow.photos[0].url} />);
     }
   }
 

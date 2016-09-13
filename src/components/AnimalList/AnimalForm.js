@@ -84,7 +84,7 @@ class AnimalForm extends React.Component {
           <label>Płeć</label>
         </div>
         <div className ="input-field col s12 m6" >
-            <select  name="animal.species" ref="animal_species" defaultValue={animal.species || 'DOG'} onChange={this.handleSelectChange} >
+            <select  name="animal.species" ref="animal_species" value={animal.species || "DOG"} onChange={this.handleSelectChange} >
               <option value={"DOG"}>Pies</option>
               <option value={"CAT"}>Kot</option>
               <option value={"OTHER"}>Inne</option>

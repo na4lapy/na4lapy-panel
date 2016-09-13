@@ -3,6 +3,8 @@ import AnimalForm from '../components/AnimalList/AnimalForm';
 import {connect} from 'react-redux';
 import {getAnimals} from '../actions/AnimalActions';
 import {bindActionCreators} from 'redux';
+import {actions} from 'react-redux-form';
+
 
 class AnimalAddPage extends React.Component {
   constructor(props) {
@@ -12,6 +14,8 @@ class AnimalAddPage extends React.Component {
   componentDidMount() {
     if(typeof this.props.animalId !== 'undefined') {
       this.props.getAnimals(this.props.animalId);
+    }  else {
+      this.props.resetModel('animal');
     }
   }
 
@@ -24,7 +28,8 @@ class AnimalAddPage extends React.Component {
 
 AnimalAddPage.propTypes = {
   animalId: PropTypes.number,
-  getAnimals: PropTypes.func
+  getAnimals: PropTypes.func,
+  resetModel: PropTypes.func
 };
 
 function mapStateToProps(state, ownProps){
@@ -36,6 +41,7 @@ function mapStateToProps(state, ownProps){
 function mapDispatchToProps(dispatch) {
   return {
     getAnimals: bindActionCreators(getAnimals, dispatch),
+    resetModel: bindActionCreators(actions.reset, dispatch)
   };
 }
 
