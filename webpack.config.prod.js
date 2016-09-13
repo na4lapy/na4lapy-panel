@@ -67,7 +67,6 @@ export default {
       jQuery: "jquery",
       "window.jQuery": "jquery",
       Hammer: "hammerjs/hammer",
-      Materialize: "Materialize"
     })
   ],
   module: {

@@ -4,7 +4,6 @@ import {Form, Field, actions} from 'react-redux-form';
 import {bindActionCreators} from 'redux';
 import {voivodeships} from '../../initialStates';
 import {connect} from 'react-redux';
-import 'materialize-css/dist/js/materialize.js';
 
 class ShelterForm extends React.Component {
 

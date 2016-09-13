@@ -1,4 +1,5 @@
 import {TOAST_DURATION} from './config';
+import 'materialize-css/dist/js/materialize.js';
 
 export default function toast(message) {
   Materialize.toast(message, TOAST_DURATION); //eslint-disable-line
