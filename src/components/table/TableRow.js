@@ -10,7 +10,7 @@ class TableRow extends React.Component {
 
   renderImage(){
     if(typeof this.props.dataRow.photos[0] != 'undefined') {
-      return (<img className="animal_photo" src={'http://localhost:9000/v1/files/' + this.props.dataRow.photos[0].fileName} />);
+      return (<img className="animal_photo" src= {this.props.dataRow.photos[0].url} />);
     }
   }
 
