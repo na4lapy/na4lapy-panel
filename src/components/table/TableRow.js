@@ -1,6 +1,6 @@
 import React,{PropTypes} from 'react';
 import AnimalDictionary from '../../animal_dictionary';
-import API_URL from '../../config';
+// import API_URL from '../../config';
 
 class TableRow extends React.Component {
 

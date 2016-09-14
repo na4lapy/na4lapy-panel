@@ -20,7 +20,6 @@ export default class FilterPanel extends React.Component {
   }
 
   render(){
-    console.log(this.props.filterState);
     return (
         <form>
             <div className="row">
@@ -76,5 +75,6 @@ export default class FilterPanel extends React.Component {
 
 FilterPanel.propTypes = {
   children: PropTypes.object,
-  setFilter: PropTypes.func
+  setFilter: PropTypes.func,
+  animalFilter: PropTypes.object
 };

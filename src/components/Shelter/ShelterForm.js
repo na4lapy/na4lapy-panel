@@ -17,12 +17,18 @@ class ShelterForm extends React.Component {
     $(ReactDOM.findDOMNode(this.refs.shelter_voivodeship)).on('change',this.handleSelectChange);
   }
 
+  componentWillReceiveProps() {
+    $('select').material_select();
+  }
+
   handleSelectChange(e){
     let value = e.target.value;
     this.props.changeModel(e.target.name, value);
   }
 
   render () {
+    let {shelter} = this.props;
+    console.log(shelter.voivodeship);
     return (
       <Form model="shelter" onSubmit={(shelter) => this.props.onSubmit(shelter)}>
         <h1>Dane schroniska</h1>
@@ -70,7 +76,7 @@ class ShelterForm extends React.Component {
 
         <div className="row">
           <div className="input-field col s8">
-            <select name="shelter.voivodeship" ref="shelter_voivodeship" onChange={this.handleSelectChange}>
+            <select name="shelter.voivodeship" value={shelter.voivodeship} ref="shelter_voivodeship" onChange={this.handleSelectChange}>
               {voivodeships.map((voivodeship, index) =>
                 <option key={index} value={voivodeship}>{voivodeship}</option>
               )}
@@ -96,7 +102,8 @@ class ShelterForm extends React.Component {
 
 ShelterForm.propTypes = {
   changeModel: PropTypes.func,
-  onSubmit: PropTypes.func
+  onSubmit: PropTypes.func,
+  shelter: PropTypes.object
 };
 
 function mapStateToProps(state) {

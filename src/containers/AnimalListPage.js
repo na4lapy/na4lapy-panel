@@ -106,7 +106,8 @@ AnimalListPage.propTypes = {
   saveAnimal: PropTypes.func,
   animals: PropTypes.array,
   sortingKey: PropTypes.string,
-  sortingOrder: PropTypes.string
+  sortingOrder: PropTypes.string,
+  animalFilter: PropTypes.object
 };
 
 function mapDispatchToProps(dispatch) {
