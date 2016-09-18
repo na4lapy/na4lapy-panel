@@ -81,9 +81,10 @@ class AnimalForm extends React.Component {
 
   render() {
     let {animal} = this.props;
+    console.log(animal);
     return (
       <Form model="animal" onSubmit={(animal) => this.handleSubmit(animal)}>
-      <h1 className="center">Dodaj kudłacza!</h1>
+      <h1 className="center">{animal.id ? 'Edytuj kudłacza!' : 'Dodaj kudłacza!'}</h1>
       <div className="row">
         <div className ="input-field col s12 m6" >
             <select  name="animal.gender" ref="animal_gender" value={animal.gender || 'UNKNOWN'} onChange={this.handleSelectChange} >
@@ -162,7 +163,7 @@ class AnimalForm extends React.Component {
         </div>
         <div className ="input-field col s12 m6" >
             <select  name="animal.sterilization" ref="animal_sterilization" defaultValue={animal.sterilization || 'UNKNOWN'} onChange={this.handleSelectChange} >
-              <option value={"STERILIZED"}>Sterylizowany</option>
+              <option value={"STERILIZED"}>{animal.gender == "FEMALE" ? 'Sterylizowana' : 'Wykastrowany'}</option>
               <option value={"NOT_STERILIZED"}>Nie sterylizowany</option>
               <option value={"UNKNOWN"}>Nieokreślony</option>
             </select>
