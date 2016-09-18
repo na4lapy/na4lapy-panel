@@ -18,6 +18,10 @@ class ShelterForm extends React.Component {
   }
 
   componentWillReceiveProps() {
+    Materialize.updateTextFields(); //eslint-disable-line
+  }
+
+  componentDidUpdate() {
     $('select').material_select();
   }
 
@@ -28,7 +32,6 @@ class ShelterForm extends React.Component {
 
   render () {
     let {shelter} = this.props;
-    console.log(shelter.voivodeship);
     return (
       <Form model="shelter" onSubmit={(shelter) => this.props.onSubmit(shelter)}>
         <h1>Dane schroniska</h1>

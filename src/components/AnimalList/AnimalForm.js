@@ -50,8 +50,14 @@ class AnimalForm extends React.Component {
     // Materialize.updateTextFields(); //eslint-disable-line
   }
 
-  handleSubmit(animal){
-    this.props.saveAnimal(animal);
+
+
+  componentWillReceiveProps() {
+    Materialize.updateTextFields(); //eslint-disable-line
+  }
+
+  componentDidUpdate( ) {
+      $('select').material_select();
   }
 
   handleSelectChange(e){
@@ -60,6 +66,10 @@ class AnimalForm extends React.Component {
      value = moment(value, DATE_FORMAT).valueOf();
     }
     this.props.changeModel(e.target.name, value);
+  }
+
+  handleSubmit(animal){
+    this.props.saveAnimal(animal);
   }
 
   removePhoto(event,id) {
@@ -76,7 +86,7 @@ class AnimalForm extends React.Component {
       <h1 className="center">Dodaj kudłacza!</h1>
       <div className="row">
         <div className ="input-field col s12 m6" >
-            <select  name="animal.gender" ref="animal_gender" defaultValue={animal.gender || 'UNKNOWN'} onChange={this.handleSelectChange} >
+            <select  name="animal.gender" ref="animal_gender" value={animal.gender || 'UNKNOWN'} onChange={this.handleSelectChange} >
               <option value={"MALE"}>Samiec</option>
               <option value={"FEMALE"}>Samica</option>
               <option value={"UNKNOWN"}>Nieznana</option>

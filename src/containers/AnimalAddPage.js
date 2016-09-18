@@ -11,12 +11,16 @@ class AnimalAddPage extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    if(typeof this.props.animalId === 'undefined') {
+      this.props.resetModel('animal');
+    }
+  }
+
   componentDidMount() {
     if(typeof this.props.animalId !== 'undefined') {
       this.props.getAnimals(this.props.animalId);
-    }  else {
-      this.props.resetModel('animal');
-    }
+    } 
   }
 
   render() {
