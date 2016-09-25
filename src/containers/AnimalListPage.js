@@ -30,8 +30,11 @@ import _ from 'lodash';
   }
 
   componentDidMount() {
-    $('body').scrollTop(0);
     this.props.getAnimals();
+  }
+
+  componentWillUpdate() {
+    window.scrollTo(0, 0);
   }
 
   onDeleteClick(event, id) {
@@ -69,7 +72,7 @@ import _ from 'lodash';
   }
 
   render() {
-    return (<div>
+    return (<div ref={(ref) => this._div = ref}>
       <div className="main_wrapper">
         <h2 className="center">Liczba zwierząt - {this.props.animals.length}</h2>
         <FilterPanel setFilter={this.setFilter} animalFilter={this.props.animalFilter} resetFilters={this.resetFilters}/>

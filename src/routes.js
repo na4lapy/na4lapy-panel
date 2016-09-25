@@ -19,8 +19,10 @@ import ShelterDetailPage from './containers/ShelterDetailPage';
 import App from './containers/App';
 import AuthorizedMainLayout from './containers/AuthorizedMainLayout';
 
+
+
 export default (
-  <Route path="/" component={App}>
+  <Route path="/" component={App} >
     <IndexRoute component={LoginPage} />
     <Route component={AuthorizedMainLayout} >
       <Route path={ANIMALS_URL} >
