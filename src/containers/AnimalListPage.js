@@ -64,7 +64,7 @@ import _ from 'lodash';
   render() {
     return (<div>
       <div className="main_wrapper">
-        <h1 className="center">Liczba zwierząt - {this.props.animals.length}</h1>
+        <h2 className="center">Liczba zwierząt - {this.props.animals.length}</h2>
         <FilterPanel setFilter={this.setFilter} animalFilter={this.props.animalFilter}/>
       </div>
       <Table
