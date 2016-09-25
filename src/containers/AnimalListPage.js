@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {ANIMALS_URL, ANIMALS_ADD_URL} from '../routes_urls';
 import {push} from 'react-router-redux';
-import {setFilter} from '../actions/FilterActions';
+import {setFilter, resetFilter} from '../actions/FilterActions';
 import {setSorting} from '../actions/SortingActions';
 import AnimalSelector from '../selectors/AnimalSelector';
 import AnimalRemovalModal from '../components/AnimalList/AnimalRemovalModal';
@@ -22,6 +22,7 @@ import _ from 'lodash';
     this.setFilter = this.setFilter.bind(this);
     this.onHeaderClick = this.onHeaderClick.bind(this);
     this.onPublishClick = this.onPublishClick.bind(this);
+    this.resetFilters = this.resetFilters.bind(this);
 
     this.state = {
       animalToBeRemoved: null
@@ -61,11 +62,16 @@ import _ from 'lodash';
     this.props.saveAnimal(animalToBePublished);
   }
 
+  resetFilters(event){
+    event.preventDefault();
+    this.props.resetFilters();
+  }
+
   render() {
     return (<div>
       <div className="main_wrapper">
         <h2 className="center">Liczba zwierząt - {this.props.animals.length}</h2>
-        <FilterPanel setFilter={this.setFilter} animalFilter={this.props.animalFilter}/>
+        <FilterPanel setFilter={this.setFilter} animalFilter={this.props.animalFilter} resetFilters={this.resetFilters}/>
       </div>
       <Table
         data={this.props.animals || []}
@@ -107,7 +113,9 @@ AnimalListPage.propTypes = {
   animals: PropTypes.array,
   sortingKey: PropTypes.string,
   sortingOrder: PropTypes.string,
-  animalFilter: PropTypes.object
+  animalFilter: PropTypes.object,
+  resetFilters: PropTypes.func,
+  resetModel: PropTypes.func
 };
 
 function mapDispatchToProps(dispatch) {
@@ -118,7 +126,7 @@ function mapDispatchToProps(dispatch) {
     setFilter: bindActionCreators(setFilter, dispatch),
     setSorting: bindActionCreators(setSorting, dispatch),
     saveAnimal: bindActionCreators(animalActions.saveAnimal, dispatch ),
-
+    resetFilters: bindActionCreators(resetFilter, dispatch)
   };
 }
 
@@ -127,7 +135,7 @@ function mapStateToProps(state){
     sortingKey: state.sorting.sortingKey,
     sortingOrder: state.sorting.order,
     animals: AnimalSelector(state),
-    animalFilter: state.animalFilter
+    animalFilter: state.animalFilter,
   };
 }
 

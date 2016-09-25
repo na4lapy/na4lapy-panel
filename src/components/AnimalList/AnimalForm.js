@@ -81,7 +81,6 @@ class AnimalForm extends React.Component {
 
   render() {
     let {animal} = this.props;
-    console.log(animal);
     return (
       <Form model="animal" onSubmit={(animal) => this.handleSubmit(animal)}>
       <h1 className="center">{animal.id ? 'Edytuj kudłacza!' : 'Dodaj kudłacza!'}</h1>

@@ -13,7 +13,8 @@ export const filterInitialState = {
     name: '',
     species: 'ANY',
     gender: 'ANY',
-    size: 'ANY'
+    size: 'ANY',
+    status: 'ANY'
   }
 };
 

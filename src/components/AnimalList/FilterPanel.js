@@ -15,11 +15,29 @@ export default class FilterPanel extends React.Component {
     $(ReactDOM.findDOMNode(this.refs.animal_status)).on('change',this.handleSelectChange);
   }
 
+  componentDidUpdate() {
+    $('select').material_select();
+  }
+
   handleSelectChange(e){
     this.props.setFilter(e);
   }
 
+
+
+  renderResetFilters() {
+    if(this.props.animalFilter) {
+      let {name, species, gender, size, status} = this.props.animalFilter;
+      console.log(status);
+        if (name.length >0 || species !== 'ANY' || gender !== 'ANY' || size !== 'ANY' || status !== 'ANY') {
+          return (<div className="center-align"><button className="btn" type="reset" onClick={this.props.resetFilters}>Resetuj filtry</button></div>);
+        }
+    }
+  }
+
+
   render(){
+    console.log(this.props.animalFilter.species);
     return (
         <form>
         <div className="row">
@@ -28,7 +46,7 @@ export default class FilterPanel extends React.Component {
               <label htmlFor="first_name" className="active">Szukaj</label>
           </div>
           <div className="input-field col s3" >
-            <select ref="animal_species" name="species" defaultValue={this.props.animalFilter && this.props.animalFilter.species}>
+            <select ref="animal_species" name="species" value={this.props.animalFilter && this.props.animalFilter.species} readOnly>
               <option value="ANY">Wszystkie</option>
               <option value="DOG">Pies</option>
               <option value="CAT">Kot</option>
@@ -37,7 +55,7 @@ export default class FilterPanel extends React.Component {
             <label>Gatunek</label>
           </div>
           <div className="input-field col s2" >
-            <select ref="animal_gender" name="gender" defaultValue={this.props.animalFilter && this.props.animalFilter.gender}>
+            <select ref="animal_gender" name="gender" value={this.props.animalFilter && this.props.animalFilter.gender} readOnly>
               <option value="ANY">Wszystkie</option>
               <option value="MALE">Samiec</option>
               <option value="FEMALE">Suczka</option>
@@ -46,7 +64,7 @@ export default class FilterPanel extends React.Component {
             <label>Płeć</label>
           </div>
           <div className="input-field col s2">
-            <select ref="animal_size" name="size" defaultValue={this.props.animalFilter && this.props.animalFilter.size}>
+            <select ref="animal_size" name="size" value={this.props.animalFilter && this.props.animalFilter.size} readOnly>
               <option value="ANY">Wszystkie</option>
               <option value="SMALL">Mały</option>
               <option value="MEDIUM">Średni</option>
@@ -55,7 +73,7 @@ export default class FilterPanel extends React.Component {
             <label>Wielkość</label>
           </div>
           <div className="input-field col s2">
-            <select ref="animal_status" name="status" defaultValue={this.props.animalFilter && this.props.animalFilter.status}>
+            <select ref="animal_status" name="status" value={this.props.animalFilter && this.props.animalFilter.status} readOnly>
               <option value="ANY">Wszystkie</option>
               <option value="UNPUBLISHED">Nieopublikowany</option>
               <option value="FOR_ADOPTION">Do adpocji</option>
@@ -65,6 +83,7 @@ export default class FilterPanel extends React.Component {
             <label>Status</label>
           </div>
       </div>
+      {this.renderResetFilters()}
     </form>
     );
   }
@@ -74,5 +93,6 @@ export default class FilterPanel extends React.Component {
 FilterPanel.propTypes = {
   children: PropTypes.object,
   setFilter: PropTypes.func,
+  resetFilters: PropTypes.func,
   animalFilter: PropTypes.object
 };
