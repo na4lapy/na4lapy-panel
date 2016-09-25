@@ -24,6 +24,7 @@ class AnimalForm extends React.Component {
   }
 
   componentDidMount() {
+    $('body').scrollTop(0);
     $('select').material_select();
     $('.datepicker').pickadate({
       monthsFull: MONTHS_FULL,
@@ -48,12 +49,6 @@ class AnimalForm extends React.Component {
     $(ReactDOM.findDOMNode(this.refs.animal_status)).on('change',this.handleSelectChange);
     $(ReactDOM.findDOMNode(this.refs.animal_size)).on('change',this.handleSelectChange);
     // Materialize.updateTextFields(); //eslint-disable-line
-  }
-
-
-
-  componentWillReceiveProps() {
-    Materialize.updateTextFields(); //eslint-disable-line
   }
 
   componentDidUpdate( ) {
@@ -86,7 +81,7 @@ class AnimalForm extends React.Component {
       <h1 className="center">{animal.id ? 'Edytuj kudłacza!' : 'Dodaj kudłacza!'}</h1>
       <div className="row">
         <div className ="input-field col s12 m6" >
-            <select  name="animal.gender" ref="animal_gender" value={animal.gender || 'UNKNOWN'} onChange={this.handleSelectChange} >
+            <select  className="active" name="animal.gender" ref="animal_gender" value={animal.gender || 'UNKNOWN'} onChange={this.handleSelectChange} >
               <option value={"MALE"}>Samiec</option>
               <option value={"FEMALE"}>Samica</option>
               <option value={"UNKNOWN"}>Nieznana</option>
@@ -105,18 +100,18 @@ class AnimalForm extends React.Component {
       <div className="row">
         <Field className="input-field col s12 m6" model="animal.name">
           <input name="animal.name" type="text" placeholder="Imię"/>
-          <label htmlFor="animal.name">Imię</label>
+          <label className="active" htmlFor="animal.name">Imię</label>
         </Field>
         <Field className="input-field col s12 m6" model="animal.race">
           <input name="animal.race" type="text" placeholder="Rasa"/>
-          <label htmlFor="animal.race">Rasa</label>
+          <label className="active" htmlFor="animal.race">Rasa</label>
         </Field>
       </div>
 
       <div className="row">
         <div className="input-field col s12 m6">
           <input ref="animal_birthDate" name="animal.birthDate" type="date" className="datepicker" placeholder="yyyy-mm-dd"/>
-          <label htmlFor="animal.birthDate" className="active">Data urodzenia</label>
+          <label className="active" htmlFor="animal.birthDate" className="active">Data urodzenia</label>
         </div>
         <div className="input-field col s12 m6">
           <input ref="animal_admittanceDate" name="animal.admittanceDate" type="date" className="datepicker" placeholder="yyyy-mm-dd" />
@@ -130,7 +125,7 @@ class AnimalForm extends React.Component {
               <option value={"LOW"}>Niska</option>
               <option value={"UNKNOWN"}>Nieznana</option>
             </select>
-          <label>Aktywność</label>
+          <label className="active">Aktywność</label>
         </div>
         <div className ="input-field col s12 m4" >
             <select  name="animal.training" ref="animal_training" defaultValue={animal.training || 'UNKNOWN'} onChange={this.handleSelectChange} >
@@ -139,7 +134,7 @@ class AnimalForm extends React.Component {
               <option value={"NONE"}>Brak</option>
               <option value={"UNKNOWN"}>Nieokreślony</option>
             </select>
-          <label>Trening</label>
+          <label >Trening</label>
         </div>
         <div className ="input-field col s12 m4" >
             <select  name="animal.size" ref="animal_size" defaultValue={animal.size || 'SMALL'} onChange={this.handleSelectChange} >

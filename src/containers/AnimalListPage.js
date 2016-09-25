@@ -30,6 +30,7 @@ import _ from 'lodash';
   }
 
   componentDidMount() {
+    $('body').scrollTop(0);
     this.props.getAnimals();
   }
 
