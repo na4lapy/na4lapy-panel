@@ -22,13 +22,11 @@ export default class FilterPanel extends React.Component {
   render(){
     return (
         <form>
-            <div className="row">
-              <div className="input-field col s12">
-                  <input value={this.props.animalFilter && this.props.animalFilter.name} name="name" type="text" placeholder="Imię" onChange={this.props.setFilter}/>
-                  <label htmlFor="first_name" className="active">Szukaj</label>
-              </div>
-          </div>
         <div className="row">
+          <div className="input-field col s3">
+              <input value={this.props.animalFilter && this.props.animalFilter.name} name="name" type="text" placeholder="Imię" onChange={this.props.setFilter}/>
+              <label htmlFor="first_name" className="active">Szukaj</label>
+          </div>
           <div className="input-field col s3" >
             <select ref="animal_species" name="species" defaultValue={this.props.animalFilter && this.props.animalFilter.species}>
               <option value="ANY">Wszystkie</option>
@@ -38,7 +36,7 @@ export default class FilterPanel extends React.Component {
             </select>
             <label>Gatunek</label>
           </div>
-          <div className="input-field col s3" >
+          <div className="input-field col s2" >
             <select ref="animal_gender" name="gender" defaultValue={this.props.animalFilter && this.props.animalFilter.gender}>
               <option value="ANY">Wszystkie</option>
               <option value="MALE">Samiec</option>
@@ -47,7 +45,7 @@ export default class FilterPanel extends React.Component {
             </select>
             <label>Płeć</label>
           </div>
-          <div className="input-field col s3">
+          <div className="input-field col s2">
             <select ref="animal_size" name="size" defaultValue={this.props.animalFilter && this.props.animalFilter.size}>
               <option value="ANY">Wszystkie</option>
               <option value="SMALL">Mały</option>
@@ -56,7 +54,7 @@ export default class FilterPanel extends React.Component {
             </select>
             <label>Wielkość</label>
           </div>
-          <div className="input-field col s3">
+          <div className="input-field col s2">
             <select ref="animal_status" name="status" defaultValue={this.props.animalFilter && this.props.animalFilter.status}>
               <option value="ANY">Wszystkie</option>
               <option value="UNPUBLISHED">Nieopublikowany</option>
