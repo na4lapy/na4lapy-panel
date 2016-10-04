@@ -28,7 +28,6 @@ export default class FilterPanel extends React.Component {
   renderResetFilters() {
     if(this.props.animalFilter) {
       let {name, species, gender, size, status} = this.props.animalFilter;
-      console.log(status);
         if (name.length >0 || species !== 'ANY' || gender !== 'ANY' || size !== 'ANY' || status !== 'ANY') {
           return (<div className="center-align"><button className="btn" type="reset" onClick={this.props.resetFilters}>Resetuj filtry</button></div>);
         }
@@ -37,7 +36,6 @@ export default class FilterPanel extends React.Component {
 
 
   render(){
-    console.log(this.props.animalFilter.species);
     return (
         <form>
         <div className="row">

@@ -76,9 +76,15 @@ class AnimalForm extends React.Component {
 
   render() {
     let {animal} = this.props;
+    let name = '';
+    if (animal && animal.name) {
+      name =  animal.name;
+    } else {
+      name = 'Zwierzę';
+    }
     return (
       <Form model="animal" onSubmit={(animal) => this.handleSubmit(animal)}>
-      <h1 className="center">{animal.id ? 'Edytuj kudłacza!' : 'Dodaj kudłacza!'}</h1>
+      <h1 className="center">{animal.id ? 'Edytuj ' + name : 'Dodaj zwierzę.'}</h1>
       <div className="row">
         <div className ="input-field col s12 m6" >
             <select  className="active" name="animal.gender" ref="animal_gender" value={animal.gender || 'UNKNOWN'} onChange={this.handleSelectChange} >
@@ -110,11 +116,11 @@ class AnimalForm extends React.Component {
 
       <div className="row">
         <div className="input-field col s12 m6">
-          <input ref="animal_birthDate" name="animal.birthDate" type="date" className="datepicker" placeholder="yyyy-mm-dd"/>
-          <label className="active" htmlFor="animal.birthDate" className="active">Data urodzenia</label>
+          <input ref="animal_birthDate" name="animal.birthDate" type="date" className="datepicker" placeholder="yyyy-mm-dd" value={animal.birthDate}/>
+          <label className="active" htmlFor="animal.birthDate">Data urodzenia</label>
         </div>
         <div className="input-field col s12 m6">
-          <input ref="animal_admittanceDate" name="animal.admittanceDate" type="date" className="datepicker" placeholder="yyyy-mm-dd" />
+          <input ref="animal_admittanceDate" name="animal.admittanceDate" type="date" className="datepicker" placeholder="yyyy-mm-dd" value={animal.admittanceDate}/>
           <label htmlFor="animal.admittanceDate" className="active">Data przyjęcia do schroniska</label>
         </div>
       </div>

@@ -48,9 +48,8 @@ class LoginPage extends React.Component {
       <div className="container ">
         <form className="col s12" onSubmit={this.onLoginSubmit}>
           <div className="row">
-            <h1 className="center">Admin pieseł</h1>
+            <h1 className="center">Na 4 Łapy Panel Administracyjny</h1>
             <div className="valign-wrapper">
-              <img className="valign circle responsive-img piesel" alt="pieseł" src="../img/pieseł.jpg" />
             </div>
               <div className="input-field col s12">
                 <input value={this.state.email} name="email" id="email" type="email" className={emailClass} onChange={this.onInputChange}/>

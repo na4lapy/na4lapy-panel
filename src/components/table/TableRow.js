@@ -11,7 +11,7 @@ class TableRow extends React.Component {
 
   renderImage(){
     if(typeof this.props.dataRow.photos[0] != 'undefined') {
-      return (<img className="animal_photo" src={this.props.dataRow.photos[0].url} />);
+      return (<img className="animal_photo" onClick={(event) => this.props.onEditClick(event, this.props.dataRow.id)} src={this.props.dataRow.photos[0].url} />);
     }
   }
 
