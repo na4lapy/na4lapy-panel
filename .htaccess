@@ -1,0 +1,19 @@
+
+<IfModule rewrite_module>
+#OR<IfModule mod_rewrite.c>
+#OR<IfModule mod_rewrite.so>
+    # according to apache-documentation, followsymlinks is needed for mod_rewrite
+    Options +FollowSymLinks
+    # Enable the RewriteEngine
+    RewriteEngine On
+    # if needed add(/uncomment) the following:
+    #RewriteBase /path/to/file/to/be/found/
+    # check if the request is not an existing file
+    RewriteCond %{SCRIPT_FILENAME} !-f
+    # check if the request is not an existing directory
+    RewriteCond %{SCRIPT_FILENAME} !-d
+    # check if the request is not an existing symlink
+    RewriteCond %{SCRIPT_FILENAME} !-s
+    # rewrite all requests that passed the conditions to the file index.php
+    RewriteRule .* index.html
+</IfModule>
