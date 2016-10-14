@@ -48,10 +48,11 @@ class LoginPage extends React.Component {
       <div className="container ">
         <form className="col s12" onSubmit={this.onLoginSubmit}>
           <div className="row">
-            <h1 className="center">Na 4 Łapy Panel Administracyjny</h1>
             <div className="logo-wrapper">
               <img className="logo login" src="../img/logo.jpg" />
             </div>
+            <h1 className="center">Na 4 Łapy </h1>
+            <h2 className="center">Panel Administracyjny</h2>
             <div className="valign-wrapper">
             </div>
               <div className="input-field col s12">
