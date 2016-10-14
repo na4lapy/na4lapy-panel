@@ -90,12 +90,12 @@ class ShelterForm extends React.Component {
             <input name="shelter.accountNumber" type="text" placeholder="Numer konta bankowego"/>
             <label htmlFor="shelter.accountNumber" className="active">Numer konta bankowego</label>
           </Field>
+        </div>
         <div className="row">
           <Field model="shelter.adoptionRules" className="input-field col s12">
             <textarea id="AdoptionRules" className="materialize-textarea" placeholder="Regulamin adopcji"/>
             <label htmlFor="AdoptionRules" className="active">Regulamin adopcji</label>
           </Field>
-        </div>
         </div>
         <button className="btn" type="submit">Zapisz</button>
       </Form>
