@@ -21,7 +21,7 @@ export const DELETE_ANIMALS_FAILURE = 'DELETE_ANIMALS_FAILURE';
 export function saveAnimal(animal) {
   return dispatch => {
     let method = 'post';
-    let url = API_URL + 'v1/animals';
+    let url = API_URL + '/animals';
     if(animal.id) {
       method = 'patch';
     }
@@ -36,7 +36,7 @@ export function saveAnimal(animal) {
       if(animal.tempPhotos && animal.tempPhotos.length != 0){
         axios.all(animal.tempPhotos.map(file => {
           return axios.post(
-            API_URL + 'v1/files/upload/' + file.name,
+            API_URL + '/files/upload/' + file.name,
             file,
             {
                 params: {
@@ -93,7 +93,7 @@ export function saveAnimal(animal) {
 export function getAnimals(id){
   return dispatch => {
     dispatch(getAnimalsRequest());
-    let url = API_URL + 'v1/animals';
+    let url = API_URL + '/animals';
     if(typeof id !== 'undefined'){
       url += '/' + id;
     }
@@ -102,7 +102,8 @@ export function getAnimals(id){
       if(typeof id !== 'undefined'){
         dispatch(actions.change('animal', response.data));
       } else {
-        dispatch(getAnimalsSuccess(response.data));
+        console.log(response.data);
+        dispatch(getAnimalsSuccess(response.data.data));
       }
     }).catch((err) => {
       dispatch(getAnimalsFailure(err.response.data));
@@ -140,7 +141,7 @@ export function deleteAnimal (id) {
   return dispatch => {
 
     dispatch(deleteAnimalRequest());
-    axios.delete(API_URL + 'v1/animals/' + id).then(() => {
+    axios.delete(API_URL + '/animals/' + id).then(() => {
       dispatch(deleteAnimalSuccess());
       toast(DELETE_ANIMAL_MSG);
       dispatch(getAnimals());

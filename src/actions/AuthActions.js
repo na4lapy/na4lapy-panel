@@ -10,13 +10,15 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
-import API_URL, {TOKEN_KEY} from '../config';
+import {TOKEN_KEY} from '../config';
+
+let AUTH_URL = 'https://api.na4lapy.org/';
 
 export function loginUser(credentials) {
   return dispatch =>  {
     //dispatch login request started
     dispatch(requestLogin(credentials));
-    return axios.post(API_URL + 'login',{
+    return axios.post(AUTH_URL + 'login',{
       email: credentials.email,
       password: credentials.password
     }).then(response => {
@@ -61,7 +63,7 @@ export function logoutUser(){
   return dispatch => {
     localStorage.removeItem(TOKEN_KEY);
     dispatch(logoutRequest());
-    return axios.post(API_URL + 'logout',{
+    return axios.post(AUTH_URL + 'logout',{
       token: localStorage.getItem(TOKEN_KEY)
     }).then( () => {
       dispatch(logoutSuccess());

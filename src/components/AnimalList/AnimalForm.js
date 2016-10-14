@@ -57,9 +57,9 @@ class AnimalForm extends React.Component {
 
   handleSelectChange(e){
     let value = e.target.value;
-    if(e.target.classList.contains('datepicker')){
-     value = moment(value, DATE_FORMAT).valueOf();
-    }
+    // if(e.target.classList.contains('datepicker')){
+    //  value = moment(value, DATE_FORMAT).f;
+    // }
     this.props.changeModel(e.target.name, value);
   }
 

@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 import TableRow from './TableRow';
 
-import {stickyTableHeaders} from 'sticky-table-headers'; //eslint-disable-line
+  import {stickyTableHeaders} from 'sticky-table-headers'; //eslint-disable-line
 
 class Table extends React.Component {
 
@@ -32,7 +32,9 @@ class Table extends React.Component {
             })}
           </tr></thead>
           <tbody>
-          {this.props.data.map((dataRow, idx) => {
+          {this.props.data.length > 0 && this.props.data.map((dataRow, idx) => {
+
+            console.log(dataRow,this.props.data.length);
               return (<TableRow
                               onPublishClick={that.props.onPublishClick}
                                onDeleteClick={that.props.onDeleteClick}
