@@ -100,7 +100,7 @@ export default class ImageUploader extends React.Component {
           </Field>
           </div>
           <div className="file-path-wrapper">
-            <input className="file-path validate" type="text" placeholder="Upload one or more files"/>
+            <input className="file-path validate" type="text" placeholder="Wgraj jedno lub więcej zdjęć"/>
           </div>
       </div>
       <div className="row">
