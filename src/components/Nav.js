@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
-import {ANIMALS_URL, STATISTIC_URL, SHELTER_URL} from '../routes_urls';
+import {ANIMALS_URL, SHELTER_URL} from '../routes_urls';
 
 export default class Nav extends React.Component {
   constructor(props) {

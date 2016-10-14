@@ -14,7 +14,6 @@ class Table extends React.Component {
 
   componentDidMount() {
     $('table').stickyTableHeaders();
-
   }
 
   render() {
@@ -33,8 +32,6 @@ class Table extends React.Component {
           </tr></thead>
           <tbody>
           {this.props.data.length > 0 && this.props.data.map((dataRow, idx) => {
-
-            console.log(dataRow,this.props.data.length);
               return (<TableRow
                               onPublishClick={that.props.onPublishClick}
                                onDeleteClick={that.props.onDeleteClick}

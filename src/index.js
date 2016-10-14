@@ -22,16 +22,9 @@ const store = configureStore(filterInitialState);
 const history = syncHistoryWithStore(browserHistory, store);
 
 axios.defaults.validateStatus = status => {
-  return (status >= 200 && status < 400) || status == 401;
+  return (status >= 200 && status < 400) ;
 };
-axios.interceptors.response.use(response => {
-  if(response.status == 401) {
-    localStorage.removeItem(TOKEN_KEY);
-    store.dispatch(push('/'));
-  }
-  return response;
-});
-//
+
 axios.interceptors.request.use(config => {
 
   let token = localStorage.getItem(TOKEN_KEY);

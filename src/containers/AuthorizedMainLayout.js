@@ -11,8 +11,8 @@ class AuthorizedMainLayout extends React.Component{
     this.logout = this.logout.bind(this);
   }
 
-  componentWillMount(){
-    this.redirectToLogin(this.props);
+  componentWillMount() {
+    this.redirectToLogin();
   }
 
   componentWillReceiveProps() {
@@ -20,7 +20,7 @@ class AuthorizedMainLayout extends React.Component{
   }
 
   redirectToLogin(){
-    if(!localStorage.getItem(TOKEN_KEY)) {
+    if(!localStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY) == 'undefined') {
       this.context.router.push("/");
     }
   }

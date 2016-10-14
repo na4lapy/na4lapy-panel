@@ -33,6 +33,5 @@ export default (
       </Route >
       <Route path={STATISTIC_URL} component={StatisticsPage} />
     </Route>
-
   </Route>
 );

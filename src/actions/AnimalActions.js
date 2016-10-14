@@ -102,7 +102,6 @@ export function getAnimals(id){
       if(typeof id !== 'undefined'){
         dispatch(actions.change('animal', response.data));
       } else {
-        console.log(response.data);
         dispatch(getAnimalsSuccess(response.data.data));
       }
     }).catch((err) => {

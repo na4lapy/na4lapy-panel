@@ -5,8 +5,6 @@ import {connect} from 'react-redux';
 import ImageUploader from '../ImageUploader';
 import {bindActionCreators} from 'redux';
 import * as animalActions from '../../actions/AnimalActions';
-import moment from 'moment';
-import {DATE_FORMAT} from '../../config';
 import {deletePhoto} from '../../actions/PhotoActions';
 import {MONTHS_FULL, MONTHS_SHORT, WEEKDAYS_FULL, WEEKDAYS_SHORT, TODAY, CLEAR, CLOSE} from '../../utils';
 
