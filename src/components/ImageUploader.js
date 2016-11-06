@@ -2,6 +2,8 @@ import React, {PropTypes} from 'react';
 import { Field } from 'react-redux-form';
 import FileRemovalModal from './AnimalList/FileRemovalModal';
 import UploadedPhotosWrapper from './AnimalList/UploadedPhotosWrapper';
+import ImagePreviews from './AnimalList/ImagePreviews';
+import _ from 'lodash';
 
 export default class ImageUploader extends React.Component {
 
@@ -21,16 +23,19 @@ export default class ImageUploader extends React.Component {
     this.openTempPhotosModal = this.openTempPhotosModal.bind(this);
   }
 
-  openUploadedModal(e, fileName, index){
+  openUploadedModal(e, index){
+    console.log(index);
+    console.log(this.props.photos);
+    console.log(this.props.photos[index]);
     this.setState({
        photosType: 'wgranych',
        callback: this.removeUploadedPhoto,
        photoId: this.props.photos[index].id
-     }, this.openModal(e, fileName, index));
+     }, this.openModal(e, this.props.photos[index].fileName, index));
   }
 
-  openTempPhotosModal(e, fileName, index){
-    this.setState({photosType: 'do wgrania', callback: this.removeFromTempQueue}, this.openModal(e, fileName, index));
+  openTempPhotosModal(e, index){
+    this.setState({photosType: 'do wgrania', callback: this.removeFromTempQueue}, this.openModal(e, '', index));
   }
 
   removeUploadedPhoto() {
@@ -45,9 +50,16 @@ export default class ImageUploader extends React.Component {
   }
 
   removeFromTempQueue() {
+    let files = _.clone(this.state.files);
+    let urls = _.clone(this.state.imagePreviewUrls);
+
+    files.splice(this.state.removingFileIndex, 1);
+    urls.splice(this.state.removingFileIndex, 1);
+
+
       this.setState({
-        files: this.state.files.splice(1, this.state.removingFileIndex),
-        imagePreviewUrls: this.state.imagePreviewUrls.splice(1, this.state.removingFileIndex)
+        files: files,
+        imagePreviewUrls: urls
       });
     }
 
@@ -76,18 +88,6 @@ export default class ImageUploader extends React.Component {
 
   render() {
     let {imagePreviewUrls} = this.state;
-    let imagePreviews = null;
-    if (imagePreviewUrls) {
-        imagePreviews= [];
-        imagePreviews.push(<h3 key="header" className="center">Zdjęcia do wgrania</h3>);
-        imagePreviewUrls.map( (imagePreviewUrl,index) => {
-          imagePreviews.push(
-            <div key={index} className="col s4 previewWrapper">
-              <img className="z-depth-2 responsive-img"  src={imagePreviewUrl} />
-              <a onClick={(event) => this.openTempPhotosModal(event,this.state.files[index].name, index)} className="btn-floating btn-small waves-effect waves-light red"><i className="material-icons">clear</i></a>
-            </div> );
-        });
-    }
     return (
       <div>
         {this.renderUploadedPhotos()}
@@ -103,9 +103,10 @@ export default class ImageUploader extends React.Component {
             <input className="file-path validate" type="text" placeholder="Wgraj jedno lub więcej zdjęć"/>
           </div>
       </div>
-      <div className="row">
-        {imagePreviews}
-      </div>
+      <h3 key="header" className="center">Zdjęcia do wgrania</h3>
+      {imagePreviewUrls && _.chunk(imagePreviewUrls, 3).map( (previews, rowIndex) => {
+        return  <ImagePreviews key={rowIndex} previewsTriples={previews} rowIndex={rowIndex} deletePhoto={this.openTempPhotosModal}/>;
+      })}
       <FileRemovalModal removeCallback={this.state.callback} fileName={this.state.removingFileName} photosType={this.state.photosType}/>
 
     </div>);

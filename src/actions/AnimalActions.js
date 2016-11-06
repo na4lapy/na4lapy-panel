@@ -1,5 +1,5 @@
 import axios from 'axios';
-import API_URL from '../config';
+import API_BASE_URL from '../config';
 import {push} from 'react-router-redux';
 import {actions} from 'react-redux-form';
 import {ANIMALS_URL} from '../routes_urls';
@@ -18,6 +18,8 @@ export const DELETE_ANIMALS_SUCCESS = 'DELETE_ANIMALS_SUCCESS';
 export const DELETE_ANIMALS_FAILURE = 'DELETE_ANIMALS_FAILURE';
 
 /* SAVING ANIMAL FORM OBJECT TO THE API */
+let API_URL = API_BASE_URL + '/v1';
+
 export function saveAnimal(animal) {
   return dispatch => {
     let method = 'post';

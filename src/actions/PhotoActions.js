@@ -1,15 +1,17 @@
 export const DELETE_PHOTO_REQUEST = 'DELETE_PHOTO_REQUEST';
 export const DELETE_PHOTO_SUCCESS = 'DELETE_PHOTO_SUCCESS';
 export const DELETE_PHOTO_FAILURE = 'DELETE_ANIMALS_FAILURE';
-import API_URL from '../config';
+import API_BASE_URL from '../config';
 import axios from 'axios';
 import {getAnimals} from './AnimalActions';
+let API_URL_FILES = API_BASE_URL + '/v1/files/';
+
 
 export function deletePhoto(animalId,id) {
   return dispatch => {
 
     dispatch(deletePhotoRequest());
-    axios.delete(API_URL + 'v1/files/' + id).then(() => {
+    axios.delete(API_URL_FILES + id).then(() => {
       dispatch(deletePhotoSuccess());
       dispatch(getAnimals(animalId));
     }).catch((err) => {

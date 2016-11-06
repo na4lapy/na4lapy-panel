@@ -5,7 +5,9 @@ export const animalInitialState = {
   training: 'UNKNOWN',
   vaccination: 'UNKNOWN',
   sterilization: 'UNKNOWN',
-  status: 'UNPUBLISHED'
+  status: 'ACTIVE',
+  animalStatus: 'NEW'
+
 };
 
 export const filterInitialState = {

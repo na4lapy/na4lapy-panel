@@ -1,4 +1,6 @@
 import React, {PropTypes} from 'react';
+import API_BASE_URL from '../../config';
+let API_URL_FILES = API_BASE_URL + '/v1/files/';
 
 const UploadedPhotosWrapper = ({photos, removePhoto}) => {
 
@@ -8,8 +10,8 @@ const UploadedPhotosWrapper = ({photos, removePhoto}) => {
         <div className="row">
           {photos.map( (photo,index) => {
             return (<div key={photo.id} className="previewWrapper col s3">
-                    <img className="z-depth-2 responsive-img" src={photo.url}/>
-                    <a onClick={(event) => removePhoto(event, photo.url,index)} className="btn-floating btn-small waves-effect waves-light red"><i className="material-icons">clear</i></a>
+                    <img className="z-depth-2 responsive-img" src={API_URL_FILES + photo.fileName}/>
+                    <a onClick={(event) => removePhoto(event,index)} className="btn-floating btn-small waves-effect waves-light red"><i className="material-icons">clear</i></a>
                   </div>);
           })}
         </div>

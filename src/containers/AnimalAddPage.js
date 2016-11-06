@@ -20,7 +20,7 @@ class AnimalAddPage extends React.Component {
   componentDidMount() {
     if(typeof this.props.animalId !== 'undefined') {
       this.props.getAnimals(this.props.animalId);
-    } 
+    }
   }
 
   render() {
@@ -31,7 +31,7 @@ class AnimalAddPage extends React.Component {
 }
 
 AnimalAddPage.propTypes = {
-  animalId: PropTypes.number,
+  animalId: PropTypes.string,
   getAnimals: PropTypes.func,
   resetModel: PropTypes.func
 };

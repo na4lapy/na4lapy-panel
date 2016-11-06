@@ -170,8 +170,8 @@ class AnimalForm extends React.Component {
       </div>
       <div className="row">
         <div className ="input-field col s12 m6" >
-            <select  name="animal.status" ref="animal_status" defaultValue={animal.status || 'UNPUBLISHED'} onChange={this.handleSelectChange} >
-              <option value={"UNPUBLISHED"}>Nieopublikowany</option>
+            <select  name="animal.animalStatus" ref="animal_status" defaultValue={animal.status || 'UNPUBLISHED'} onChange={this.handleSelectChange} >
+              <option value={"NEW"}>Nieopublikowany</option>
               <option value={"FOR_ADOPTION"}>Do adopcji</option>
               <option value={"ADOPTED"}>Adoptowany</option>
             </select>
@@ -183,7 +183,7 @@ class AnimalForm extends React.Component {
         </Field>
         <hr />
 
-      <ImageUploader deletePhoto={this.props.deletePhoto} photos={this.props.animal.photos} animalId={this.props.animal.id}/>
+      <ImageUploader deletePhoto={this.props.deletePhoto} photos={animal.photos} animalId={animal.id}/>
 
       </div>
       <div className="row">
