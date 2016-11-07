@@ -4,7 +4,7 @@ export const DELETE_PHOTO_FAILURE = 'DELETE_ANIMALS_FAILURE';
 import API_BASE_URL from '../config';
 import axios from 'axios';
 import {getAnimals} from './AnimalActions';
-let API_URL_FILES = API_BASE_URL + '/v1/files/';
+let API_URL_FILES = API_BASE_URL + 'files/';
 
 
 export function deletePhoto(animalId,id) {

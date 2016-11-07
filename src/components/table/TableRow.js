@@ -1,7 +1,7 @@
 import React,{PropTypes} from 'react';
 import AnimalDictionary from '../../animal_dictionary';
 import API_BASE_URL from '../../config';
-let API_URL_FILES = API_BASE_URL + '/v1/files/';
+let API_URL_FILES = API_BASE_URL + 'files/';
 
 class TableRow extends React.Component {
 

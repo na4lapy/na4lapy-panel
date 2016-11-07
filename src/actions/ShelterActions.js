@@ -41,7 +41,7 @@ export function loadShelter(id) {
 
   return dispatch => {
     dispatch(loadShelterRequest());
-    return axios.get(API_URL + 'v1/shelters/' + id)
+    return axios.get(API_URL + 'shelters/' + id)
       .then((response) => {
         dispatch(loadShelterSuccess(response.data));
         dispatch(actions.change('shelter', response.data));
@@ -90,7 +90,7 @@ export function saveShelter(shelter) {
 
   return axios.request({
       method,
-      url: API_URL + 'v1/shelters',
+      url: API_URL + 'shelters',
       data: {
         ...shelter
       }

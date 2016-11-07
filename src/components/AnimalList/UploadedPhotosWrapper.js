@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 import API_BASE_URL from '../../config';
-let API_URL_FILES = API_BASE_URL + '/v1/files/';
+let API_URL_FILES = API_BASE_URL + 'files/';
 
 const UploadedPhotosWrapper = ({photos, removePhoto}) => {
 
