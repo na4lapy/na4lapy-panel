@@ -24,9 +24,6 @@ export default class ImageUploader extends React.Component {
   }
 
   openUploadedModal(e, index){
-    console.log(index);
-    console.log(this.props.photos);
-    console.log(this.props.photos[index]);
     this.setState({
        photosType: 'wgranych',
        callback: this.removeUploadedPhoto,

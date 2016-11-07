@@ -1,6 +1,7 @@
 import React,{PropTypes} from 'react';
 import AnimalDictionary from '../../animal_dictionary';
-// import API_URL from '../../config';
+import API_BASE_URL from '../../config';
+let API_URL_FILES = API_BASE_URL + '/v1/files/';
 
 class TableRow extends React.Component {
 
@@ -11,7 +12,7 @@ class TableRow extends React.Component {
 
   renderImage(){
     if(this.props.dataRow.photos && typeof this.props.dataRow.photos[0] != 'undefined') {
-      return (<img className="animal_photo" onClick={(event) => this.props.onEditClick(event, this.props.dataRow.id)} src={this.props.dataRow.photos[0].url} />);
+      return (<img className="animal_photo" onClick={(event) => this.props.onEditClick(event, this.props.dataRow.id)} src={API_URL_FILES + this.props.dataRow.photos[0].fileName} />);
     }
   }
 

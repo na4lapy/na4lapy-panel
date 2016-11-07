@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import {TOKEN_KEY} from './config';
 import axios from 'axios';
-import {push, syncHistoryWithStore} from 'react-router-redux';
+import {syncHistoryWithStore} from 'react-router-redux';
 /* eslint-disable */
 import configureStore from './store/configureStore';
 /* eslint-enable */
