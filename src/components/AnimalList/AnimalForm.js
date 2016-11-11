@@ -6,6 +6,7 @@ import ImageUploader from '../ImageUploader';
 import {bindActionCreators} from 'redux';
 import * as animalActions from '../../actions/AnimalActions';
 import {deletePhoto} from '../../actions/PhotoActions';
+import ErrorModal from '../ErrorModal';
 import {MONTHS_FULL, MONTHS_SHORT, WEEKDAYS_FULL, WEEKDAYS_SHORT, TODAY, CLEAR, CLOSE} from '../../utils';
 
 
@@ -49,6 +50,15 @@ class AnimalForm extends React.Component {
     // Materialize.updateTextFields(); //eslint-disable-line
   }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.animalRequestErrors) {
+      this.setState({errorMessage: 'Wystąpił błąd przy przesyłaniu jednego lub kilku zdjęć. Sprawdź czy  rozmiar przesyłanych zdjęć jest za duży'},
+        $('#error-modal').openModal()
+      );
+
+    }
+  }
+
   componentDidUpdate( ) {
       $('select').material_select();
   }
@@ -62,6 +72,7 @@ class AnimalForm extends React.Component {
   }
 
   handleSubmit(animal){
+    console.log(animal);
     this.props.saveAnimal(animal);
   }
 
@@ -80,7 +91,9 @@ class AnimalForm extends React.Component {
     } else {
       name = 'Zwierzę';
     }
+
     return (
+    <div>
       <Form model="animal" onSubmit={(animal) => this.handleSubmit(animal)}>
       <h1 className="center">{animal.id ? 'Edytuj ' + name : 'Dodaj zwierzę.'}</h1>
       <div className="row">
@@ -194,6 +207,8 @@ class AnimalForm extends React.Component {
        </div>
      </div>
       </Form>
+      <ErrorModal errorMessage={this.state.errorMessage} />
+    </div>
     );
   }
 }
@@ -207,7 +222,8 @@ AnimalForm.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    animal: state.animal
+    animal: state.animal,
+    animalRequestErrors: state.animalRequest.errors
   };
 }
 

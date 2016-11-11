@@ -1,11 +1,13 @@
 import React, {PropTypes} from 'react';
-import { Field } from 'react-redux-form';
+import { Field, actions } from 'react-redux-form';
+import {connect} from 'react-redux';
 import FileRemovalModal from './AnimalList/FileRemovalModal';
+import {bindActionCreators} from 'redux';
 import UploadedPhotosWrapper from './AnimalList/UploadedPhotosWrapper';
 import ImagePreviews from './AnimalList/ImagePreviews';
 import _ from 'lodash';
 
-export default class ImageUploader extends React.Component {
+class ImageUploader extends React.Component {
 
   constructor(props){
     super(props);
@@ -53,6 +55,7 @@ export default class ImageUploader extends React.Component {
     files.splice(this.state.removingFileIndex, 1);
     urls.splice(this.state.removingFileIndex, 1);
 
+      this.props.changeModel('animal.tempPhotos', files);
 
       this.setState({
         files: files,
@@ -67,8 +70,11 @@ export default class ImageUploader extends React.Component {
     for (let i = 0; i < files.length; i++) {
       let reader = new FileReader();
       reader.onloadend = () => {
+        let tempFiles = _.clone(this.state.files);
+        tempFiles.push(files[i]);
+        this.props.changeModel('animal.tempPhotos', tempFiles);
         this.setState({
-           files: this.state.files.concat([files[i]]),
+           files: tempFiles,
            imagePreviewUrls: this.state.imagePreviewUrls.concat(reader.result)
          });
 
@@ -115,3 +121,11 @@ ImageUploader.propTypes = {
   photos: PropTypes.array,
   animalId: PropTypes.number
 };
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeModel: bindActionCreators(actions.change, dispatch),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ImageUploader);

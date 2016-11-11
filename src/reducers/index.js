@@ -8,6 +8,7 @@
  import FilterReducer from './FilterReducer';
  import SorterReducer from './SorterReducer';
  import ShelterReducer from './ShelterReducer';
+ import AnimalRequestReducer from './AnimalReducer';
 
  const rootReducer = combineReducers({
    userAuth: AuthReducer,
@@ -15,6 +16,7 @@
    animalListState: AnimalListReducer,
    animalFilter: FilterReducer,
    sorting:SorterReducer,
+   animalRequest: AnimalRequestReducer,
    animal:  modelReducer('animal', animalInitialState),
    animalForm: formReducer('animal', animalInitialState),
    shelter: modelReducer('shelter', shelterInitialState),

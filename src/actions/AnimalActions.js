@@ -48,12 +48,33 @@ export function saveAnimal(animal) {
                 }
             });
         })
-      ).then(() => {
+      ).then((resp) => {
+        console.log(resp);
         dispatch(saveAnimalSuccess());
         toast(SAVE_ANIMAL_MSG);
         dispatch(push(ANIMALS_URL));
-      }).catch((err) => {
-        dispatch(saveAnimalFailure(err.resposne.data));
+      }).catch((err, err1) => {
+        console.log(err1);
+        if (err.response) {
+        // The request was made, but the server responded with a status code
+        // that falls out of the range of 2xx
+        console.log(err.response.data);
+        console.log(err.response.status);
+        console.log(err.response.headers);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.log('Error', err.message);
+      }
+        //FILE TO BIG
+        console.log(err.conf);
+        if(err.config.data && err.config.data.name){
+          const stateError = {fileName: err.config.data.name, code: 413};
+          dispatch(saveAnimalFailure(stateError));
+        } else {
+          dispatch(saveAnimalFailure(err.resposne.data));
+        }
+
+
       });
     } else {
         toast(SAVE_ANIMAL_MSG);
@@ -171,7 +192,7 @@ export function deleteAnimal (id) {
         type: DELETE_ANIMALS_FAILURE,
         isAnimalDeleted: false,
         isFetching: false,
-        errors
+        errors,
       };
     }
 }

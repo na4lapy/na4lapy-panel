@@ -14,7 +14,7 @@ export default function configureStore(initialState = {animals:[]}) {
   const routingMiddleware = routerMiddleware(browserHistory);
   const store = createStore(rootReducer, initialState, compose(
     // Add other routingMiddleware on this line...
-    applyMiddleware(thunk , routingMiddleware,createLogger()),
+    applyMiddleware(thunk , routingMiddleware),
     window.devToolsExtension ? window.devToolsExtension() : f => f // add support for Redux dev tools
     )
   );
