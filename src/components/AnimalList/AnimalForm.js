@@ -72,7 +72,6 @@ class AnimalForm extends React.Component {
   }
 
   handleSubmit(animal){
-    console.log(animal);
     this.props.saveAnimal(animal);
   }
 

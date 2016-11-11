@@ -20,6 +20,7 @@ class LoginPage extends React.Component {
     if(nextProps.userAuth.isAuthenticated) {
       this.context.router.push(ANIMALS_URL);
     }
+    Materialize.updateTextFields(); //eslint-disable-line
   }
 
   onInputChange(event) {
@@ -43,6 +44,7 @@ class LoginPage extends React.Component {
     if (this.props.errorDictionary && this.props.errorDictionary.password) {
       passwordClass+= " invalid";
     }
+
     return (
 
       <div className="container ">
@@ -56,12 +58,12 @@ class LoginPage extends React.Component {
             <div className="valign-wrapper">
             </div>
               <div className="input-field col s12">
-                <input value={this.state.email} name="email" id="email" type="email" className={emailClass} onChange={this.onInputChange}/>
-                <label data-error={this.props.errorDictionary ? this.props.errorDictionary.email : ''} htmlFor="email">Email</label>
+                <input value={this.state.email} name="email" id="email" type="email" className={emailClass} onChange={this.onInputChange} placeholder="Email"/>
+                <label className="closer-error" data-error={this.props.errorDictionary ? this.props.errorDictionary.email : ''} htmlFor="email"></label>
               </div>
               <div className="input-field col s12 mt-50">
-                <input name="password" value={this.state.password} id="password" type="password" className={passwordClass} onChange={this.onInputChange}/>
-                <label data-error={this.props.errorDictionary ? this.props.errorDictionary.password : ''} htmlFor="password">Hasło</label>
+                <input name="password" value={this.state.password} id="password" type="password" className={passwordClass} onChange={this.onInputChange} placeholder="Hasło"/>
+                <label className="closer-error" data-error={this.props.errorDictionary ? this.props.errorDictionary.password : ''} htmlFor="password"></label>
               </div>
               <div className="col s12 mt-50">
                 <button className="btn btn-large waves-effect waves-light" type="submit" name="action">Zaloguj się

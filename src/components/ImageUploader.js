@@ -119,7 +119,8 @@ class ImageUploader extends React.Component {
 ImageUploader.propTypes = {
   deletePhoto: PropTypes.func,
   photos: PropTypes.array,
-  animalId: PropTypes.number
+  animalId: PropTypes.number,
+  changeModel: PropTypes.func
 };
 
 const mapDispatchToProps = (dispatch) => {
