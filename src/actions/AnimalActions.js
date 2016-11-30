@@ -105,6 +105,15 @@ export function saveAnimal(animal) {
   }
 }
 
+export function clearPhotoUploadError() {
+  return {
+    type: SAVE_ANIMAL_FAILURE,
+    isFetching: false,
+    isAnimalSaved: false,
+    errors: null
+  };
+}
+
 export function getAnimals(id){
   return dispatch => {
     dispatch(getAnimalsRequest());

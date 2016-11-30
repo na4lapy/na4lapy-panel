@@ -17,6 +17,7 @@ class AnimalForm extends React.Component {
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.removePhoto = this.removePhoto.bind(this);
+    this.errorModalConfirmationCallback = this.errorModalConfirmationCallback.bind(this);
     this.state = {
       uploadedFileToBeRemoved: null
     };
@@ -52,7 +53,7 @@ class AnimalForm extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.animalRequestErrors) {
-      this.setState({errorMessage: 'Wystąpił błąd przy przesyłaniu jednego lub kilku zdjęć. Sprawdź czy  rozmiar przesyłanych zdjęć jest za duży'},
+      this.setState({errorMessage: 'Wystąpił błąd przy przesyłaniu jednego lub kilku zdjęć. Sprawdź czy  rozmiar przesyłanych zdjęć jest za duży. Niektóre lub wszystkie zdjęcia mogły zostać niezapisane!!'},
         $('#error-modal').openModal()
       );
 
@@ -73,6 +74,10 @@ class AnimalForm extends React.Component {
 
   handleSubmit(animal){
     this.props.saveAnimal(animal);
+  }
+
+  errorModalConfirmationCallback() {
+    this.props.clearPhotoUploadError();
   }
 
   removePhoto(event,id) {
@@ -206,7 +211,7 @@ class AnimalForm extends React.Component {
        </div>
      </div>
       </Form>
-      <ErrorModal errorMessage={this.state.errorMessage} />
+      <ErrorModal errorMessage={this.state.errorMessage} confirmationCallback={this.errorModalConfirmationCallback}/>
     </div>
     );
   }
@@ -216,7 +221,8 @@ AnimalForm.propTypes = {
   animal: PropTypes.object,
   saveAnimal: PropTypes.func.isRequired,
   changeModel: PropTypes.func.isRequired,
-  deletePhoto: PropTypes.func
+  deletePhoto: PropTypes.func,
+  clearPhotoUploadError: PropTypes.func
 };
 
 function mapStateToProps(state) {
@@ -230,7 +236,8 @@ function mapDispatchToProps(dispatch){
   return {
     saveAnimal: bindActionCreators(animalActions.saveAnimal, dispatch ),
     changeModel: bindActionCreators(actions.change, dispatch),
-    deletePhoto: bindActionCreators(deletePhoto, dispatch)
+    deletePhoto: bindActionCreators(deletePhoto, dispatch),
+    clearPhotoUploadError: bindActionCreators(animalActions.clearPhotoUploadError, dispatch)
   };
 }
 

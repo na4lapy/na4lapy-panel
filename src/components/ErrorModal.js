@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-const ErrorModal = ({errorMessage}) => {
+const ErrorModal = ({errorMessage, confirmationCallback}) => {
   return (
     <div id="error-modal" className="modal bottom-sheet">
      <div className="modal-content">
@@ -8,7 +8,7 @@ const ErrorModal = ({errorMessage}) => {
        <p>{errorMessage}</p>
      </div>
      <div className="modal-footer">
-       <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat">OK</a>
+       <a href="#!" className="modal-action modal-close waves-effect waves-green btn-flat" onClick={confirmationCallback}>OK</a>
      </div>
    </div>
   );
