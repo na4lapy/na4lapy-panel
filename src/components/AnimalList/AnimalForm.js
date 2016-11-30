@@ -173,11 +173,11 @@ class AnimalForm extends React.Component {
         </div>
         <div className ="input-field col s12 m6" >
             <select  name="animal.sterilization" ref="animal_sterilization" defaultValue={animal.sterilization || 'UNKNOWN'} onChange={this.handleSelectChange} >
-              <option value={"STERILIZED"}>{animal.gender == "FEMALE" ? 'Sterylizowana' : 'Wykastrowany'}</option>
-              <option value={"NOT_STERILIZED"}>Nie sterylizowany</option>
-              <option value={"UNKNOWN"}>Nieokreślony</option>
+              <option value={"STERILIZED"}>Tak</option>
+              <option value={"NOT_STERILIZED"}>Nie</option>
+              <option value={"UNKNOWN"}>Nie wiadomo</option>
             </select>
-          <label>Sterylizacja</label>
+          <label>Kastracja/Sterylizacja</label>
         </div>
       </div>
       <div className="row">
