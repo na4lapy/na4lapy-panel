@@ -18,7 +18,7 @@ export const DELETE_ANIMALS_SUCCESS = 'DELETE_ANIMALS_SUCCESS';
 export const DELETE_ANIMALS_FAILURE = 'DELETE_ANIMALS_FAILURE';
 
 /* SAVING ANIMAL FORM OBJECT TO THE API */
-
+//TODO: refactor needed
 export function saveAnimal(animal) {
   return dispatch => {
     let method = 'post';
@@ -34,8 +34,11 @@ export function saveAnimal(animal) {
         ...animal
       },
     }).then(response => {
-      if(animal.tempPhotos && animal.tempPhotos.length != 0){
-        axios.all(animal.tempPhotos.map(file => {
+      let resolvedFiles = 0;
+      let didFailUploadFail = false;
+      let failedFiles = [];
+      if (animal.tempPhotos && animal.tempPhotos.length != 0) {
+        animal.tempPhotos.map(file => {
           return axios.post(
             API_BASE_URL + 'files/upload/' + file.name,
             file,
@@ -46,29 +49,37 @@ export function saveAnimal(animal) {
                 headers: {
                   'Content-Type': file.type
                 }
+            }).then(() => {
+              resolvedFiles++;
+              if (resolvedFiles == animal.tempPhotos.length && !didFailUploadFail) {
+                dispatch(saveAnimalSuccess());
+                toast(SAVE_ANIMAL_MSG);
+                dispatch(push(ANIMALS_URL));
+              } else if (resolvedFiles == animal.tempPhotos.length && didFailUploadFail && failedFiles.length != 0 ) {
+                let error = {
+                  failedFiles,
+                  code: 413
+                };
+                dispatch(saveAnimalFailure(error));
+              }
+            }).catch((err) => {
+              resolvedFiles++;
+              didFailUploadFail = true;
+              //FILE TO BIG add to failedFiles
+              if(err.config.data && err.config.data.name) {
+                failedFiles.push(err.config.data.name);
+              }
+
+              if (resolvedFiles == animal.tempPhotos.length && didFailUploadFail && failedFiles.length != 0 ) {
+                let error = {
+                  failedFiles,
+                  code: 413
+                };
+                dispatch(saveAnimalFailure(error));
+              }
+
             });
-        })
-      ).then(() => {
-        dispatch(saveAnimalSuccess());
-        toast(SAVE_ANIMAL_MSG);
-        dispatch(push(ANIMALS_URL));
-      }).catch((err) => {
-        if (err.response) {
-        // The request was made, but the server responded with a status code
-        // that falls out of the range of 2xx
-      } else {
-        // Something happened in setting up the request that triggered an Error
-      }
-        //FILE TO BIG
-        if(err.config.data && err.config.data.name){
-          const stateError = {fileName: err.config.data.name, code: 413};
-          dispatch(saveAnimalFailure(stateError));
-        } else {
-          dispatch(saveAnimalFailure(err.resposne.data));
-        }
-
-
-      });
+        });
     } else {
         toast(SAVE_ANIMAL_MSG);
         dispatch(getAnimals());

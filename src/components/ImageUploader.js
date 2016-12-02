@@ -55,13 +55,13 @@ class ImageUploader extends React.Component {
     files.splice(this.state.removingFileIndex, 1);
     urls.splice(this.state.removingFileIndex, 1);
 
-      this.props.changeModel('animal.tempPhotos', files);
+    this.props.changeModel('animal.tempPhotos', files);
 
-      this.setState({
-        files: files,
-        imagePreviewUrls: urls
-      });
-    }
+    this.setState({
+      files: files,
+      imagePreviewUrls: urls
+    });
+  }
 
   handleFilesUpload(e){
     e.preventDefault();
@@ -108,7 +108,7 @@ class ImageUploader extends React.Component {
       </div>
       <h3 key="header" className="center">Zdjęcia do wgrania</h3>
       {imagePreviewUrls && _.chunk(imagePreviewUrls, 3).map( (previews, rowIndex) => {
-        return  <ImagePreviews key={rowIndex} previewsTriples={previews} rowIndex={rowIndex} deletePhoto={this.openTempPhotosModal}/>;
+        return  <ImagePreviews key={rowIndex} previewsTriples={previews} rowIndex={rowIndex} deletePhoto={this.openTempPhotosModal} failedFiles={this.props.failedFiles} files={_.chunk(this.state.files, 3)[rowIndex]}/>;
       })}
       <FileRemovalModal removeCallback={this.state.callback} fileName={this.state.removingFileName} photosType={this.state.photosType}/>
 
@@ -120,7 +120,8 @@ ImageUploader.propTypes = {
   deletePhoto: PropTypes.func,
   photos: PropTypes.array,
   animalId: PropTypes.number,
-  changeModel: PropTypes.func
+  changeModel: PropTypes.func,
+  failedFiles: PropTypes.array
 };
 
 const mapDispatchToProps = (dispatch) => {

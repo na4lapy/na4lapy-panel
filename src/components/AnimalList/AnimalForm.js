@@ -8,6 +8,10 @@ import * as animalActions from '../../actions/AnimalActions';
 import {deletePhoto} from '../../actions/PhotoActions';
 import ErrorModal from '../ErrorModal';
 import {MONTHS_FULL, MONTHS_SHORT, WEEKDAYS_FULL, WEEKDAYS_SHORT, TODAY, CLEAR, CLOSE} from '../../utils';
+import {failedFilesMessage} from '../../config';
+import {push} from 'react-router-redux';
+import {ANIMALS_URL} from '../../routes_urls';
+
 
 
 
@@ -18,6 +22,7 @@ class AnimalForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.removePhoto = this.removePhoto.bind(this);
     this.errorModalConfirmationCallback = this.errorModalConfirmationCallback.bind(this);
+    this.onBackButtonClick = this.onBackButtonClick.bind(this);
     this.state = {
       uploadedFileToBeRemoved: null
     };
@@ -53,10 +58,10 @@ class AnimalForm extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.animalRequestErrors) {
-      this.setState({errorMessage: 'Wystąpił błąd przy przesyłaniu jednego lub kilku zdjęć. Sprawdź czy  rozmiar przesyłanych zdjęć jest za duży. Niektóre lub wszystkie zdjęcia mogły zostać niezapisane!!'},
-        $('#error-modal').openModal()
-      );
-
+      this.setState(
+        {errorMessage: failedFilesMessage(nextProps.animalRequestErrors.failedFiles),
+          failedFiles: nextProps.animalRequestErrors.failedFiles
+        }, $('#error-modal').openModal());
     }
   }
 
@@ -74,6 +79,10 @@ class AnimalForm extends React.Component {
 
   handleSubmit(animal){
     this.props.saveAnimal(animal);
+  }
+
+  onBackButtonClick() {
+    this.push(ANIMALS_URL);
   }
 
   errorModalConfirmationCallback() {
@@ -200,13 +209,16 @@ class AnimalForm extends React.Component {
         </Field>
         <hr />
 
-      <ImageUploader deletePhoto={this.props.deletePhoto} photos={animal.photos} animalId={animal.id}/>
+      <ImageUploader deletePhoto={this.props.deletePhoto} photos={animal.photos} animalId={animal.id} failedFiles={this.state.failedFiles || []}/>
 
       </div>
       <div className="row">
         <div className="center">
-          <button className="btn-large center" type="submit">
-            Zapisz {animal.name}
+          <button className="btn large center" type="submit">
+            Zapisz {animal.name} 
+         </button>
+         <button className="btn large left" onClick={this.onBackButtonClick}>
+           Powrót do listy
          </button>
        </div>
      </div>
@@ -228,7 +240,8 @@ AnimalForm.propTypes = {
 function mapStateToProps(state) {
   return {
     animal: state.animal,
-    animalRequestErrors: state.animalRequest.errors
+    animalRequestErrors: state.animalRequest.errors,
+    areImageUploadFinished: state.animalRequest.isFetching
   };
 }
 
@@ -237,7 +250,8 @@ function mapDispatchToProps(dispatch){
     saveAnimal: bindActionCreators(animalActions.saveAnimal, dispatch ),
     changeModel: bindActionCreators(actions.change, dispatch),
     deletePhoto: bindActionCreators(deletePhoto, dispatch),
-    clearPhotoUploadError: bindActionCreators(animalActions.clearPhotoUploadError, dispatch)
+    clearPhotoUploadError: bindActionCreators(animalActions.clearPhotoUploadError, dispatch),
+    push: bindActionCreators(push, dispatch)
   };
 }
 
