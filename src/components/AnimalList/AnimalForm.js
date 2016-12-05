@@ -26,6 +26,7 @@ class AnimalForm extends React.Component {
     this.state = {
       uploadedFileToBeRemoved: null
     };
+    this.reloadAnimal = this.reloadAnimal.bind(this);
   }
 
   componentDidMount() {
@@ -82,7 +83,7 @@ class AnimalForm extends React.Component {
   }
 
   onBackButtonClick() {
-    this.push(ANIMALS_URL);
+    this.props.push(ANIMALS_URL);
   }
 
   errorModalConfirmationCallback() {
@@ -94,6 +95,11 @@ class AnimalForm extends React.Component {
     this.setState({uploadedFileToBeRemoved: this.props.animal.photos[id]}, () => {
         $('#removingFileModal').openModal();
     });
+  }
+
+  reloadAnimal() {
+    this.setState({failedFiles: null});
+    this.props.reloadAnimal();
   }
 
   render() {
@@ -209,15 +215,21 @@ class AnimalForm extends React.Component {
         </Field>
         <hr />
 
-      <ImageUploader deletePhoto={this.props.deletePhoto} photos={animal.photos} animalId={animal.id} failedFiles={this.state.failedFiles || []}/>
+      <ImageUploader
+        areImageUploadFinished={this.props.areImageUploadFinished}
+        deletePhoto={this.props.deletePhoto}
+        photos={animal.photos}
+        animalId={animal.id}
+        failedFiles={this.state.failedFiles || []}
+        reloadAnimal={this.reloadAnimal}/>
 
       </div>
       <div className="row">
         <div className="center">
           <button className="btn large center" type="submit">
-            Zapisz {animal.name} 
+            Zapisz {animal.name}
          </button>
-         <button className="btn large left" onClick={this.onBackButtonClick}>
+         <button className="btn large left" onClick={this.onBackButtonClick} type="button">
            Powrót do listy
          </button>
        </div>
@@ -234,14 +246,15 @@ AnimalForm.propTypes = {
   saveAnimal: PropTypes.func.isRequired,
   changeModel: PropTypes.func.isRequired,
   deletePhoto: PropTypes.func,
-  clearPhotoUploadError: PropTypes.func
+  clearPhotoUploadError: PropTypes.func,
+  reloadAnimal: PropTypes.func
 };
 
 function mapStateToProps(state) {
   return {
     animal: state.animal,
     animalRequestErrors: state.animalRequest.errors,
-    areImageUploadFinished: state.animalRequest.isFetching
+    areImageUploadFinished: !state.animalRequest.isFetching
   };
 }
 

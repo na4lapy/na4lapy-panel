@@ -1,4 +1,7 @@
 
+body
+  background-color: white
+
 nav
   background-color: #57a3b1
 
@@ -79,6 +82,30 @@ thead
   left: 0
   right: 0
 
+.progress-overlay
+  background: rgba(0, 0, 0, 0.39)
+  width:      100%
+  height:     100%
+  z-index:    10
+  top:        0
+  left:       0
+  position:   fixed
+
+  .progress-wrapper
+    position: relative
+    width: 100%
+    height: 100%
+
+  .center-progress
+    height: 90px
+    width: 50%
+    position: absolute
+    top: 50%
+    left: 25%
+    background: #fff
+
+    h3
+      text-indent: 20px
 
 @media (max-width: 768px)
   .logo

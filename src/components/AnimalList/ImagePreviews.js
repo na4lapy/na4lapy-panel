@@ -3,8 +3,7 @@ import React, {PropTypes} from 'react';
 const ImagePreviews = ({previewsTriples, rowIndex, deletePhoto, failedFiles, files}) => {
 
   let fileNames = files.map((file) => {return file.name});
-
-
+  
   return (
     <div className="row">
     {previewsTriples.map( (preview, index) => {
@@ -13,7 +12,7 @@ const ImagePreviews = ({previewsTriples, rowIndex, deletePhoto, failedFiles, fil
       if (failedFiles.length != 0) {
         imageClasess += imageUploadFailed ? " image-upload-failed" : " image-upload-success";
       }
-      
+
         return (<div key={index} className={imageClasess}>
           <img className="z-depth-2 responsive-img"  src={preview} />
           <div className="overlay valign-wrapper">

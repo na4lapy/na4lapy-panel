@@ -23,6 +23,7 @@ class ImageUploader extends React.Component {
     this.removeFromTempQueue = this.removeFromTempQueue.bind(this);
     this.removeUploadedPhoto = this.removeUploadedPhoto.bind(this);
     this.openTempPhotosModal = this.openTempPhotosModal.bind(this);
+    this.clearFileQueue = this.clearFileQueue.bind(this);
   }
 
   openUploadedModal(e, index){
@@ -89,6 +90,17 @@ class ImageUploader extends React.Component {
     }
   }
 
+  clearFileQueue() {
+    if (this.props.areImageUploadFinished && this.state.files && this.state.files.length != 0) {
+      this.setState({
+        files: [],
+        imagePreviewUrls: []
+      });
+      this.refs.fileNamesInput.value = null;
+      this.props.reloadAnimal();
+    }
+  }
+
   render() {
     let {imagePreviewUrls} = this.state;
     return (
@@ -99,11 +111,11 @@ class ImageUploader extends React.Component {
           <div className="btn">
           <span>Zdjęcia</span>
           <Field  model="animal.tempPhotos">
-            <input type="file" multiple onChange={this.handleFilesUpload}/>
+            <input type="file" multiple onChange={this.handleFilesUpload} onClick={this.clearFileQueue}/>
           </Field>
           </div>
           <div className="file-path-wrapper">
-            <input className="file-path validate" type="text" placeholder="Wgraj jedno lub więcej zdjęć"/>
+            <input className="file-path validate" type="text" placeholder="Wgraj jedno lub więcej zdjęć" ref="fileNamesInput"/>
           </div>
       </div>
       <h3 key="header" className="center">Zdjęcia do wgrania</h3>
@@ -121,7 +133,9 @@ ImageUploader.propTypes = {
   photos: PropTypes.array,
   animalId: PropTypes.number,
   changeModel: PropTypes.func,
-  failedFiles: PropTypes.array
+  failedFiles: PropTypes.array,
+  areImageUploadFinished: PropTypes.bool,
+  reloadAnimal: PropTypes.func
 };
 
 const mapDispatchToProps = (dispatch) => {

@@ -10,3 +10,9 @@ export const failedFilesMessage = (failedFiles) => {
   message += ". Może są za duże? Spróbuj zmniejszyć ich rozmiar.";
   return message;
 };
+
+
+export const loaderOptions = {
+  color: '#2FA59A',
+  opacity: 0.25
+};

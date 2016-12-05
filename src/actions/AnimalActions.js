@@ -17,9 +17,12 @@ export const DELETE_ANIMALS_REQUEST = 'DELETE_ANIMALS_REQUEST';
 export const DELETE_ANIMALS_SUCCESS = 'DELETE_ANIMALS_SUCCESS';
 export const DELETE_ANIMALS_FAILURE = 'DELETE_ANIMALS_FAILURE';
 
+export const PHOTO_RESOLVED = 'PHOTO_RESOLVED';
+
 /* SAVING ANIMAL FORM OBJECT TO THE API */
 //TODO: refactor needed
 export function saveAnimal(animal) {
+  debugger;
   return dispatch => {
     let method = 'post';
     let url = API_BASE_URL + 'animals';
@@ -38,6 +41,9 @@ export function saveAnimal(animal) {
       let didFailUploadFail = false;
       let failedFiles = [];
       if (animal.tempPhotos && animal.tempPhotos.length != 0) {
+        //init dispatch
+        dispatch(photoResolved(resolvedFiles, animal.tempPhotos.length));
+
         animal.tempPhotos.map(file => {
           return axios.post(
             API_BASE_URL + 'files/upload/' + file.name,
@@ -51,6 +57,7 @@ export function saveAnimal(animal) {
                 }
             }).then(() => {
               resolvedFiles++;
+              dispatch(photoResolved(resolvedFiles, animal.tempPhotos.length));
               if (resolvedFiles == animal.tempPhotos.length && !didFailUploadFail) {
                 dispatch(saveAnimalSuccess());
                 toast(SAVE_ANIMAL_MSG);
@@ -64,6 +71,7 @@ export function saveAnimal(animal) {
               }
             }).catch((err) => {
               resolvedFiles++;
+              dispatch(photoResolved(resolvedFiles, animal.tempPhotos.length));
               didFailUploadFail = true;
               //FILE TO BIG add to failedFiles
               if(err.config.data && err.config.data.name) {
@@ -114,6 +122,14 @@ export function saveAnimal(animal) {
       errors
     };
   }
+
+  function photoResolved(photoNumber, photoCount){
+    return {
+      type: PHOTO_RESOLVED,
+      photoNumber,
+      photoCount
+    };
+  }
 }
 
 export function clearPhotoUploadError() {
@@ -136,6 +152,7 @@ export function getAnimals(id){
     .then(response => {
       if(typeof id !== 'undefined'){
         dispatch(actions.change('animal', response.data));
+        dispatch(getAnimalsSuccess([]));
       } else {
         dispatch(getAnimalsSuccess(response.data.data));
       }

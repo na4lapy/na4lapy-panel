@@ -4,13 +4,13 @@ import {bindActionCreators} from 'redux';
 
 import ShelterForm from '../components/Shelter/ShelterForm';
 import {loadShelter, saveShelter} from '../actions/ShelterActions';
+import Loader from '../components/Loader';
 
 class ShelterDetailPage extends React.Component {
 
   constructor (props) {
     super(props);
   }
-
 
   componentDidMount(){
       this.props.loadShelter(1);
@@ -20,6 +20,7 @@ class ShelterDetailPage extends React.Component {
     return (
       <div className="container">
         <ShelterForm onSubmit={this.props.onSubmit}/>
+        <Loader isShown={this.props.isFetching} />
       </div>
     );
   }
@@ -29,13 +30,15 @@ class ShelterDetailPage extends React.Component {
 ShelterDetailPage.propTypes = {
   shelter: PropTypes.object,
   loadShelter: PropTypes.func,
-  onSubmit: PropTypes.func
+  onSubmit: PropTypes.func,
+  isFetching: PropTypes.bool
 };
 
 
 function mapStateToProps(state){
   return {
-    shelter: state.shelterState.shelter
+    shelter: state.shelterState.shelter,
+    isFetching: state.shelterState.isFetching
   };
 }
 
