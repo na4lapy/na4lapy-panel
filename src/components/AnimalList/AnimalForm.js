@@ -213,7 +213,14 @@ class AnimalForm extends React.Component {
           <input name="animal.chip" type="text" placeholder="Chip"/>
           <label htmlFor="animal.chip">Chip</label>
         </Field>
-        <hr />
+      </div>
+      <div className="row">
+        <Field className="input-field col s12" model="animal.description">
+          <textarea id="animal.description" name="animal.description" className="materialize-textarea">{animal.description}</textarea>
+          <label htmlFor="animal.description" className="active">Opis</label>
+        </Field>
+
+      <hr />
 
       <ImageUploader
         areImageUploadFinished={this.props.areImageUploadFinished}

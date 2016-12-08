@@ -25,7 +25,6 @@ const getAnimals = (animals, animalFilter, animalSorter) => {
     sortedObjects.reverse();
   }
 
- //TODO: sortowanie
   return sortedObjects;
 };
 

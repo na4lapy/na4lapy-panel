@@ -22,7 +22,6 @@ export const PHOTO_RESOLVED = 'PHOTO_RESOLVED';
 /* SAVING ANIMAL FORM OBJECT TO THE API */
 //TODO: refactor needed
 export function saveAnimal(animal) {
-  debugger;
   return dispatch => {
     let method = 'post';
     let url = API_BASE_URL + 'animals';
