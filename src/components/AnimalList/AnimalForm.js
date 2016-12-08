@@ -161,7 +161,7 @@ class AnimalForm extends React.Component {
               <option value={"LOW"}>Niska</option>
               <option value={"UNKNOWN"}>Nieznana</option>
             </select>
-          <label className="active">Aktywność</label>
+          <label>Aktywność</label>
         </div>
         <div className ="input-field col s12 m4" >
             <select  name="animal.training" ref="animal_training" defaultValue={animal.training || 'UNKNOWN'} onChange={this.handleSelectChange} >
