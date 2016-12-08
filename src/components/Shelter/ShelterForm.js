@@ -84,7 +84,7 @@ class ShelterForm extends React.Component {
                 <option key={index} value={voivodeship}>{voivodeship}</option>
               )}
             </select>
-            <label className="active">Województwo</label>
+            <label >Województwo</label>
           </div>
           <Field model="shelter.accountNumber" className="input-field col s4">
             <input name="shelter.accountNumber" type="text" placeholder="Numer konta bankowego"/>
