@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
 import {TOKEN_KEY} from './config';
 import axios from 'axios';
-import {syncHistoryWithStore} from 'react-router-redux';
+import {syncHistoryWithStore, push} from 'react-router-redux';
 /* eslint-disable */
 import configureStore from './store/configureStore';
 /* eslint-enable */
@@ -33,6 +33,21 @@ axios.interceptors.request.use(config => {
   }
   return config;
 });
+
+axios.interceptors.response.use( (response) => {
+  console.log(response);
+  return response;
+}, (error) => {
+  let response = error.response
+  //Unauthorized, token expired
+  if (response.status === 401) {
+    localStorage.removeItem(TOKEN_KEY);
+    store.dispatch(push("/"));
+  }
+  return response;
+}
+
+);
 
 render(
   <Provider store={store}>

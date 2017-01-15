@@ -12,16 +12,16 @@ class AuthorizedMainLayout extends React.Component{
   }
 
   componentWillMount() {
-    this.redirectToLogin();
+    // this.redirectToLogin();
   }
 
   componentWillReceiveProps() {
-    this.redirectToLogin();
+    // this.redirectToLogin();
   }
 
   redirectToLogin(){
     if(!localStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY) == 'undefined') {
-      this.context.router.push("/");
+      // this.context.router.push("/");
     }
   }
 

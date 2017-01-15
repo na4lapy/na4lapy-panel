@@ -1,5 +1,5 @@
 import {
-  LOGIN_REQUEST, LOGIN_SUCESS, LOGIN_FAILURE } from '../actions/AuthActions';
+  LOGIN_REQUEST, LOGIN_SUCESS, LOGIN_FAILURE, TOKEN_ERROR } from '../actions/AuthActions';
 
 export default function(state = {
   isFetching: false,
@@ -26,6 +26,14 @@ export default function(state = {
         isAuthenticated: false,
         errorDictionary: action.errorDictionary ? action.errorDictionary : {email: 'Błędne hasło lub email', password: 'Błędne hasło lub email'}
       });
+    case TOKEN_ERROR: {
+      debugger;
+      return Object.assign({}, state, {
+        isFetching: false,
+        isAuthenticated: false,
+        tokenError: 'Wylogowano z powodu wygaśnięcia sesji lub błędu tokenu'
+      });
+    }
     default:
       return state;
     }

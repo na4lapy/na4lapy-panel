@@ -23,6 +23,7 @@ class AnimalForm extends React.Component {
     this.removePhoto = this.removePhoto.bind(this);
     this.errorModalConfirmationCallback = this.errorModalConfirmationCallback.bind(this);
     this.onBackButtonClick = this.onBackButtonClick.bind(this);
+    this.isAnimalNameValid = this.isAnimalNameValid.bind(this);
     this.state = {
       uploadedFileToBeRemoved: null
     };
@@ -102,6 +103,10 @@ class AnimalForm extends React.Component {
     this.props.reloadAnimal();
   }
 
+  isAnimalNameValid(name) {
+    return name && name.length > 0;
+  }
+
   render() {
     let {animal} = this.props;
     let name = '';
@@ -111,6 +116,7 @@ class AnimalForm extends React.Component {
       name = 'Zwierzę';
     }
 
+    let {  fields  } = this.props.animalForm;
     return (
     <div>
       <Form model="animal" onSubmit={(animal) => this.handleSubmit(animal)}>
@@ -134,9 +140,14 @@ class AnimalForm extends React.Component {
         </div>
       </div>
       <div className="row">
-        <Field className="input-field col s12 m6" model="animal.name">
+        <Field className="input-field col s12 m6" model="animal.name" validators={{
+            required: (val) => {return val && val.length }
+          }}>
           <input name="animal.name" type="text" placeholder="Imię"/>
-          <label className="active" htmlFor="animal.name">Imię</label>
+          <label className="active" htmlFor="animal.name">Imię - <strong>wymagane!</strong></label>
+            { !fields.name.valid &&
+              <strong className="text-red">Imię jest wymagane</strong>
+            }
         </Field>
         <Field className="input-field col s12 m6" model="animal.race">
           <input name="animal.race" type="text" placeholder="Rasa"/>
@@ -146,11 +157,11 @@ class AnimalForm extends React.Component {
 
       <div className="row">
         <div className="input-field col s12 m6">
-          <input ref="animal_birthDate" name="animal.birthDate" type="date" className="datepicker" placeholder="yyyy-mm-dd" value={animal.birthDate}/>
-          <label className="active" htmlFor="animal.birthDate">Data urodzenia</label>
+          <input ref="animal_birthDate" name="animal.birthdate" type="date" className="datepicker" placeholder="yyyy-mm-dd" value={animal.birthDate}/>
+          <label className="active" htmlFor="animal.birthdate">Data urodzenia</label>
         </div>
         <div className="input-field col s12 m6">
-          <input ref="animal_admittanceDate" name="animal.admittanceDate" type="date" className="datepicker" placeholder="yyyy-mm-dd" value={animal.admittanceDate}/>
+          <input ref="animal_admittanceDate" name="animal.addmittancedate" type="date" className="datepicker" placeholder="yyyy-mm-dd" value={animal.admittanceDate}/>
           <label htmlFor="animal.admittanceDate" className="active">Data przyjęcia do schroniska</label>
         </div>
       </div>
@@ -202,7 +213,7 @@ class AnimalForm extends React.Component {
       </div>
       <div className="row">
         <div className ="input-field col s12 m6" >
-            <select  name="animal.animalStatus" ref="animal_status" defaultValue={animal.status || 'UNPUBLISHED'} onChange={this.handleSelectChange} >
+            <select  name="animal.animal_status" ref="animal_status" defaultValue={animal.status || 'UNPUBLISHED'} onChange={this.handleSelectChange} >
               <option value={"NEW"}>Nieopublikowany</option>
               <option value={"FOR_ADOPTION"}>Do adopcji</option>
               <option value={"ADOPTED"}>Adoptowany</option>
@@ -217,7 +228,7 @@ class AnimalForm extends React.Component {
       <div className="row">
         <Field className="input-field col s12" model="animal.description">
           <textarea id="animal.description" name="animal.description" className="materialize-textarea">{animal.description}</textarea>
-          <label htmlFor="animal.description" className="active">Opis</label>
+        <label htmlFor="animal.description" className="activeD">Opis</label>
         </Field>
 
       <hr />
@@ -259,6 +270,7 @@ AnimalForm.propTypes = {
 
 function mapStateToProps(state) {
   return {
+    animalForm: state.animalForm,
     animal: state.animal,
     animalRequestErrors: state.animalRequest.errors,
     areImageUploadFinished: !state.animalRequest.isFetching

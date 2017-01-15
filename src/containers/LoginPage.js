@@ -21,7 +21,6 @@ class LoginPage extends React.Component {
     if(nextProps.userAuth.isAuthenticated) {
       this.context.router.push(ANIMALS_URL);
     }
-    debugger;
     Materialize.updateTextFields(); //eslint-disable-line
   }
 
@@ -57,6 +56,7 @@ class LoginPage extends React.Component {
               </div>
               <h1 className="center">Na 4 Łapy </h1>
               <h2 className="center">Panel Administracyjny</h2>
+              {this.props.userAuth && this.props.userAuth.tokenError && <h5 className="text-red center">{this.props.userAuth.tokenError}</h5>}
               <div className="valign-wrapper">
               </div>
                 <div className="input-field col s12">

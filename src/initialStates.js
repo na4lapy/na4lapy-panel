@@ -1,4 +1,5 @@
 export const animalInitialState = {
+  name: '',
   gender: 'UNKNOWN',
   species: 'DOG',
   activity: 'UNKNOWN',
@@ -6,8 +7,8 @@ export const animalInitialState = {
   vaccination: 'UNKNOWN',
   sterilization: 'UNKNOWN',
   status: 'ACTIVE',
-  animalStatus: 'NEW'
-
+  animal_status: 'NEW',
+  shelterid: 1
 };
 
 export const filterInitialState = {
