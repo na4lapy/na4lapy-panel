@@ -17,7 +17,7 @@ const UploadedPhotosWrapper = ({photos, removePhoto}) => {
 };
 
 UploadedPhotosWrapper.propTypes = {
-  photos: PropTypes.array,
+  photos: PropTypes.object,
   removePhoto: PropTypes.func,
   fileName: PropTypes.string,
   removeCallback: PropTypes.func

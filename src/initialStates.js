@@ -8,7 +8,8 @@ export const animalInitialState = {
   sterilization: 'UNKNOWN',
   status: 'ACTIVE',
   animal_status: 'NEW',
-  shelterid: 1
+  shelterid: 1,
+  tempPhotos: []
 };
 
 export const filterInitialState = {

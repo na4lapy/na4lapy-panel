@@ -6,6 +6,7 @@ import {bindActionCreators} from 'redux';
 import UploadedPhotosWrapper from './AnimalList/UploadedPhotosWrapper';
 import ImagePreviews from './AnimalList/ImagePreviews';
 import _ from 'lodash';
+import { FILE_SIZE_LIMIT_IN_MB } from "../config";
 
 class ImageUploader extends React.Component {
 
@@ -71,6 +72,12 @@ class ImageUploader extends React.Component {
     for (let i = 0; i < files.length; i++) {
       let reader = new FileReader();
       reader.onloadend = () => {
+
+        if (files[i].size/1024/1024 > FILE_SIZE_LIMIT_IN_MB) {
+          this.setState({fileSizeError: true});
+          this.props.setValidity('animal.tempPhotos', false);
+          return;
+        }
         let tempFiles = _.clone(this.state.files);
         tempFiles.push(files[i]);
         this.props.changeModel('animal.tempPhotos', tempFiles);
@@ -103,6 +110,8 @@ class ImageUploader extends React.Component {
 
   render() {
     let {imagePreviewUrls} = this.state;
+    let placeholderMessage = "Wgraj jedno lub więcej zdjęć do " + FILE_SIZE_LIMIT_IN_MB + " Mb";
+    let sizeErrorMessage = "Jedno lub więcej zdjęć przekracza limit " + FILE_SIZE_LIMIT_IN_MB + " Mb. Formularz nie może zostać zapisany.";
     return (
       <div>
         {this.renderUploadedPhotos()}
@@ -115,7 +124,8 @@ class ImageUploader extends React.Component {
           </Field>
           </div>
           <div className="file-path-wrapper">
-            <input className="file-path validate" type="text" placeholder="Wgraj jedno lub więcej zdjęć" ref="fileNamesInput"/>
+            <input className="file-path validate" type="text" placeholder={placeholderMessage} ref="fileNamesInput"/>
+            {this.state.fileSizeError && <p className="text-red">{sizeErrorMessage}</p>}
           </div>
       </div>
       <h3 key="header" className="center">Zdjęcia do wgrania</h3>
@@ -130,7 +140,7 @@ class ImageUploader extends React.Component {
 
 ImageUploader.propTypes = {
   deletePhoto: PropTypes.func,
-  photos: PropTypes.array,
+  photos: PropTypes.object,
   animalId: PropTypes.number,
   changeModel: PropTypes.func,
   failedFiles: PropTypes.array,
@@ -141,6 +151,7 @@ ImageUploader.propTypes = {
 const mapDispatchToProps = (dispatch) => {
   return {
     changeModel: bindActionCreators(actions.change, dispatch),
+    setValidity: bindActionCreators(actions.setValidity, dispatch)
   };
 };
 

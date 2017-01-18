@@ -244,7 +244,7 @@ class AnimalForm extends React.Component {
       </div>
       <div className="row">
         <div className="center">
-          <button className="btn large center" type="submit">
+          <button className="btn large center" type="submit" disabled={!this.props.animalForm.valid}>
             Zapisz {animal.name}
          </button>
          <button className="btn large left" onClick={this.onBackButtonClick} type="button">
