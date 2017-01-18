@@ -1,4 +1,4 @@
-### Panel dla platformy na4Łapy w React & Redux
+# Panel dla platformy na4Łapy w React & Redux
 
 "Na4Łapy" to aplikacja pozwalająca przeglądać zdjęcia i opisy zwierząt znajdujących się pod opieką gdańskiego schroniska Promyk. Użytkownik może w prosty sposób dodawać psy i koty do listy ulubionych oraz przekazywać datki na zwierzęta w formie elektronicznych mikropłatności.
 
