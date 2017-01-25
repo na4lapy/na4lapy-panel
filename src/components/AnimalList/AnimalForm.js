@@ -72,6 +72,7 @@ class AnimalForm extends React.Component {
   }
 
   handleSelectChange(e){
+    debugger;
     let value = e.target.value;
     // if(e.target.classList.contains('datepicker')){
     //  value = moment(value, DATE_FORMAT).f;
@@ -157,12 +158,12 @@ class AnimalForm extends React.Component {
 
       <div className="row">
         <div className="input-field col s12 m6">
-          <input ref="animal_birthDate" name="animal.birthdate" type="date" className="datepicker" placeholder="yyyy-mm-dd" value={animal.birthDate}/>
+          <input ref="animal_birthDate" name="animal.birthdate" type="date" className="datepicker" placeholder="yyyy-mm-dd" value={animal.birthdate}/>
           <label className="active" htmlFor="animal.birthdate">Data urodzenia</label>
         </div>
         <div className="input-field col s12 m6">
-          <input ref="animal_admittanceDate" name="animal.addmittancedate" type="date" className="datepicker" placeholder="yyyy-mm-dd" value={animal.admittanceDate}/>
-          <label htmlFor="animal.admittanceDate" className="active">Data przyjęcia do schroniska</label>
+          <input ref="animal_admittanceDate" name="animal.admittancedate" type="date" className="datepicker" placeholder="yyyy-mm-dd" value={animal.admittancedate}/>
+          <label htmlFor="animal.admittancedate" className="active">Data przyjęcia do schroniska</label>
         </div>
       </div>
       <div className="row">
