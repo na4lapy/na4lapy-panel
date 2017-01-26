@@ -247,15 +247,13 @@ class AnimalForm extends React.Component {
 
       </div>
       <div className="row">
-        <div className="center">
-          <button className="btn large center" type="submit" disabled={!this.props.animalForm.valid}>
+          <button className="btn btn-large right" type="submit" disabled={!this.props.animalForm.valid}><i className="material-icons right">done</i>
             Zapisz {animal.name}
          </button>
-         <button className="btn large left" onClick={this.onBackButtonClick} type="button">
+         <button className="btn btn-large left  orange lighten-1" onClick={this.onBackButtonClick} type="button">
            Powrót do listy
          </button>
        </div>
-     </div>
       </Form>
       <ErrorModal errorMessage={this.state.errorMessage} confirmationCallback={this.errorModalConfirmationCallback}/>
     </div>
