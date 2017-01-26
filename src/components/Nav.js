@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 import {ANIMALS_URL, SHELTER_URL, ANIMALS_ADD_URL} from '../routes_urls';
+import logo from '../img/logo.jpg'; //eslint-disable-line
 
 export default class Nav extends React.Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class Nav extends React.Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <Link to={ANIMALS_URL}><img className="logo" src="../img/logo.jpg" /></Link>
+          <Link to={ANIMALS_URL}><img className="logo" src={logo} /></Link>
           <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
           <ul className="right hide-on-med-and-down">
             <li><Link to={ANIMALS_ADD_URL}>Dodaj zwierzę</Link></li>
