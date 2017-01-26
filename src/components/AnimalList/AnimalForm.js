@@ -222,9 +222,9 @@ class AnimalForm extends React.Component {
             </select>
           <label>Status</label>
         </div>
-        <Field className="input-field col s12 m6" model="animal.chip">
-          <input name="animal.chip" type="text" placeholder="Chip"/>
-          <label htmlFor="animal.chip">Chip</label>
+        <Field className="input-field col s12 m6" model="animal.chipid">
+          <input name="animal.chipid" type="text" placeholder="Nr chipu"/>
+          <label htmlFor="animal.chipid" className="active">Chip</label>
         </Field>
       </div>
       <div className="row">
