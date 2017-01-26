@@ -41,6 +41,8 @@ class AnimalForm extends React.Component {
       today: TODAY,
       clear: CLEAR,
       close: CLOSE,
+      selectMonths: true,
+      selectYears: 20,
 
       format: 'yyyy-mm-dd'
     });
