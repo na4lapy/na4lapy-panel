@@ -32,7 +32,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.13.1",
-    "materialize-css": "0.97.6",
+    "materialize-css": "0.97.8",
     "moment": "2.14.1",
     "object-assign": "4.1.0",
     "rc-checkbox": "1.4.0",

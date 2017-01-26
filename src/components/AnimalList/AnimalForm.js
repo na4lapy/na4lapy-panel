@@ -69,14 +69,15 @@ class AnimalForm extends React.Component {
 
   componentDidUpdate( ) {
       $('select').material_select();
+      setTimeout(function(){
+         $('.materialize-textarea').trigger('autoresize');
+         $('.descLabel').addClass('active');
+        }, 150);
+
   }
 
   handleSelectChange(e){
-    debugger;
     let value = e.target.value;
-    // if(e.target.classList.contains('datepicker')){
-    //  value = moment(value, DATE_FORMAT).f;
-    // }
     this.props.changeModel(e.target.name, value);
   }
 
@@ -229,7 +230,7 @@ class AnimalForm extends React.Component {
       <div className="row">
         <Field className="input-field col s12" model="animal.description">
           <textarea id="animal.description" name="animal.description" className="materialize-textarea">{animal.description}</textarea>
-        <label htmlFor="animal.description" className="activeD">Opis</label>
+        <label htmlFor="animal.description" className="active descLabel">Opis</label>
         </Field>
 
       <hr />
