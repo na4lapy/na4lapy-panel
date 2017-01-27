@@ -29,8 +29,8 @@ class TableRow extends React.Component {
       <td className="animal_photo_row">{this.renderImage()}</td>
       <td>{this.props.dataRow.name}</td>
       <td>{AnimalDictionary.species[this.props.dataRow.species]}</td>
-      <td>{this.props.dataRow.birthDate}</td>
-      <td>{this.props.dataRow.admittanceDate}</td>
+      <td>{this.props.dataRow.birthdate}</td>
+      <td>{this.props.dataRow.admittancedate}</td>
       <td>{this.props.dataRow.race}</td>
       <td>{AnimalDictionary.gender[this.props.dataRow.gender]}</td>
       <td>{AnimalDictionary.size[this.props.dataRow.size]}</td>
