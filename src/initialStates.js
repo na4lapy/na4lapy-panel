@@ -18,7 +18,7 @@ export const filterInitialState = {
     species: 'ANY',
     gender: 'ANY',
     size: 'ANY',
-    status: 'ANY'
+    animal_status: 'ANY'
   }
 };
 

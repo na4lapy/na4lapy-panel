@@ -34,7 +34,7 @@ class TableRow extends React.Component {
       <td>{this.props.dataRow.race}</td>
       <td>{AnimalDictionary.gender[this.props.dataRow.gender]}</td>
       <td>{AnimalDictionary.size[this.props.dataRow.size]}</td>
-      <td>{AnimalDictionary.status[this.props.dataRow.status]}</td>
+      <td>{AnimalDictionary.status[this.props.dataRow.animal_status]}</td>
       <td><button className="btn" onClick={(event) => this.props.onEditClick(event, this.props.dataRow.id)}>Edycja</button>
           <button className="btn red darken-1" onClick={(event) => this.props.onDeleteClick(event, this.props.dataRow.id)}>Usuń</button>
           {this.renderPublishButton()}
