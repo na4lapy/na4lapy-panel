@@ -6,6 +6,8 @@ import {ANIMALS_URL} from '../routes_urls';
 import toast, {SAVE_ANIMAL_MSG, DELETE_ANIMAL_MSG} from '../utils';
 import {logoutDueToTokenError} from './AuthActions';
 
+let API_URL_REMOVE_ALL = API_BASE_URL + 'files/removeall/';
+
 export const SAVE_ANIMAL_REQUEST = 'SAVE_ANIMAL_REQUEST';
 export const SAVE_ANIMAL_SUCCESS = 'SAVE_ANIMAL_SUCCESS';
 export const SAVE_ANIMAL_FAILURE = 'SAVE_ANIMAL_FAILURE';
@@ -196,13 +198,20 @@ export function deleteAnimal (id) {
   return dispatch => {
 
     dispatch(deleteAnimalRequest());
-    axios.delete(API_BASE_URL + 'animals/' + id).then(() => {
-      dispatch(deleteAnimalSuccess());
-      toast(DELETE_ANIMAL_MSG);
-      dispatch(getAnimals());
-    }).catch((err) => {
+    //remove all photos of given animal
+    axios.delete(API_URL_REMOVE_ALL + id).then(() => {
+      //remove the animal
+        axios.delete(API_BASE_URL + 'animals/' + id).then(() => {
+          dispatch(deleteAnimalSuccess());
+          toast(DELETE_ANIMAL_MSG);
+          dispatch(getAnimals());
+        }).catch((err) => {
+          dispatch(deleteAnimalFailure(err.response.data));
+        });
+    } ).catch( (err) => {
       dispatch(deleteAnimalFailure(err.response.data));
     });
+
   };
 
   function deleteAnimalRequest(){
