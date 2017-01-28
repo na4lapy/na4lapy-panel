@@ -24,6 +24,12 @@ class AnimalAddPage extends React.Component {
     this.reloadAnimal();
   }
 
+  componentWillUpdate(nextProps) {
+   if (typeof nextProps.animalId === 'undefined') {
+     this.props.resetModel('animal');
+   }
+  }
+
   reloadAnimal(){
     if(typeof this.props.animalId !== 'undefined') {
       this.props.getAnimals(this.props.animalId);

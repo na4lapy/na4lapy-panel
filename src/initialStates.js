@@ -9,7 +9,9 @@ export const animalInitialState = {
   status: 'ACTIVE',
   animal_status: 'NEW',
   shelterid: 1,
-  tempPhotos: []
+  tempPhotos: [],
+  birthdate: '',
+  admittancedate: ''
 };
 
 export const filterInitialState = {

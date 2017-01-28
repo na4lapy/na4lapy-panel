@@ -19,7 +19,9 @@ import ShelterDetailPage from './containers/ShelterDetailPage';
 import App from './containers/App';
 import AuthorizedMainLayout from './containers/AuthorizedMainLayout';
 
-
+function onAddPageEnter(){
+    
+}
 
 export default (
   <Route path="/" component={App} >
@@ -27,7 +29,7 @@ export default (
     <Route component={AuthorizedMainLayout} >
       <Route path={ANIMALS_URL} >
         <IndexRoute component={AnimalListPage} />
-        <Route path={ANIMALS_ADD_URL} component={AnimalAddPage} />
+        <Route path={ANIMALS_ADD_URL} component={AnimalAddPage} onEnter={onAddPageEnter}/>
         <Route path={ANIMALS_URL + '/:animalId'} component={AnimalAddPage}/>
         <Route path={SHELTER_URL} component={ShelterDetailPage} />
       </Route >

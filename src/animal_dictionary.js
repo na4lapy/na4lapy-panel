@@ -12,7 +12,7 @@ export default  {
   },
 
   status: {
-    UNPUBLISHED: 'Nieopublikowany',
+    NEW: 'Nieopublikowany',
     FOR_ADOPTION: 'Do adpocji',
     ADOPTED: 'Adoptowany',
   },
