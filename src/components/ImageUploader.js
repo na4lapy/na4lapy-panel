@@ -27,6 +27,10 @@ class ImageUploader extends React.Component {
     this.clearFileQueue = this.clearFileQueue.bind(this);
   }
 
+  componentDidMount() {
+    $('#removingFileModal').modal();
+  }
+
   openUploadedModal(e, index){
     this.setState({
        photosType: 'wgranych',
@@ -45,7 +49,7 @@ class ImageUploader extends React.Component {
 
   openModal(e, fileName, index){
     this.setState({removingFileName: fileName, removingFileIndex: index}, () => {
-      $('#removingFileModal').openModal();
+      $('#removingFileModal').modal('open');
     });
 
   }
@@ -58,7 +62,7 @@ class ImageUploader extends React.Component {
     urls.splice(this.state.removingFileIndex, 1);
 
     this.props.changeModel('animal.tempPhotos', files);
-
+    this.refs.fileNamesInput.value = files.map( f => f.name + ", " );
     this.setState({
       files: files,
       imagePreviewUrls: urls
@@ -84,6 +88,8 @@ class ImageUploader extends React.Component {
         this.setState({
            files: tempFiles,
            imagePreviewUrls: this.state.imagePreviewUrls.concat(reader.result)
+         }, () => {
+             this.refs.fileNamesInput.value = this.state.files.map( f => f.name + ", " )
          });
 
       };
@@ -120,11 +126,11 @@ class ImageUploader extends React.Component {
           <div className="btn">
           <span>Zdjęcia</span>
           <Field  model="animal.tempPhotos">
-            <input type="file" multiple onChange={this.handleFilesUpload} onClick={this.clearFileQueue}/>
+            <input type="file" multiple onChange={this.handleFilesUpload}/>
           </Field>
           </div>
           <div className="file-path-wrapper">
-            <input className="file-path validate" type="text" placeholder={placeholderMessage} ref="fileNamesInput"/>
+            <input ref="fileNamesInput" className="file-path validate" type="text" placeholder={placeholderMessage} ref="fileNamesInput"/>
             {this.state.fileSizeError && <p className="text-red">{sizeErrorMessage}</p>}
           </div>
       </div>

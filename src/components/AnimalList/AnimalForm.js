@@ -267,7 +267,9 @@ AnimalForm.propTypes = {
   changeModel: PropTypes.func.isRequired,
   deletePhoto: PropTypes.func,
   clearPhotoUploadError: PropTypes.func,
-  reloadAnimal: PropTypes.func
+  reloadAnimal: PropTypes.func,
+  push: PropTypes.func,
+  animalForm: PropTypes.object
 };
 
 function mapStateToProps(state) {
