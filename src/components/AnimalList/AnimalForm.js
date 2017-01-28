@@ -39,7 +39,7 @@ class AnimalForm extends React.Component {
       clear: CLEAR,
       close: CLOSE,
       selectMonths: true,
-      selectYears: 20,
+      selectYears: 40,
 
       format: 'yyyy-mm-dd'
     });
