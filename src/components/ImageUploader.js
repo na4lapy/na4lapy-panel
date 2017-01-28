@@ -41,9 +41,6 @@ class ImageUploader extends React.Component {
       this.refs.fileNamesInput.value = null;
     }
   }
-  componentWillUnmount() {
-    console.log("dupa");
-  }
 
   openUploadedModal(e, index){
     this.setState({

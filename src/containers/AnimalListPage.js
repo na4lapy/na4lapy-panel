@@ -31,6 +31,7 @@ import _ from 'lodash';
 
   componentDidMount() {
     this.props.getAnimals();
+    $('#removingAnimalModal').modal();
   }
 
   componentWillUpdate() {
@@ -40,7 +41,7 @@ import _ from 'lodash';
   onDeleteClick(event, id) {
     const animalToBeRemoved = _.find(this.props.animals, {id});
     this.setState({animalToBeRemoved: animalToBeRemoved}, () => {
-      $('#removingAnimalModal').openModal();
+      $('#removingAnimalModal').modal('open');
     });
   }
 

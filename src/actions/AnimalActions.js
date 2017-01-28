@@ -32,6 +32,7 @@ export function saveAnimal(animal) {
       method = 'patch';
     }
     dispatch(saveAnimalRequest());
+    dispatch(photoResolved(0,0));
     return axios.request({
       method,
       url,
