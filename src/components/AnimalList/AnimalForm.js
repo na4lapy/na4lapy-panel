@@ -12,9 +12,6 @@ import {failedFilesMessage} from '../../config';
 import {push} from 'react-router-redux';
 import {ANIMALS_URL} from '../../routes_urls';
 
-
-
-
 class AnimalForm extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +22,7 @@ class AnimalForm extends React.Component {
     this.onBackButtonClick = this.onBackButtonClick.bind(this);
     this.isAnimalNameValid = this.isAnimalNameValid.bind(this);
     this.state = {
-      uploadedFileToBeRemoved: null
+      uploadedFileToBeRemoved: null,
     };
     this.reloadAnimal = this.reloadAnimal.bind(this);
   }

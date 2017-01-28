@@ -11,7 +11,8 @@ export const animalInitialState = {
   shelterid: 1,
   tempPhotos: [],
   birthdate: '',
-  admittancedate: ''
+  admittancedate: '',
+  photos: []
 };
 
 export const filterInitialState = {

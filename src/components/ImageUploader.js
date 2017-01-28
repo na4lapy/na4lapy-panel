@@ -15,7 +15,8 @@ class ImageUploader extends React.Component {
 
     this.state = {
       files: [],
-      imagePreviewUrls: []
+      imagePreviewUrls: [],
+      url: window.location.pathname
     };
 
     this.handleFilesUpload = this.handleFilesUpload.bind(this);
@@ -29,6 +30,19 @@ class ImageUploader extends React.Component {
 
   componentDidMount() {
     $('#removingFileModal').modal();
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if ((nextState.url.match('animals\\\d+?')) && (!window.location.pathname.match('animals\\\d+?'))){
+      this.setState({
+        files: [],
+        imagePreviewUrls: []
+      });
+      this.refs.fileNamesInput.value = null;
+    }
+  }
+  componentWillUnmount() {
+    console.log("dupa");
   }
 
   openUploadedModal(e, index){
@@ -96,6 +110,7 @@ class ImageUploader extends React.Component {
       reader.readAsDataURL(files[i]);
     }
   }
+
 
   renderUploadedPhotos(){
     if (this.props.photos && this.props.photos.length != 0) {

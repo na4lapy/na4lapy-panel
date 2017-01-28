@@ -35,7 +35,6 @@ axios.interceptors.request.use(config => {
 });
 
 axios.interceptors.response.use( (response) => {
-  console.log(response);
   return response;
 }, (error) => {
   let response = error.response

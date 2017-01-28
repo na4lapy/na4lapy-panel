@@ -47,7 +47,7 @@ class AnimalAddPage extends React.Component {
 
   render() {
     return (<div className="container">
-        <AnimalForm reloadAnimal={this.reloadAnimal}/>
+        <AnimalForm reloadAnimal={this.reloadAnimal} />
          <Loader isShown={this.props.animalRequest.isFetching} message={this.loaderMessage()}/>
     </div>);
   }
