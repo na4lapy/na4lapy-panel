@@ -3,7 +3,7 @@ import React, {PropTypes} from 'react';
 const ImagePreviews = ({previewsTriples, rowIndex, deletePhoto, failedFiles, files}) => {
 
   let fileNames = files.map((file) => {return file.name});
-  
+
   return (
     <div className="row">
     {previewsTriples.map( (preview, index) => {

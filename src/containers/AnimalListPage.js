@@ -10,6 +10,7 @@ import {setFilter, resetFilter} from '../actions/FilterActions';
 import {setSorting} from '../actions/SortingActions';
 import AnimalSelector from '../selectors/AnimalSelector';
 import AnimalRemovalModal from '../components/AnimalList/AnimalRemovalModal';
+import Loader from '../components/Loader';
 import _ from 'lodash';
 
 
@@ -103,7 +104,7 @@ import _ from 'lodash';
          <a className="btn-floating btn-large waves-effect waves-light light-blue" ><i className="material-icons">add</i></a>
       </div>
       <AnimalRemovalModal animal={this.state.animalToBeRemoved} removeCallback={this.props.deleteAnimal}/>
-
+      <Loader isShown={this.props.isFetching} message={"Proszę czekać..."} />
     </div>);
   }
 }
@@ -141,6 +142,7 @@ function mapStateToProps(state){
     sortingOrder: state.sorting.order,
     animals: AnimalSelector(state),
     animalFilter: state.animalFilter,
+    isFetching: state.animalRequest.isFetching
   };
 }
 
