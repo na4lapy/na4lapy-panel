@@ -7,6 +7,7 @@ export const animalInitialState = {
   vaccination: 'UNKNOWN',
   sterilization: 'UNKNOWN',
   status: 'ACTIVE',
+  size: 'SMALL',
   animal_status: 'NEW',
   shelterid: 1,
   tempPhotos: [],

@@ -24,7 +24,7 @@ export default function(state = {
       {
         isFetching: false,
         isAuthenticated: false,
-        errorDictionary: action.errorDictionary ? action.errorDictionary : {email: 'Błędne hasło lub email', password: 'Błędne hasło lub email'}
+        errorDictionary: {email: 'Błędne hasło lub email', password: 'Błędne hasło lub email'}
       });
     case TOKEN_ERROR: {
       debugger;

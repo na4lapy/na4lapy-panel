@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 
 const ImagePreviews = ({previewsTriples, rowIndex, deletePhoto, failedFiles, files}) => {
 
-  let fileNames = files.map((file) => {return file.name});
+  let fileNames = files.map((file) => {return file.name})
 
   return (
     <div className="row">
@@ -22,7 +22,7 @@ const ImagePreviews = ({previewsTriples, rowIndex, deletePhoto, failedFiles, fil
           </div>
           <a onClick={(event) => deletePhoto(event, rowIndex * 3 + index)} className={"btn-floating btn-small waves-effect waves-light red "}><i className="material-icons">clear</i></a>
         </div>);
-    })};
+    })}
     </div>
   );
 };

@@ -17,7 +17,7 @@ class TableRow extends React.Component {
   }
 
   renderPublishButton() {
-    if (this.props.dataRow.status == 'UNPUBLISHED') {
+    if (this.props.dataRow.status == 'NEW') {
       return (<button className="btn blue lighten-1" onClick={() => this.props.onPublishClick(this.props.dataRow.id)}>Opublikuj</button>);
     }
   }

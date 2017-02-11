@@ -12,9 +12,7 @@ export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
 export const TOKEN_ERROR = 'TOKEN_ERROR';
 
-import {TOKEN_KEY} from '../config';
-
-let AUTH_URL = 'https://api.na4lapy.org/';
+import AUTH_URL, {TOKEN_KEY} from '../config';
 
 export function loginUser(credentials) {
   return dispatch =>  {
@@ -22,13 +20,18 @@ export function loginUser(credentials) {
     dispatch(requestLogin(credentials));
     return axios.post(AUTH_URL + 'login',{
       email: credentials.email,
-      password: credentials.password
-    }).then(response => {
+      password: credentials.password,
+      headers: {
+         'Content-Type': 'application/json'
+     }
+    }
+  ).then(response => {
       localStorage.setItem(TOKEN_KEY, response.data.token);
       dispatch(receiveLogin());
       dispatch(push(ANIMALS_URL));
-    }).catch((error) => {
-      dispatch(loginError(error.response.data));
+
+    }).catch(() => {
+      dispatch(loginError());
     });
   };
 
@@ -98,12 +101,11 @@ export function logoutUser(){
     };
   }
 
-  function logoutFailure(errorData) {
+  function logoutFailure() {
     return {
       type: LOGOUT_FAILURE,
       isFetching: false,
       isAuthenticated: false,
-      errors: errorData.response
     };
   }
 }

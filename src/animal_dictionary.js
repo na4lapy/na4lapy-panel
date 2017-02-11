@@ -13,7 +13,7 @@ export default  {
 
   status: {
     NEW: 'Nieopublikowany',
-    FOR_ADOPTION: 'Do adpocji',
+    FOR_ADOPTION: 'Do adopcji',
     ADOPTED: 'Adoptowany',
   },
 

@@ -73,7 +73,7 @@ export default class FilterPanel extends React.Component {
           <div className="input-field col s2">
             <select ref="animal_status" name="animal_status" value={this.props.animalFilter && this.props.animalFilter.animal_status} readOnly>
               <option value="ANY">Wszystkie</option>
-              <option value="UNPUBLISHED">Nieopublikowany</option>
+              <option value="NEW">Nieopublikowany</option>
               <option value="FOR_ADOPTION">Do adpocji</option>
               <option value="ADOPTED">Adoptowany</option>
             </select>

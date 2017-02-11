@@ -73,17 +73,21 @@ class ImageUploader extends React.Component {
     urls.splice(this.state.removingFileIndex, 1);
 
     this.props.changeModel('animal.tempPhotos', files);
-    this.refs.fileNamesInput.value = files.map( f => f.name + ", " );
-    this.setState({
-      files: files,
-      imagePreviewUrls: urls
-    });
+    this.refs.fileNamesInput.value = files.map( f => f.name + " ");
+    if (files.length == 0 && urls.length == 0) {
+      this.clearFileQueue();
+    } else {
+      this.setState({
+        files: files,
+        imagePreviewUrls: urls
+      });
+  }
+
   }
 
   handleFilesUpload(e){
     e.preventDefault();
     let files = e.target.files;
-
     for (let i = 0; i < files.length; i++) {
       let reader = new FileReader();
       reader.onloadend = () => {
@@ -100,7 +104,7 @@ class ImageUploader extends React.Component {
            files: tempFiles,
            imagePreviewUrls: this.state.imagePreviewUrls.concat(reader.result)
          }, () => {
-             this.refs.fileNamesInput.value = this.state.files.map( f => f.name + ", " )
+             this.refs.fileNamesInput.value = this.state.files.map( f => f.name + " " );
          });
 
       };
@@ -116,14 +120,12 @@ class ImageUploader extends React.Component {
   }
 
   clearFileQueue() {
-    if (this.props.areImageUploadFinished && this.state.files && this.state.files.length != 0) {
       this.setState({
         files: [],
         imagePreviewUrls: []
       });
       this.refs.fileNamesInput.value = null;
-      this.props.reloadAnimal();
-    }
+      this.refs.fileInput.value = null;
   }
 
   render() {
@@ -138,17 +140,17 @@ class ImageUploader extends React.Component {
           <div className="btn">
           <span>Zdjęcia</span>
           <Field  model="animal.tempPhotos">
-            <input type="file" multiple onChange={this.handleFilesUpload}/>
+            <input ref="fileInput" type="file" multiple onChange={this.handleFilesUpload} id="fileInput"/>
           </Field>
           </div>
           <div className="file-path-wrapper">
-            <input ref="fileNamesInput" className="file-path validate" type="text" placeholder={placeholderMessage} ref="fileNamesInput"/>
+            <input ref="fileNamesInput" className="file-path validate" type="text" placeholder={placeholderMessage}/>
             {this.state.fileSizeError && <p className="text-red">{sizeErrorMessage}</p>}
           </div>
       </div>
       <h3 key="header" className="center">Zdjęcia do wgrania</h3>
       {imagePreviewUrls && _.chunk(imagePreviewUrls, 3).map( (previews, rowIndex) => {
-        return  <ImagePreviews key={rowIndex} previewsTriples={previews} rowIndex={rowIndex} deletePhoto={this.openTempPhotosModal} failedFiles={this.props.failedFiles} files={_.chunk(this.state.files, 3)[rowIndex]}/>
+        return  <ImagePreviews key={rowIndex} previewsTriples={previews} rowIndex={rowIndex} deletePhoto={this.openTempPhotosModal} failedFiles={this.props.failedFiles} files={_.chunk(this.state.files, 3)[rowIndex]}/>;
       })}
       <FileRemovalModal removeCallback={this.state.callback} fileName={this.state.removingFileName} photosType={this.state.photosType}/>
 
@@ -163,7 +165,8 @@ ImageUploader.propTypes = {
   changeModel: PropTypes.func,
   failedFiles: PropTypes.array,
   areImageUploadFinished: PropTypes.bool,
-  reloadAnimal: PropTypes.func
+  reloadAnimal: PropTypes.func,
+  setValidity: PropTypes.func
 };
 
 const mapDispatchToProps = (dispatch) => {

@@ -1,8 +1,9 @@
-export default  process.env.NODE_ENV === 'development' ? 'https://api.na4lapy.org/' : 'https://api.na4lapy.org/';
+export default  process.env.NODE_ENV === 'development' ? 'http://localhost:8123/' : 'http://localhost:8123/';
 export const TOKEN_KEY = 'token';
 export const DATE_FORMAT = 'DD MMM, YYYY';
 export const TOAST_DURATION = 2000;
 export const FILE_SIZE_LIMIT_IN_MB = 3;
+export const REJECT_AUTH_HTTP_CODE = 403;
 
 export const failedFilesMessage = (failedFiles) => {
   let message = "Wystąpił błąd przy przesyłaniu następujących plików: ";

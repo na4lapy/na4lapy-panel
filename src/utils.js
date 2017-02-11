@@ -18,3 +18,12 @@ export const WEEKDAYS_SHORT = ['Nie', 'Pon', 'Wt', 'Śr', 'Czw', 'Pią', 'Sob'];
 export const TODAY = "Dziś";
 export const CLEAR = "Wyczyść";
 export const CLOSE = "Zamknij";
+
+
+export function getCookie(cookiename) 
+  {
+  // Get name followed by anything except a semicolon
+  var cookiestring=RegExp(""+cookiename+"[^;]+").exec(document.cookie);
+  // Return everything after the equal sign, or an empty string if the cookie name not found
+  return unescape(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./,"") : "");
+  }
