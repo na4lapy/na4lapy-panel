@@ -20,10 +20,21 @@ export const CLEAR = "Wyczyść";
 export const CLOSE = "Zamknij";
 
 
-export function getCookie(cookiename) 
+export function getCookie(cookiename)
   {
   // Get name followed by anything except a semicolon
-  var cookiestring=RegExp(""+cookiename+"[^;]+").exec(document.cookie);
+  let cookiestring=RegExp(""+cookiename+"[^;]+").exec(document.cookie);
   // Return everything after the equal sign, or an empty string if the cookie name not found
-  return unescape(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./,"") : "");
+  return unescape(!!cookiestring ? cookiestring.toString().replace(/^[^=]+./,"") : ""); //eslint-disable-line
   }
+
+  export function deleteAllCookies() {
+    let cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i];
+        let eqPos = cookie.indexOf("=");
+        let name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}

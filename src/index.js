@@ -12,7 +12,7 @@ import 'materialize-css/dist/css/materialize.css';
 import 'materialize-css/dist/js/materialize.js';
 
 import './styles/index.sass';
-import {REJECT_AUTH_HTTP_CODE, TOKEN_KEY} from './config';
+import {REJECT_AUTH_HTTP_CODE, AUTH_COOKIE_KEY} from './config';
 
 import routes from './routes';
 import {filterInitialState} from './initialStates';
@@ -29,9 +29,9 @@ axios.defaults.validateStatus = status => {
 
 axios.interceptors.request.use(config => {
   config.withCredentials = true;
-  let token = getCookie('kitura-session-id');
+  let token = getCookie(AUTH_COOKIE_KEY);
   if (token && token.length >= 0 ) {
-      config.headers['kitura-session-id'] = token;
+      config.headers[AUTH_COOKIE_KEY] = token;
   }
   return config;
 });
@@ -42,7 +42,6 @@ axios.interceptors.response.use( (response) => {
   let response = error.response
   //Unauthorized, token expired
   if (response.status === REJECT_AUTH_HTTP_CODE) {
-    localStorage.removeItem(TOKEN_KEY);
     store.dispatch(push("/"));
     return Promise.reject(error);
   }

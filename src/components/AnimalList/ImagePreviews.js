@@ -15,10 +15,8 @@ const ImagePreviews = ({previewsTriples, rowIndex, deletePhoto, failedFiles, fil
 
         return (<div key={index} className={imageClasess}>
           <img className="z-depth-2 responsive-img"  src={preview} />
-          <div className="overlay valign-wrapper">
-                  <div className="valign">
-                    <p>{imageUploadFailed ? "Zdjęcia nie wgrano!" : "Zdjęcie wgrano poprawnie"}</p>
-                  </div>
+          <div className="center">
+            <button className="btn">{fileNames[index].isProfile  ? "Profile" : "Wybierz na profilowe"}</button>
           </div>
           <a onClick={(event) => deletePhoto(event, rowIndex * 3 + index)} className={"btn-floating btn-small waves-effect waves-light red "}><i className="material-icons">clear</i></a>
         </div>);

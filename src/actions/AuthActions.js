@@ -12,7 +12,9 @@ export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
 export const TOKEN_ERROR = 'TOKEN_ERROR';
 
-import AUTH_URL, {TOKEN_KEY} from '../config';
+import AUTH_URL from '../config';
+
+import {deleteAllCookies} from '../utils';
 
 export function loginUser(credentials) {
   return dispatch =>  {
@@ -25,8 +27,7 @@ export function loginUser(credentials) {
          'Content-Type': 'application/json'
      }
     }
-  ).then(response => {
-      localStorage.setItem(TOKEN_KEY, response.data.token);
+  ).then(() => {
       dispatch(receiveLogin());
       dispatch(push(ANIMALS_URL));
 
@@ -73,11 +74,11 @@ export function logoutUser(){
 
   return dispatch => {
     dispatch(logoutRequest());
+
     return axios.post(AUTH_URL + 'logout',{
-      token: localStorage.getItem(TOKEN_KEY)
     }).then( () => {
       dispatch(logoutSuccess());
-      localStorage.removeItem(TOKEN_KEY);
+      deleteAllCookies();
       dispatch(push("/"));
     }).catch((err) => {
       dispatch(logoutFailure(err));

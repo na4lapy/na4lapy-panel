@@ -98,6 +98,7 @@ class ImageUploader extends React.Component {
           return;
         }
         let tempFiles = _.clone(this.state.files);
+        files[i].isProfile = i == 0;
         tempFiles.push(files[i]);
         this.props.changeModel('animal.tempPhotos', tempFiles);
         this.setState({

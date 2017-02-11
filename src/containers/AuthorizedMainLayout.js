@@ -1,9 +1,10 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {TOKEN_KEY} from '../config';
 import Nav from '../components/Nav';
 import {bindActionCreators} from 'redux';
 import {logoutUser} from '../actions/AuthActions';
+import {getCookie} from '../utils';
+import {AUTH_COOKIE_KEY} from '../config';
 
 class AuthorizedMainLayout extends React.Component{
   constructor(props, context) {
@@ -12,16 +13,16 @@ class AuthorizedMainLayout extends React.Component{
   }
 
   componentWillMount() {
-    // this.redirectToLogin();
+    this.redirectToLogin();
   }
 
   componentWillReceiveProps() {
-    // this.redirectToLogin();
+    this.redirectToLogin();
   }
 
   redirectToLogin(){
-    if(!localStorage.getItem(TOKEN_KEY) || localStorage.getItem(TOKEN_KEY) == 'undefined') {
-      // this.context.router.push("/");
+    if(!getCookie(AUTH_COOKIE_KEY) || getCookie(AUTH_COOKIE_KEY) == 'undefined') {
+      this.context.router.push("/");
     }
   }
 
