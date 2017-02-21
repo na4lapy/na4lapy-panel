@@ -1,4 +1,4 @@
-export default  process.env.NODE_ENV === 'development' ? 'http://localhost:8123/' : 'http://api.na4lapy.org/';
+export default  process.env.NODE_ENV === 'development' ? 'http://api.na4lapy.org/' : 'http://api.na4lapy.org/';
 export const DATE_FORMAT = 'DD MMM, YYYY';
 export const TOAST_DURATION = 2000;
 export const FILE_SIZE_LIMIT_IN_MB = 3;

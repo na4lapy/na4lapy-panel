@@ -26,6 +26,7 @@ class ImageUploader extends React.Component {
     this.removeUploadedPhoto = this.removeUploadedPhoto.bind(this);
     this.openTempPhotosModal = this.openTempPhotosModal.bind(this);
     this.clearFileQueue = this.clearFileQueue.bind(this);
+    this.tagPhotoAsProfile = this.tagPhotoAsProfile.bind(this);
   }
 
   componentDidMount() {
@@ -81,8 +82,44 @@ class ImageUploader extends React.Component {
         files: files,
         imagePreviewUrls: urls
       });
+    }
   }
 
+  tagPhotoAsProfile(id, isAlreadUploaded,e ) {
+    e.preventDefault();
+    //reset temp files and already uploaded files to not
+    this.setState({
+      files: this.state.files.map((file, index) =>{
+        if (index == id && !isAlreadUploaded) {
+          file.profil = true;
+        } else {
+          file.profil = false;
+        }
+        return file;
+      })
+    });
+
+    let photos = [];
+
+    this.props.photos.forEach((firstObject) => {
+      let secondObject = {};
+      for(var k in firstObject) {
+        secondObject[k]=firstObject[k];
+      }
+      photos.push(secondObject);
+    })
+
+    let photosWithProfiles = photos.map((photo, index) => {
+
+       if (index == id && isAlreadUploaded) {
+          photo.profil = true;
+       } else {
+         photo.profil = false;
+       }
+       return photo;
+    });
+
+    this.props.changeModel('animal.photos', photosWithProfiles);
   }
 
   handleFilesUpload(e){
@@ -98,7 +135,9 @@ class ImageUploader extends React.Component {
           return;
         }
         let tempFiles = _.clone(this.state.files);
-        files[i].isProfile = i == 0;
+
+        files[i].profil = i == 0 && this.props.photos.filter((p) => p.profil).length == 0;
+
         tempFiles.push(files[i]);
         this.props.changeModel('animal.tempPhotos', tempFiles);
         this.setState({
@@ -107,16 +146,14 @@ class ImageUploader extends React.Component {
          }, () => {
              this.refs.fileNamesInput.value = this.state.files.map( f => f.name + " " );
          });
-
       };
       reader.readAsDataURL(files[i]);
     }
   }
 
-
   renderUploadedPhotos(){
     if (this.props.photos && this.props.photos.length != 0) {
-      return (<UploadedPhotosWrapper photos={this.props.photos} removePhoto={this.openUploadedModal}/>);
+      return (<UploadedPhotosWrapper tagPhotoAsProfile={this.tagPhotoAsProfile} photos={this.props.photos} removePhoto={this.openUploadedModal}/>);
     }
   }
 
@@ -128,6 +165,7 @@ class ImageUploader extends React.Component {
       this.refs.fileNamesInput.value = null;
       this.refs.fileInput.value = null;
   }
+
 
   render() {
     let {imagePreviewUrls} = this.state;
@@ -151,7 +189,7 @@ class ImageUploader extends React.Component {
       </div>
       <h3 key="header" className="center">Zdjęcia do wgrania</h3>
       {imagePreviewUrls && _.chunk(imagePreviewUrls, 3).map( (previews, rowIndex) => {
-        return  <ImagePreviews key={rowIndex} previewsTriples={previews} rowIndex={rowIndex} deletePhoto={this.openTempPhotosModal} failedFiles={this.props.failedFiles} files={_.chunk(this.state.files, 3)[rowIndex]}/>;
+        return  <ImagePreviews key={rowIndex} previewsTriples={previews} rowIndex={rowIndex} tagPhotoAsProfile={this.tagPhotoAsProfile} deletePhoto={this.openTempPhotosModal} failedFiles={this.props.failedFiles} files={_.chunk(this.state.files, 3)[rowIndex]}/>;
       })}
       <FileRemovalModal removeCallback={this.state.callback} fileName={this.state.removingFileName} photosType={this.state.photosType}/>
 

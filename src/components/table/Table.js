@@ -33,6 +33,7 @@ class Table extends React.Component {
           <tbody>
           {this.props.data.length > 0 && this.props.data.map((dataRow, idx) => {
               return (<TableRow
+                              onPostToFacebook={that.props.onPostToFacebook}
                               onPublishClick={that.props.onPublishClick}
                                onDeleteClick={that.props.onDeleteClick}
                                onEditClick={that.props.onEditClick}

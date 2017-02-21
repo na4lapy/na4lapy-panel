@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react';
 
-const ImagePreviews = ({previewsTriples, rowIndex, deletePhoto, failedFiles, files}) => {
+const ImagePreviews = ({previewsTriples, rowIndex, tagPhotoAsProfile,deletePhoto, failedFiles, files}) => {
 
-  let fileNames = files.map((file) => {return file.name})
+  let fileNames = files.map((file) => {return file.name;});
 
   return (
     <div className="row">
@@ -12,11 +12,11 @@ const ImagePreviews = ({previewsTriples, rowIndex, deletePhoto, failedFiles, fil
       if (failedFiles.length != 0) {
         imageClasess += imageUploadFailed ? " image-upload-failed" : " image-upload-success";
       }
-
+      console.log(files[index]);
         return (<div key={index} className={imageClasess}>
           <img className="z-depth-2 responsive-img"  src={preview} />
           <div className="center">
-            <button className="btn">{fileNames[index].isProfile  ? "Profile" : "Wybierz na profilowe"}</button>
+            <button onClick={(event) => tagPhotoAsProfile(rowIndex*3+index, false, event)} className="btn">{files[index].profil  ? "Profilowe " : "Wybierz na profilowe"}</button>
           </div>
           <a onClick={(event) => deletePhoto(event, rowIndex * 3 + index)} className={"btn-floating btn-small waves-effect waves-light red "}><i className="material-icons">clear</i></a>
         </div>);
@@ -30,7 +30,8 @@ ImagePreviews.propTypes = {
   rowIndex: PropTypes.number,
   deletePhoto: PropTypes.func,
   files: PropTypes.array,
-  failedFiles: PropTypes.array
+  failedFiles: PropTypes.array,
+  tagPhotoAsProfile: PropTypes.func
 };
 
 

@@ -22,10 +22,7 @@ export function loginUser(credentials) {
     dispatch(requestLogin(credentials));
     return axios.post(AUTH_URL + 'login',{
       email: credentials.email,
-      password: credentials.password,
-      headers: {
-         'Content-Type': 'application/json'
-     }
+      password: credentials.password
     }
   ).then(() => {
       dispatch(receiveLogin());

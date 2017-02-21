@@ -4,7 +4,6 @@ import {push} from 'react-router-redux';
 import {actions} from 'react-redux-form';
 import {ANIMALS_URL} from '../routes_urls';
 import toast, {SAVE_ANIMAL_MSG, DELETE_ANIMAL_MSG} from '../utils';
-import {logoutDueToTokenError} from './AuthActions';
 
 let API_URL_REMOVE_ALL = API_BASE_URL + 'files/removeall/';
 
@@ -32,7 +31,6 @@ export function saveAnimal(animal) {
       method = 'patch';
     }
     dispatch(saveAnimalRequest());
-    dispatch(photoResolved(0,0));
     return axios.request({
       method,
       url,
@@ -40,70 +38,24 @@ export function saveAnimal(animal) {
         ...animal
       },
     }).then(response => {
-      let resolvedFiles = 0;
-      let didFailUploadFail = false;
-      let failedFiles = [];
+      //save newly created photos
+      let isUploadedPhotoProfile = animal.photos.filter((photo) => {return  photo.profil; }).length == 1;
+      let shouldMarkFirstPhotoProfile = typeof animal.tempPhotos == "undefined" || animal.tempPhotos.length == 0;
+      updatePhotosInAPI(animal.photos, shouldMarkFirstPhotoProfile, dispatch);
       if (animal.tempPhotos && animal.tempPhotos.length != 0) {
-        //init dispatch
-        dispatch(photoResolved(resolvedFiles, animal.tempPhotos.length));
 
-        animal.tempPhotos.map(file => {
-          return axios.post(
-            API_BASE_URL + 'files/upload/' + file.name,
-            file,
-            {
-                params: {
-                  animalId: response.data.id
-                },
-                headers: {
-                  'Content-Type': file.type
-                }
-            }).then(() => {
-              resolvedFiles++;
-              dispatch(photoResolved(resolvedFiles, animal.tempPhotos.length));
-              if (resolvedFiles == animal.tempPhotos.length && !didFailUploadFail) {
-                dispatch(saveAnimalSuccess());
-                toast(SAVE_ANIMAL_MSG);
-                dispatch(push(ANIMALS_URL));
-              } else if (resolvedFiles == animal.tempPhotos.length && didFailUploadFail && failedFiles.length != 0 ) {
-                let error = {
-                  failedFiles,
-                  code: 413
-                };
-                dispatch(saveAnimalFailure(error));
-              }
-            }).catch((err) => {
-              resolvedFiles++;
-              dispatch(photoResolved(resolvedFiles, animal.tempPhotos.length));
-              didFailUploadFail = true;
-              //FILE TO BIG add to failedFiles
-              if(err.config.data && err.config.data.name) {
-                failedFiles.push(err.config.data.name);
-              }
-
-              if (resolvedFiles == animal.tempPhotos.length && didFailUploadFail && failedFiles.length != 0 ) {
-                let error = {
-                  failedFiles,
-                  code: 413
-                };
-                dispatch(saveAnimalFailure(error));
-              }
-
-            });
-        });
-    } else {
-        if(response.status !== 401) {
-          toast(SAVE_ANIMAL_MSG);
-          dispatch(getAnimals());
-          dispatch(saveAnimalSuccess());
-          dispatch(push(ANIMALS_URL));
-        } else {
-          dispatch(logoutDueToTokenError());
-        }
+        sendPhotosToAPI(animal.tempPhotos,response.data.id, dispatch, isUploadedPhotoProfile);
+      } else {
+        dispatch(saveAnimalSuccess());
+        toast(SAVE_ANIMAL_MSG);
+        dispatch(push(ANIMALS_URL));
       }
     });
+    // .catch((err) => {
+    //   // dispatch(saveAnimalFailure());
+    //   toast(err);
+    // });
   };
-
 
   function saveAnimalRequest(){
     return {
@@ -111,6 +63,44 @@ export function saveAnimal(animal) {
       isFetching: true,
       isAnimalSaved: false
     };
+  }
+}
+
+function sendPhotosToAPI(animalPhotos,animalId, dispatch, isUploadedPhotoProfile) {
+
+    //update animal array to make first animalPhoto profile
+    if  (animalPhotos.filter((item) => {
+      return item.profil;
+    }).length == 0 && !isUploadedPhotoProfile) {
+      animalPhotos[0].profil = true;
+    }
+    //init dispatch
+
+    //if successCounter == animalPhotosl.length that means every photo was uploaded
+    let successCounter = 0;
+
+    animalPhotos.map(file => {
+      return axios.post(
+        API_BASE_URL + 'files/upload/' + file.name,
+        file,
+        {
+            params: {
+              animalId: animalId,
+              profil: file.profil
+            },
+            headers: {
+              'Content-Type': file.type
+            }
+        }).then(() => {
+          successCounter++;
+          if (successCounter == animalPhotos.length) {
+            dispatch(saveAnimalSuccess());
+            toast(SAVE_ANIMAL_MSG);
+            dispatch(push(ANIMALS_URL));
+          }
+        }).catch(() => {
+          });
+        });
   }
 
   function saveAnimalSuccess(){
@@ -121,22 +111,24 @@ export function saveAnimal(animal) {
     };
   }
 
-  function saveAnimalFailure(errors){
-    return {
-      type: SAVE_ANIMAL_FAILURE,
-      isFetching: false,
-      isAnimalSaved: false,
-      errors
-    };
+function updatePhotosInAPI(animalPhotos, shouldMarkFirstPhotoProfile, dispatch) {
+
+  let count = 0;
+  if (animalPhotos.length > 0 && shouldMarkFirstPhotoProfile && animalPhotos.filter((item) => {return item.profil;}).length == 0) {
+    animalPhotos[0].profil = true;
   }
 
-  function photoResolved(photoNumber, photoCount){
-    return {
-      type: PHOTO_RESOLVED,
-      photoNumber,
-      photoCount
-    };
-  }
+  animalPhotos.map(photo => {
+    return axios.patch(API_BASE_URL + 'files/' + photo.id + "?profil="+photo.profil).then(() => {
+      count++;
+      if (count == animalPhotos.length) {
+        dispatch(saveAnimalSuccess());
+        dispatch(push(ANIMALS_URL));
+      }
+    }).catch(() => {
+
+    });
+  });
 }
 
 export function clearPhotoUploadError() {
@@ -164,6 +156,7 @@ export function getAnimals(id){
         dispatch(getAnimalsSuccess(response.data.data));
       }
     }).catch((err) => {
+      console.log(err);
       dispatch(getAnimalsFailure(err.response.data));
     });
   };

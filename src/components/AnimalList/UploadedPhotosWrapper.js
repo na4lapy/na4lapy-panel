@@ -2,14 +2,14 @@ import React, {PropTypes} from 'react';
 import _ from 'lodash';
 import PhotoQuadrupletRow from './PhotoQuadrupletRow';
 
-const UploadedPhotosWrapper = ({photos, removePhoto}) => {
+const UploadedPhotosWrapper = ({tagPhotoAsProfile, photos, removePhoto}) => {
 
     return (
       <div>
         <h3 className="center"> Wgrane zdjęcia </h3>
           {photos && _.chunk(photos, 4).map( (photosQuadruplet,index) => {
 
-            return  <PhotoQuadrupletRow key={index} photosQuadruplet={photosQuadruplet} index={index} removePhoto={removePhoto} />;
+            return  <PhotoQuadrupletRow key={index} tagPhotoAsProfile={tagPhotoAsProfile} photosQuadruplet={photosQuadruplet} index={index} removePhoto={removePhoto} />;
 
           })}
        </div>

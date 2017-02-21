@@ -7,12 +7,16 @@ class TableRow extends React.Component {
 
   constructor(props) {
     super(props);
-
   }
 
   renderImage(){
+    let photoName = this.props.dataRow.photos.filter((photo) => photo.profil).map((p) => p.fileName)[0];
+    //if no profile photo fallback to first available photo
+    if (!photoName && this.props.dataRow.photos && typeof this.props.dataRow.photos[0] != 'undefined') {
+      photoName = this.props.dataRow.photos[0].fileName;
+    }
     if(this.props.dataRow.photos && typeof this.props.dataRow.photos[0] != 'undefined') {
-      return (<img className="animal_photo" onClick={(event) => this.props.onEditClick(event, this.props.dataRow.id)} src={API_URL_FILES + this.props.dataRow.photos[0].fileName} />);
+      return (<img className="animal_photo" onClick={(event) => this.props.onEditClick(event, this.props.dataRow.id)} src={API_URL_FILES + photoName} />);
     }
   }
 
@@ -35,7 +39,9 @@ class TableRow extends React.Component {
       <td>{AnimalDictionary.gender[this.props.dataRow.gender]}</td>
       <td>{AnimalDictionary.size[this.props.dataRow.size]}</td>
       <td>{AnimalDictionary.status[this.props.dataRow.animal_status]}</td>
-      <td><button className="btn" onClick={(event) => this.props.onEditClick(event, this.props.dataRow.id)}>Edycja</button>
+      <td>
+          <button className="btn" onClick={(event) => this.props.onPostToFacebook(event,this.props.dataRow)}>Facebook</button>
+          <button className="btn" onClick={(event) => this.props.onEditClick(event, this.props.dataRow.id)}>Edycja</button>
           <button className="btn red darken-1" onClick={(event) => this.props.onDeleteClick(event, this.props.dataRow.id)}>Usuń</button>
           {this.renderPublishButton()}
       </td>
@@ -50,6 +56,7 @@ TableRow.propTypes = {
   onEditClick: PropTypes.func,
   onPublishClick: PropTypes.func,
   dataRow: PropTypes.object.isRequired,
+  onPostToFacebook: PropTypes.func,
 
 };
 

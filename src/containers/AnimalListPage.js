@@ -10,8 +10,10 @@ import {setFilter, resetFilter} from '../actions/FilterActions';
 import {setSorting} from '../actions/SortingActions';
 import AnimalSelector from '../selectors/AnimalSelector';
 import AnimalRemovalModal from '../components/AnimalList/AnimalRemovalModal';
+import FBAccountChooseModal from '../components/AnimalList/FBAccountChooseModal';
 import Loader from '../components/Loader';
 import _ from 'lodash';
+import * as facebookActions from '../actions/FacebookActions';
 
 
  class AnimalListPage extends React.Component {
@@ -24,7 +26,9 @@ import _ from 'lodash';
     this.onHeaderClick = this.onHeaderClick.bind(this);
     this.onPublishClick = this.onPublishClick.bind(this);
     this.resetFilters = this.resetFilters.bind(this);
-
+    this.onPostToFacebook = this.onPostToFacebook.bind(this);
+    this.shouldRespondToFacebookStateInProps = this.shouldRespondToFacebookStateInProps.bind(this);
+    this.onFbAccountChoosen = this.onFbAccountChoosen.bind(this);
     this.state = {
       animalToBeRemoved: null
     };
@@ -33,6 +37,13 @@ import _ from 'lodash';
   componentDidMount() {
     this.props.getAnimals();
     $('#removingAnimalModal').modal();
+    $('#FBAccountChooseModal').modal();
+  }
+
+  componentWillReceiveProps(nextProps){
+    if(this.shouldRespondToFacebookStateInProps(nextProps)) {
+      $('#FBAccountChooseModal').modal('open');
+    }
   }
 
   componentWillUpdate() {
@@ -48,6 +59,10 @@ import _ from 'lodash';
 
   onEditClick(event, idx) {
     this.props.push(ANIMALS_URL + '/' + idx);
+  }
+
+  onPostToFacebook(event, animal) {
+    this.props.postAnimalToFacebook(animal);
   }
 
   onAddClick(){
@@ -68,12 +83,21 @@ import _ from 'lodash';
     this.props.saveAnimal(animalToBePublished);
   }
 
+  onFbAccountChoosen(account_token, account_id) {
+    this.props.onFbAccountChoosen(account_token, account_id, this.props.facebookState.fb_animal);
+  }
+
   resetFilters(event){
     event.preventDefault();
     this.props.resetFilters();
   }
 
+  shouldRespondToFacebookStateInProps(props) {
+    return props.facebookState && props.facebookState.accounts && props.facebookState.showPostAsPopup
+  }
+
   render() {
+    let loaderMessage  = this.props.facebookState && this.props.facebookState.loaderMessage;
     return (<div ref={(ref) => this._div = ref}>
       <div className="main_wrapper">
         <h2 className="center">Liczba zwierząt - {this.props.animals.length}</h2>
@@ -99,12 +123,14 @@ import _ from 'lodash';
         onEditClick={this.onEditClick}
         onHeaderClick={this.onHeaderClick}
         onPublishClick={this.onPublishClick}
+        onPostToFacebook={this.onPostToFacebook}
          />
        <div className="fixed-action-btn" onClick={() => this.onAddClick()}>
          <a className="btn-floating btn-large waves-effect waves-light light-blue" ><i className="material-icons">add</i></a>
       </div>
-      <AnimalRemovalModal animal={this.state.animalToBeRemoved} removeCallback={this.props.deleteAnimal}/>
-      <Loader isShown={this.props.isFetching} message={"Proszę czekać..."} />
+        <AnimalRemovalModal animal={this.state.animalToBeRemoved} removeCallback={this.props.deleteAnimal}/>
+        <FBAccountChooseModal accounts={this.props.facebookState.accounts} chooseAccountCallback={this.onFbAccountChoosen} />}
+      <Loader isShown={this.props.isFetching || this.props.isFbFetching} message={loaderMessage ? loaderMessage : "Proszę czekać..."  } />
     </div>);
   }
 }
@@ -121,7 +147,12 @@ AnimalListPage.propTypes = {
   sortingOrder: PropTypes.string,
   animalFilter: PropTypes.object,
   resetFilters: PropTypes.func,
-  resetModel: PropTypes.func
+  resetModel: PropTypes.func,
+  postAnimalToFacebook: PropTypes.func,
+  logoutOutOfFacebook: PropTypes.func,
+  facebookState: PropTypes.object,
+  isFetching: PropTypes.bool,
+  onFbAccountChoosen: PropTypes.func,
 };
 
 function mapDispatchToProps(dispatch) {
@@ -132,7 +163,10 @@ function mapDispatchToProps(dispatch) {
     setFilter: bindActionCreators(setFilter, dispatch),
     setSorting: bindActionCreators(setSorting, dispatch),
     saveAnimal: bindActionCreators(animalActions.saveAnimal, dispatch ),
-    resetFilters: bindActionCreators(resetFilter, dispatch)
+    resetFilters: bindActionCreators(resetFilter, dispatch),
+    postAnimalToFacebook: bindActionCreators(facebookActions.postAnimalToFacebook,dispatch),
+    logoutOutOfFacebook: bindActionCreators(facebookActions.logoutOutOfFacebook, dispatch),
+    onFbAccountChoosen: bindActionCreators(facebookActions.onFbAccountChoosen, dispatch)
   };
 }
 
@@ -142,7 +176,9 @@ function mapStateToProps(state){
     sortingOrder: state.sorting.order,
     animals: AnimalSelector(state),
     animalFilter: state.animalFilter,
-    isFetching: state.animalRequest.isFetching
+    isFetching: state.animalRequest.isFetching,
+    facebookState: state.facebookState,
+    isFbFetching: state.facebookState.isFetching
   };
 }
 

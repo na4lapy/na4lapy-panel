@@ -27,7 +27,6 @@ export default function(state = {
         errorDictionary: {email: 'Błędne hasło lub email', password: 'Błędne hasło lub email'}
       });
     case TOKEN_ERROR: {
-      debugger;
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: false,

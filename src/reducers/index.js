@@ -9,6 +9,7 @@
  import SorterReducer from './SorterReducer';
  import ShelterReducer from './ShelterReducer';
  import AnimalRequestReducer from './AnimalReducer';
+ import FacebookReducer from './FacebookReducer';
 
  const rootReducer = combineReducers({
    userAuth: AuthReducer,
@@ -21,7 +22,8 @@
    animalForm: formReducer('animal', animalInitialState),
    shelter: modelReducer('shelter', shelterInitialState),
    shelterForm: formReducer('shelter', shelterInitialState),
-   shelterState: ShelterReducer
+   shelterState: ShelterReducer,
+   facebookState: FacebookReducer
 });
 
  export default rootReducer;

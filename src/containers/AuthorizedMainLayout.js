@@ -3,8 +3,6 @@ import {connect} from 'react-redux';
 import Nav from '../components/Nav';
 import {bindActionCreators} from 'redux';
 import {logoutUser} from '../actions/AuthActions';
-import {getCookie} from '../utils';
-import {AUTH_COOKIE_KEY} from '../config';
 
 class AuthorizedMainLayout extends React.Component{
   constructor(props, context) {
@@ -12,18 +10,23 @@ class AuthorizedMainLayout extends React.Component{
     this.logout = this.logout.bind(this);
   }
 
-  componentWillMount() {
-    this.redirectToLogin();
-  }
+  componentDidMount() {
+    window.fbAsyncInit = function() {
+      FB.init({ //eslint-disable-line
+        appId      : '942037912599059',
+        xfbml      : true,
+        version    : 'v2.8'
+      });
+      FB.AppEvents.logPageView(); //eslint-disable-line
+    };
 
-  componentWillReceiveProps() {
-    this.redirectToLogin();
-  }
-
-  redirectToLogin(){
-    if(!getCookie(AUTH_COOKIE_KEY) || getCookie(AUTH_COOKIE_KEY) == 'undefined') {
-      this.context.router.push("/");
-    }
+    (function(d, s, id){
+       let js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
   }
 
   logout(){
