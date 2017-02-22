@@ -20,7 +20,8 @@ UploadedPhotosWrapper.propTypes = {
   photos: PropTypes.object,
   removePhoto: PropTypes.func,
   fileName: PropTypes.string,
-  removeCallback: PropTypes.func
+  removeCallback: PropTypes.func,
+  tagPhotoAsProfile: PropTypes.func,
 };
 
 export default UploadedPhotosWrapper;

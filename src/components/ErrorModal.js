@@ -16,7 +16,8 @@ const ErrorModal = ({errorMessage, confirmationCallback}) => {
 };
 
 ErrorModal.propTypes = {
-  errorMessage: PropTypes.string
+  errorMessage: PropTypes.string,
+  confirmationCallback: PropTypes.func
 };
 
 export default ErrorModal;

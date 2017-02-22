@@ -142,11 +142,11 @@ class AnimalForm extends React.Component {
       </div>
       <div className="row">
         <Field className="input-field col s12 m6" model="animal.name" validators={{
-            required: (val) => {return val && val.length }
+            required: (val) => {return val && val.length; }
           }}>
           <input name="animal.name" type="text" placeholder="Imię"/>
           <label className="active" htmlFor="animal.name">Imię - <strong>wymagane!</strong></label>
-            { !fields.name.valid &&
+            {!fields.name.valid &&
               <strong className="text-red">Imię jest wymagane</strong>
             }
         </Field>
@@ -266,7 +266,8 @@ AnimalForm.propTypes = {
   clearPhotoUploadError: PropTypes.func,
   reloadAnimal: PropTypes.func,
   push: PropTypes.func,
-  animalForm: PropTypes.object
+  animalForm: PropTypes.object,
+  areImageUploadFinished: PropTypes.bool
 };
 
 function mapStateToProps(state) {

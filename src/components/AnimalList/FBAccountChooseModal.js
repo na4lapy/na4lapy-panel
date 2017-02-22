@@ -15,7 +15,7 @@ const FBAccountChooseModal = ({accounts, chooseAccountCallback}) => {
         return (
           <div key={account.id} className="row">
             <div className="col s3">{account.name}</div>
-            <div className="col s3"><button className="btn" onClick={() => {closeModal(); chooseAccountCallback(account.access_token,account.id)} }>Wybierz</button></div>
+            <div className="col s3"><button className="btn" onClick={() => {closeModal(); chooseAccountCallback(account.access_token,account.id); }}>Wybierz</button></div>
           </div>
         );
         })

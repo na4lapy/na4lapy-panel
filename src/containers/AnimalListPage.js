@@ -93,7 +93,7 @@ import * as facebookActions from '../actions/FacebookActions';
   }
 
   shouldRespondToFacebookStateInProps(props) {
-    return props.facebookState && props.facebookState.accounts && props.facebookState.showPostAsPopup
+    return props.facebookState && props.facebookState.accounts && props.facebookState.showPostAsPopup;
   }
 
   render() {
@@ -130,7 +130,7 @@ import * as facebookActions from '../actions/FacebookActions';
       </div>
         <AnimalRemovalModal animal={this.state.animalToBeRemoved} removeCallback={this.props.deleteAnimal}/>
         <FBAccountChooseModal accounts={this.props.facebookState.accounts} chooseAccountCallback={this.onFbAccountChoosen} />}
-      <Loader isShown={this.props.isFetching || this.props.isFbFetching} message={loaderMessage ? loaderMessage : "Proszę czekać..."  } />
+      <Loader isShown={this.props.isFetching || this.props.isFbFetching} message={loaderMessage ? loaderMessage : "Proszę czekać..."} />
     </div>);
   }
 }
@@ -153,6 +153,7 @@ AnimalListPage.propTypes = {
   facebookState: PropTypes.object,
   isFetching: PropTypes.bool,
   onFbAccountChoosen: PropTypes.func,
+  isFbFetching: PropTypes.bool
 };
 
 function mapDispatchToProps(dispatch) {

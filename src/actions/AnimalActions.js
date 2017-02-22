@@ -156,7 +156,6 @@ export function getAnimals(id){
         dispatch(getAnimalsSuccess(response.data.data));
       }
     }).catch((err) => {
-      console.log(err);
       dispatch(getAnimalsFailure(err.response.data));
     });
   };

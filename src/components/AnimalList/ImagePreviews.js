@@ -12,7 +12,6 @@ const ImagePreviews = ({previewsTriples, rowIndex, tagPhotoAsProfile,deletePhoto
       if (failedFiles.length != 0) {
         imageClasess += imageUploadFailed ? " image-upload-failed" : " image-upload-success";
       }
-      console.log(files[index]);
         return (<div key={index} className={imageClasess}>
           <img className="z-depth-2 responsive-img"  src={preview} />
           <div className="center">

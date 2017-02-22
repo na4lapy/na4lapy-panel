@@ -103,11 +103,11 @@ class ImageUploader extends React.Component {
 
     this.props.photos.forEach((firstObject) => {
       let secondObject = {};
-      for(var k in firstObject) {
+      for(let k in firstObject) {
         secondObject[k]=firstObject[k];
       }
       photos.push(secondObject);
-    })
+    });
 
     let photosWithProfiles = photos.map((photo, index) => {
 

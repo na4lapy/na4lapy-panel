@@ -39,8 +39,7 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use( (response) => {
   return response;
 }, (error) => {
-  let response = error.response
-  console.error(error);
+  let response = error.response;
   //Unauthorized, token expired
   if (response.status === REJECT_AUTH_HTTP_CODE) {
     store.dispatch(push("/"));
