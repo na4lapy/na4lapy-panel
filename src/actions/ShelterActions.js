@@ -11,7 +11,7 @@ export const SAVE_SHELTER_REQUEST = 'SAVE_SHELTER_REQUEST';
 export const SAVE_SHELTER_SUCCESS = 'SAVE_SHELTER_SUCCESS';
 export const SAVE_SHELTER_FAILURE = 'SAVE_SHELTER_FAILURE';
 
-export function loadShelter(id) {
+export function loadShelter() {
 
   const loadShelterRequest = () => {
     return {
@@ -41,7 +41,7 @@ export function loadShelter(id) {
 
   return dispatch => {
     dispatch(loadShelterRequest());
-    return axios.get(API_URL + 'shelters/' + id)
+    return axios.get(API_URL + 'shelter')
       .then((response) => {
         dispatch(loadShelterSuccess(response.data));
         dispatch(actions.change('shelter', response.data));

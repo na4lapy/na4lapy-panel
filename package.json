@@ -1,4 +1,4 @@
-{
+  {
   "name": "react-slingshot",
   "version": "5.0.0",
   "description": "Starter kit for creating apps with React and Redux",
@@ -6,6 +6,7 @@
     "npm": ">=3"
   },
   "scripts": {
+
     "preinstall": "node tools/nodeVersionCheck.js",
     "setup": "node tools/setup/setupMessage.js && npm install && node tools/setup/setup.js",
     "remove-demo": "babel-node tools/removeDemo.js",
