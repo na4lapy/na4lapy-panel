@@ -1,8 +1,9 @@
-export default 'http://api.na4lapy.org/';
+export default 'http://localhost:8123/';
 export const DATE_FORMAT = 'DD MMM, YYYY';
 export const TOAST_DURATION = 2000;
 export const FILE_SIZE_LIMIT_IN_MB = 3;
 export const REJECT_AUTH_HTTP_CODE = 403;
+export const UNPROCESSABLE_ENTITY_HTTP_CODE = 422;
 export const AUTH_COOKIE_KEY = 'kitura-session-id';
 
 export const failedFilesMessage = (failedFiles) => {

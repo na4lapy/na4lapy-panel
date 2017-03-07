@@ -90,7 +90,7 @@ export function saveShelter(shelter) {
 
   return axios.request({
       method,
-      url: API_URL + 'shelters',
+      url: API_URL + 'shelter',
       data: {
         ...shelter
       }

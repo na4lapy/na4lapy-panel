@@ -1,5 +1,9 @@
 import {
-  LOGIN_REQUEST, LOGIN_SUCESS, LOGIN_FAILURE, TOKEN_ERROR } from '../actions/AuthActions';
+  LOGIN_REQUEST, LOGIN_SUCESS, LOGIN_FAILURE,
+  TOKEN_ERROR,
+  SAVE_NEW_PASSWORD_FAILURE,
+  RESET_NEW_PASSWORD_ERRORS
+ } from '../actions/AuthActions';
 
 export default function(state = {
   isFetching: false,
@@ -31,6 +35,14 @@ export default function(state = {
         isFetching: false,
         isAuthenticated: false,
         tokenError: 'Wylogowano z powodu wygaśnięcia sesji lub błędu tokenu'
+      });
+    }
+    case SAVE_NEW_PASSWORD_FAILURE: {
+      return Object.assign({}, state, {...action});
+    }
+    case RESET_NEW_PASSWORD_ERRORS: {
+      return Object.assign({}, state, {
+        errors: {}
       });
     }
     default:

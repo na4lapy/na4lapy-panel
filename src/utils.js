@@ -13,6 +13,8 @@ export const FACEBOOK_CONNECT_MSG = "Łączenie z facebookiem";
 export const FACEBOOK_UPLOAD_MSG = "Publikowanie na facebooku";
 export const FACEBOOK_DONE_MSG = "Zwierzę opublikowano na facebooku";
 
+export const SAVE_PASSWORD_SUCCESS_MESSAGE = "Hasło zmienione pomyślnie";
+
 export const MONTHS_FULL = ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'];
 export const MONTHS_SHORT = ['Sty', 'Lut', 'Mar', 'Kwi', 'Maj', 'Cze', 'Lip', 'Sie', 'Wrz', 'Paź', 'Lis', 'Gru'];
 

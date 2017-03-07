@@ -12,7 +12,7 @@ import 'materialize-css/dist/css/materialize.css';
 import 'materialize-css/dist/js/materialize.js';
 
 import './styles/index.sass';
-import {REJECT_AUTH_HTTP_CODE, AUTH_COOKIE_KEY} from './config';
+import {REJECT_AUTH_HTTP_CODE, UNPROCESSABLE_ENTITY_HTTP_CODE,AUTH_COOKIE_KEY} from './config';
 
 import routes from './routes';
 import {filterInitialState} from './initialStates';
@@ -40,10 +40,13 @@ axios.interceptors.response.use( (response) => {
   return response;
 }, (error) => {
   let response = error.response;
+  console.log(response.data);
   //Unauthorized, token expired
   if (response.status === REJECT_AUTH_HTTP_CODE) {
     store.dispatch(push("/"));
     return Promise.reject(error);
+  } else if (response.status === UNPROCESSABLE_ENTITY_HTTP_CODE) {
+    return Promise.reject(response.data);
   }
   return response;
 }

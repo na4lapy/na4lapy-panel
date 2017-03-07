@@ -10,12 +10,18 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
+export const SAVE_NEW_PASSWORD_REQUEST = 'SAVE_NEW_PASSWORD_REQUEST';
+export const SAVE_NEW_PASSWORD_FAILURE = 'SAVE_NEW_PASSWORD_FAILURE';
+export const SAVE_NEW_PASSWORD_SUCCESS = 'SAVE_NEW_PASSWORD_SUCCESS';
+export const RESET_NEW_PASSWORD_ERRORS = 'RESET_NEW_PASSWORD_ERRORS';
+
 export const TOKEN_ERROR = 'TOKEN_ERROR';
 
-import AUTH_URL from '../config';
+import BASE_URL from '../config';
 
-import {deleteAllCookies} from '../utils';
+import toast, {deleteAllCookies, SAVE_PASSWORD_SUCCESS_MESSAGE} from '../utils';
 
+let AUTH_URL = BASE_URL + 'auth/'
 export function loginUser(credentials) {
   return dispatch =>  {
     //dispatch login request started
@@ -105,5 +111,50 @@ export function logoutUser(){
       isFetching: false,
       isAuthenticated: false,
     };
+  }
+}
+
+export function saveNewPassword(passwordSettings){
+  return dispatch => {
+    dispatch(saveNewPasswordRequest());
+    return axios.post(AUTH_URL + 'change_password', {
+      ...passwordSettings
+    }).then(() => {
+      dispatch(saveNewPasswordSuccess());
+      toast(SAVE_PASSWORD_SUCCESS_MESSAGE);
+    }).catch((err) => {
+      dispatch(saveNewPasswordFailure(err));
+    });
+  };
+
+  function saveNewPasswordRequest() {
+    return {
+      type: SAVE_NEW_PASSWORD_REQUEST,
+      isFetching: true,
+      isPasswordChanged: false
+    };
+  }
+
+  function saveNewPasswordFailure(errors) {
+    return {
+      type: SAVE_NEW_PASSWORD_FAILURE,
+      isFetching: false,
+      isPasswordChanged: false,
+      errors
+    };
+  }
+
+  function saveNewPasswordSuccess() {
+    return {
+      type: SAVE_NEW_PASSWORD_SUCCESS,
+      isFetching: false,
+      isPasswordChanged: true
+    }
+  }
+}
+
+export function resetNewPasswordErrors() {
+    return {
+      type: RESET_NEW_PASSWORD_ERRORS
   }
 }

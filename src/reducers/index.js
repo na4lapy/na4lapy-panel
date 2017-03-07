@@ -2,7 +2,7 @@
  import { combineReducers } from 'redux';
  import {routerReducer} from 'react-router-redux';
  import {modelReducer, formReducer} from 'react-redux-form';
- import {animalInitialState, shelterInitialState} from '../initialStates';
+ import {animalInitialState, shelterInitialState, passwordSettingsInitialState} from '../initialStates';
  import AnimalListReducer from './AnimalListReducer';
  import AuthReducer from './AuthReducer';
  import FilterReducer from './FilterReducer';
@@ -22,6 +22,8 @@
    animalForm: formReducer('animal', animalInitialState),
    shelter: modelReducer('shelter', shelterInitialState),
    shelterForm: formReducer('shelter', shelterInitialState),
+   passwordSettings: modelReducer('passwordSettings', passwordSettingsInitialState),
+   passwordSettingsForm: formReducer('passwordSettings', passwordSettingsInitialState),
    shelterState: ShelterReducer,
    facebookState: FacebookReducer
 });

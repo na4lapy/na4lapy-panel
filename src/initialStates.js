@@ -26,6 +26,12 @@ export const filterInitialState = {
   }
 };
 
+export const passwordSettingsInitialState = {
+  oldPassword: '',
+  newPassword: '',
+  repeatNewPassword: ''
+};
+
 
 export const shelterInitialState = {
   accountNumber: '',
