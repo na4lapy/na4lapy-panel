@@ -18,7 +18,7 @@ import StatisticsPage from './containers/StatisticsPage';
 import AnimalAddPage from './containers/AnimalAddPage';
 import ShelterDetailPage from './containers/ShelterDetailPage';
 import ChangePasswordPage from './containers/ChangePasswordPage';
-import StatutePage from './containers/StatutePage';
+import TermsOfUsePage from './containers/TermsOfUsePage';
 
 import App from './containers/App';
 import AuthorizedMainLayout from './containers/AuthorizedMainLayout';
@@ -33,7 +33,7 @@ export default (
         <Route path={ANIMALS_URL + '/:animalId'} component={AnimalAddPage}/>
         <Route path={SHELTER_URL} component={ShelterDetailPage} />
         <Route path={CHANGE_PASSWORD_URL} component={ChangePasswordPage} />
-        <Route path={STATUTE_URL}  component={StatutePage} />
+        <Route path={STATUTE_URL}  component={TermsOfUsePage} />
       </Route >
       <Route path={STATISTIC_URL} component={StatisticsPage} />
     </Route>
