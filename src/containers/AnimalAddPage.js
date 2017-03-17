@@ -37,6 +37,7 @@ class AnimalAddPage extends React.Component {
   }
 
   loaderMessage() {
+
     const {animalRequest} = this.props;
     if (animalRequest.photoCount && animalRequest.photoCount != 0) {
       return "Trwa wysyłanie zdjęć: " + animalRequest.photoNumber + " z " + animalRequest.photoCount;

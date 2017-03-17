@@ -2,7 +2,7 @@ import React from 'react';
 
 const TermsOfUse = () => {
   return (
-    <article>
+    <article className="container">
       <h2 className="center">Regulamin</h2>
 
       <h4 className="center">§ 1</h4>

@@ -158,3 +158,8 @@ export function resetNewPasswordErrors() {
       type: RESET_NEW_PASSWORD_ERRORS
   }
 }
+
+export function getAreTermsOfUseAccepted() {
+  console.log("getAreTermsOfUseAccepted");
+
+}

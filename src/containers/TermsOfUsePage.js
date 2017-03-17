@@ -10,9 +10,7 @@ class TermsOfUsePage extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <TermsOfUse />
-      </div>
+      <TermsOfUse />
     );
   }
 }

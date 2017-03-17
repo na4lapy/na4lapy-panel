@@ -8,7 +8,8 @@ import {
     SHELTER_URL,
     STATISTIC_URL,
     CHANGE_PASSWORD_URL,
-    STATUTE_URL
+    STATUTE_URL,
+    NO_AUTH_STATUTE_URL
 } from './routes_urls';
 
 //import components/pages
@@ -19,6 +20,7 @@ import AnimalAddPage from './containers/AnimalAddPage';
 import ShelterDetailPage from './containers/ShelterDetailPage';
 import ChangePasswordPage from './containers/ChangePasswordPage';
 import TermsOfUsePage from './containers/TermsOfUsePage';
+import TermsOfUse from './components/TermsOfUse/TermsOfUse';
 
 import App from './containers/App';
 import AuthorizedMainLayout from './containers/AuthorizedMainLayout';
@@ -37,5 +39,6 @@ export default (
       </Route >
       <Route path={STATISTIC_URL} component={StatisticsPage} />
     </Route>
+  <Route path={NO_AUTH_STATUTE_URL} component={TermsOfUse} />
   </Route>
 );

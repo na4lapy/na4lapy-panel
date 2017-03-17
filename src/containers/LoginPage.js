@@ -1,8 +1,9 @@
 import React, {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {loginUser} from '../actions/AuthActions';
-import {ANIMALS_URL} from '../routes_urls';
+import {ANIMALS_URL, NO_AUTH_STATUTE_URL} from '../routes_urls';
 import Loader from '../components/Loader';
+import { Link } from 'react-router';
 
 class LoginPage extends React.Component {
 
@@ -56,6 +57,7 @@ class LoginPage extends React.Component {
               </div>
               <h1 className="center">Na 4 Łapy </h1>
               <h2 className="center">Panel Administracyjny</h2>
+              <h6 className="center">Korzystanie z panelu Na 4 Łapy oznacza zaakceptowanie <Link to={NO_AUTH_STATUTE_URL}> regulaminu. </Link></h6>
               {this.props.userAuth && this.props.userAuth.tokenError && <h5 className="text-red center">{this.props.userAuth.tokenError}</h5>}
               <div className="valign-wrapper">
               </div>
