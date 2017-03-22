@@ -41,7 +41,7 @@ export function loadShelter() {
 
   return dispatch => {
     dispatch(loadShelterRequest());
-    return axios.get(API_URL + 'shelter')
+    return axios.get(API_URL + 'shelter/info')
       .then((response) => {
         dispatch(loadShelterSuccess(response.data));
         dispatch(actions.change('shelter', response.data));
