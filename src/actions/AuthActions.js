@@ -78,7 +78,7 @@ export function logoutUser(){
   return dispatch => {
     dispatch(logoutRequest());
 
-    return axios.post(AUTH_URL + 'logout',{
+    return axios.get(AUTH_URL + 'logout',{
     }).then( () => {
       dispatch(logoutSuccess());
       deleteAllCookies();

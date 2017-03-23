@@ -6,6 +6,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
+import CompressionPlugin from 'compression-webpack-plugin';
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
@@ -67,6 +68,9 @@ export default {
       jQuery: "jquery",
       "window.jQuery": "jquery",
       Hammer: "hammerjs/hammer",
+    }),
+    new CompressionPlugin({
+      test: /\.(js|html)$/,
     })
   ],
   module: {

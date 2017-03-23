@@ -36,6 +36,7 @@ export function getCookie(cookiename)
 
   export function deleteAllCookies() {
     let cookies = document.cookie.split(";");
+    debugger;
 
     for (let i = 0; i < cookies.length; i++) {
         let cookie = cookies[i];

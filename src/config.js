@@ -1,4 +1,4 @@
-export default 'https://api.na4lapy.org/';
+export default 'http://localhost:8123/';
 export const DATE_FORMAT = 'DD MMM, YYYY';
 export const TOAST_DURATION = 2000;
 export const FILE_SIZE_LIMIT_IN_MB = 3;
