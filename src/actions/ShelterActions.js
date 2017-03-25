@@ -81,13 +81,18 @@ export function saveShelter(shelter) {
 
   return dispatch => {
     dispatch(saveShelterRequest());
-
     let method = 'post';
 
     if(shelter.id) {
       method = 'patch';
     }
 
+    // if (shelter.accountNumber.replace(/[^0-9]/g,"").length != 26) {
+    //   console.log(shelter.accountNumber.replace(/[^0-9]/g,"").length);
+    //   dispatch(actions.setErrors('shelter.accountNumber', {'incorrect': true}));
+    //   dispatch(saveShelterFailure({}));
+    //   return
+    // }
   return axios.request({
       method,
       url: API_URL + 'shelter',

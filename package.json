@@ -38,6 +38,8 @@
     "rc-checkbox": "1.4.0",
     "react": "15.2.1",
     "react-dom": "15.2.1",
+    "react-maskedinput": "3.3.4",
+    "react-number-format": "1.1.2",
     "react-redux": "4.4.5",
     "react-redux-form": "0.14.4",
     "react-router": "2.6.0",

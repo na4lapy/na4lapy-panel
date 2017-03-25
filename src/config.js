@@ -1,4 +1,4 @@
-export default 'http://localhost:8123/';
+export default __DEV__ ? 'http://localhost:8123/' : 'https://api.na4lapy.org/'; //eslint-disable-line
 export const DATE_FORMAT = 'DD MMM, YYYY';
 export const TOAST_DURATION = 2000;
 export const FILE_SIZE_LIMIT_IN_MB = 3;

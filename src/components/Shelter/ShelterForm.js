@@ -4,12 +4,15 @@ import {Form, Field, actions} from 'react-redux-form';
 import {bindActionCreators} from 'redux';
 import {voivodeships} from '../../initialStates';
 import {connect} from 'react-redux';
+import MaskedInput from 'react-maskedinput';
+
 
 class ShelterForm extends React.Component {
 
   constructor(props){
     super(props);
     this.handleSelectChange = this.handleSelectChange.bind(this);
+    this.accountNumberChange = this.accountNumberChange.bind(this);
   }
 
   componentDidMount(){
@@ -30,8 +33,15 @@ class ShelterForm extends React.Component {
     this.props.changeModel(e.target.name, value);
   }
 
+  accountNumberChange(e) {
+    let value = e.target.value;
+    this.props.changeModel(e.target.name, value)
+
+  }
+
   render () {
-    let {shelter} = this.props;
+    let {shelter, shelterForm} = this.props;
+    console.log(shelterForm);
     return (
       <Form model="shelter" onSubmit={(shelter) => this.props.onSubmit(shelter)}>
         <h1>Dane schroniska</h1>
@@ -86,10 +96,13 @@ class ShelterForm extends React.Component {
             </select>
             <label >Województwo</label>
           </div>
-          <Field model="shelter.accountNumber" className="input-field col s4">
-            <input name="shelter.accountNumber" type="text" placeholder="Numer konta bankowego"/>
+          <div className="input-field col s4" >
+            <MaskedInput  value={shelter.accountNumber} onChange={this.accountNumberChange} mask="11-1111-1111-1111-1111-1111-1111" id="accountNumber" ref="accountNumber" name="shelter.accountNumber" type="text" placeholder="Numer konta bankowego"/>
             <label htmlFor="shelter.accountNumber" className="active">Numer konta bankowego</label>
-          </Field>
+              {shelterForm.fields.accountNumber
+           && shelterForm.fields.accountNumber.errors.incorrect
+           && <div>accountNumber bad format required</div>}
+          </div>
         </div>
         <div className="row">
           <Field model="shelter.adoptionRules" className="input-field col s12">
@@ -106,12 +119,14 @@ class ShelterForm extends React.Component {
 ShelterForm.propTypes = {
   changeModel: PropTypes.func,
   onSubmit: PropTypes.func,
-  shelter: PropTypes.object
+  shelter: PropTypes.object,
+  shelterForm: PropTypes.object
 };
 
 function mapStateToProps(state) {
   return {
-    shelter: state.shelter
+    shelter: state.shelter,
+    shelterForm: state.shelterForm
   };
 }
 

@@ -27,6 +27,7 @@ class TableRow extends React.Component {
   }
 
   render(){
+    console.log(this.props.dataRow.birthdate);
     return (
     <tr>
       <td>{this.props.dataRow.id}</td>
