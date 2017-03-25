@@ -22,6 +22,9 @@ export default class Nav extends React.Component {
       <nav>
         <div className="nav-wrapper">
           <Link to={ANIMALS_URL}><img className="logo" src={logo} /></Link>
+          <div className="help">
+            <a href="mailto:pomoc@na4lapy.org?Subject=Zgłoszenie%20problemu%20z%20panelem%20WWW" target="_top">Obsługa klienta: pomoc@na4lapy.org</a>
+          </div>
           <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
           <ul className="right hide-on-med-and-down">
             <li><Link to={ANIMALS_ADD_URL}>Dodaj zwierzę</Link></li>
