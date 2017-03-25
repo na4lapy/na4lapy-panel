@@ -97,7 +97,7 @@ class ShelterForm extends React.Component {
             <label >Województwo</label>
           </div>
           <div className="input-field col s4" >
-            <MaskedInput  value={shelter.accountNumber} onChange={this.accountNumberChange} mask="11-1111-1111-1111-1111-1111-1111" id="accountNumber" ref="accountNumber" name="shelter.accountNumber" type="text" placeholder="Numer konta bankowego"/>
+            <MaskedInput  value={shelter.accountNumber} onChange={this.accountNumberChange} mask="11 1111 1111 1111 1111 1111 1111" id="accountNumber" ref="accountNumber" name="shelter.accountNumber" type="text" placeholder="Numer konta bankowego"/>
             <label htmlFor="shelter.accountNumber" className="active">Numer konta bankowego</label>
               {shelterForm.fields.accountNumber
            && shelterForm.fields.accountNumber.errors.incorrect

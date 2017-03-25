@@ -160,6 +160,5 @@ export function resetNewPasswordErrors() {
 }
 
 export function getAreTermsOfUseAccepted() {
-  console.log("getAreTermsOfUseAccepted");
 
 }
