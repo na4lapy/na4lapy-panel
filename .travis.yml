@@ -6,3 +6,7 @@ branches:
   only:
   - master
   - dev
+  
+before_install:
+  ## Install latest version of node
+  - nvm install node
