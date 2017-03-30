@@ -1,7 +1,7 @@
 export default  {
   gender: {
     MALE: 'Samiec',
-    FEMALE: 'Suczka',
+    FEMALE: 'Samica',
     UNKNOWN: 'Nieznana'
   },
 

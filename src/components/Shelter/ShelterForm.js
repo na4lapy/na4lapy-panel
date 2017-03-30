@@ -41,28 +41,28 @@ class ShelterForm extends React.Component {
 
   render () {
     let {shelter, shelterForm} = this.props;
-    console.log(shelterForm);
+    let nameActive = shelter.name.length > 0 ? "active" : "";
     return (
       <Form model="shelter" onSubmit={(shelter) => this.props.onSubmit(shelter)}>
         <h1>Dane schroniska</h1>
 
         <div className="row">
-          <Field model="shelter.name" className="input-field col s8 active">
+          <Field model="shelter.name" className={"input-field col s8 " + nameActive}>
             <input name="shelter.name" type="text" placeholder="Nazwa schroniska"/>
             <label htmlFor="animal.name" className="active" >Nazwa schroniska</label>
           </Field>
-          <Field model="shelter.phoneNumber" className="input-field col s4">
+          <Field model="shelter.phoneNumber" className="input-field col s4 active">
             <input name="shelter.phoneNumber" type="text" placeholder="Numer telefonu"/>
             <label htmlFor="animal.phoneNumber" className="active">Numer telefonu</label>
           </Field>
         </div>
 
         <div className="row">
-          <Field model="shelter.street" className="input-field col s6">
+          <Field model="shelter.street" className="input-field col s6 active">
             <input name="shelter.street" type="text" placeholder="Ulica"/>
             <label htmlFor="shelter.street" className="active">Ulica</label>
           </Field>
-          <Field model="shelter.buildingNumber" className="input-field col s2">
+          <Field model="shelter.buildingNumber" className="input-field col s2 active">
             <input name="shelter.buildingNumber" type="text" placeholder="Nr budynku"/>
             <label htmlFor="shelter.buildingNumber" className="active">Nr budynku</label>
           </Field>

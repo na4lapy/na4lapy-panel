@@ -51,10 +51,6 @@ export function saveAnimal(animal) {
         dispatch(push(ANIMALS_URL));
       }
     });
-    // .catch((err) => {
-    //   // dispatch(saveAnimalFailure());
-    //   toast(err);
-    // });
   };
 
   function saveAnimalRequest(){
