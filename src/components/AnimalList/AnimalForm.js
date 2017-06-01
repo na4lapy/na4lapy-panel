@@ -15,16 +15,9 @@ import {ANIMALS_URL} from '../../routes_urls';
 class AnimalForm extends React.Component {
   constructor(props) {
     super(props);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.removePhoto = this.removePhoto.bind(this);
-    this.errorModalConfirmationCallback = this.errorModalConfirmationCallback.bind(this);
-    this.onBackButtonClick = this.onBackButtonClick.bind(this);
-    this.isAnimalNameValid = this.isAnimalNameValid.bind(this);
     this.state = {
       uploadedFileToBeRemoved: null,
     };
-    this.reloadAnimal = this.reloadAnimal.bind(this);
   }
 
   componentDidMount() {
@@ -76,36 +69,36 @@ class AnimalForm extends React.Component {
 
   }
 
-  handleSelectChange(e){
+  handleSelectChange = (e) => {
     let value = e.target.value;
     this.props.changeModel(e.target.name, value);
   }
 
-  handleSubmit(animal){
+  handleSubmit = (animal) => {
     this.props.saveAnimal(animal);
   }
 
-  onBackButtonClick() {
+  onBackButtonClick = () => {
     this.props.push(ANIMALS_URL);
   }
 
-  errorModalConfirmationCallback() {
+  errorModalConfirmationCallback = () => {
     this.props.clearPhotoUploadError();
   }
 
-  removePhoto(event,id) {
+  removePhoto = (event,id) => {
 
     this.setState({uploadedFileToBeRemoved: this.props.animal.photos[id]}, () => {
         $('#removingFileModal').openModal();
     });
   }
 
-  reloadAnimal() {
+  reloadAnimal = () => {
     this.setState({failedFiles: null});
     this.props.reloadAnimal();
   }
 
-  isAnimalNameValid(name) {
+  isAnimalNameValid = (name) => {
     return name && name.length > 0;
   }
 
