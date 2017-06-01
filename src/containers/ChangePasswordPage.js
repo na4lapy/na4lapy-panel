@@ -28,7 +28,8 @@ class ChangePasswordPage extends React.Component {
 }
 
 ChangePasswordPage.propTypes = {
-  resetModel: PropTypes.func
+  resetModel: PropTypes.func,
+  resetNewPasswordErrors: PropTypes.func
 };
 
 const mapDispatchToProps = (dispatch) => {

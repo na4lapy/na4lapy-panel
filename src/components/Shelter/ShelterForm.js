@@ -33,8 +33,7 @@ class ShelterForm extends React.Component {
 
   accountNumberChange = (e) => {
     let value = e.target.value;
-    this.props.changeModel(e.target.name, value)
-
+    this.props.changeModel(e.target.name, value);
   }
 
   render () {
