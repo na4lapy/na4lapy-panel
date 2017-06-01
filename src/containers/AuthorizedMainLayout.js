@@ -7,7 +7,6 @@ import {logoutUser} from '../actions/AuthActions';
 class AuthorizedMainLayout extends React.Component{
   constructor(props, context) {
     super(props, context);
-    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -29,7 +28,7 @@ class AuthorizedMainLayout extends React.Component{
      }(document, 'script', 'facebook-jssdk'));
   }
 
-  logout(){
+  logout = () => {
     this.props.logoutUser();
   }
 

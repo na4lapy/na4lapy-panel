@@ -13,9 +13,6 @@ class LoginPage extends React.Component {
         email: '',
         password: ''
     };
-    //bind UI events
-    this.onInputChange = this.onInputChange.bind(this);
-    this.onLoginSubmit = this.onLoginSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -25,12 +22,12 @@ class LoginPage extends React.Component {
     Materialize.updateTextFields(); //eslint-disable-line
   }
 
-  onInputChange(event) {
+  onInputChange = (event) => {
       event.preventDefault();
       this.setState({[event.target.name] : event.target.value });
   }
 
-  onLoginSubmit(event) {
+  onLoginSubmit = (event) => {
     event.preventDefault();
     this.props.dispatch(loginUser({email:this.state.email, password: this.state.password}));
   }

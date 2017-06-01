@@ -11,8 +11,6 @@ class ShelterForm extends React.Component {
 
   constructor(props){
     super(props);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
-    this.accountNumberChange = this.accountNumberChange.bind(this);
   }
 
   componentDidMount(){
@@ -28,12 +26,12 @@ class ShelterForm extends React.Component {
     $('select').material_select();
   }
 
-  handleSelectChange(e){
+  handleSelectChange = (e) => {
     let value = e.target.value;
     this.props.changeModel(e.target.name, value);
   }
 
-  accountNumberChange(e) {
+  accountNumberChange = (e) => {
     let value = e.target.value;
     this.props.changeModel(e.target.name, value)
 

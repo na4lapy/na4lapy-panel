@@ -10,8 +10,6 @@ import Loader from '../components/Loader';
 class AnimalAddPage extends React.Component {
   constructor(props) {
     super(props);
-    this.loaderMessage = this.loaderMessage.bind(this);
-    this.reloadAnimal = this.reloadAnimal.bind(this);
   }
 
   componentWillMount() {
@@ -30,13 +28,13 @@ class AnimalAddPage extends React.Component {
    }
   }
 
-  reloadAnimal(){
+  reloadAnimal = () => {
     if(typeof this.props.animalId !== 'undefined') {
       this.props.getAnimals(this.props.animalId);
     }
   }
 
-  loaderMessage() {
+  loaderMessage = () => {
 
     const {animalRequest} = this.props;
     if (animalRequest.photoCount && animalRequest.photoCount != 0) {

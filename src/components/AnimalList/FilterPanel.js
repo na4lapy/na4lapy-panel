@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 export default class FilterPanel extends React.Component {
   constructor(props) {
     super(props);
-    this.handleSelectChange = this.handleSelectChange.bind(this);
   }
 
   componentDidMount() {
@@ -19,7 +18,7 @@ export default class FilterPanel extends React.Component {
     $('select').material_select();
   }
 
-  handleSelectChange(e){
+  handleSelectChange = (e) => {
     this.props.setFilter(e);
   }
 

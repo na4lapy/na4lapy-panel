@@ -18,15 +18,6 @@ class ImageUploader extends React.Component {
       imagePreviewUrls: [],
       url: window.location.pathname
     };
-
-    this.handleFilesUpload = this.handleFilesUpload.bind(this);
-    this.openUploadedModal = this.openUploadedModal.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.removeFromTempQueue = this.removeFromTempQueue.bind(this);
-    this.removeUploadedPhoto = this.removeUploadedPhoto.bind(this);
-    this.openTempPhotosModal = this.openTempPhotosModal.bind(this);
-    this.clearFileQueue = this.clearFileQueue.bind(this);
-    this.tagPhotoAsProfile = this.tagPhotoAsProfile.bind(this);
   }
 
   componentDidMount() {
@@ -43,7 +34,7 @@ class ImageUploader extends React.Component {
     }
   }
 
-  openUploadedModal(e, index){
+  openUploadedModal = (e, index) => {
     this.setState({
        photosType: 'wgranych',
        callback: this.removeUploadedPhoto,
@@ -51,22 +42,22 @@ class ImageUploader extends React.Component {
      }, this.openModal(e, this.props.photos[index].fileName, index));
   }
 
-  openTempPhotosModal(e, index){
+  openTempPhotosModal = (e, index) => {
     this.setState({photosType: 'do wgrania', callback: this.removeFromTempQueue}, this.openModal(e, '', index));
   }
 
-  removeUploadedPhoto() {
+  removeUploadedPhoto = () => {
     this.props.deletePhoto(this.props.animalId, this.state.photoId);
   }
 
-  openModal(e, fileName, index){
+  openModal = (e, fileName, index) => {
     this.setState({removingFileName: fileName, removingFileIndex: index}, () => {
       $('#removingFileModal').modal('open');
     });
 
   }
 
-  removeFromTempQueue() {
+  removeFromTempQueue = () => {
     let files = _.clone(this.state.files);
     let urls = _.clone(this.state.imagePreviewUrls);
 
@@ -85,7 +76,7 @@ class ImageUploader extends React.Component {
     }
   }
 
-  tagPhotoAsProfile(id, isAlreadUploaded,e ) {
+  tagPhotoAsProfile = (id, isAlreadUploaded,e ) => {
     e.preventDefault();
     //reset temp files and already uploaded files to not
     this.setState({
@@ -122,7 +113,7 @@ class ImageUploader extends React.Component {
     this.props.changeModel('animal.photos', photosWithProfiles);
   }
 
-  handleFilesUpload(e){
+  handleFilesUpload = (e) => {
     e.preventDefault();
     let files = e.target.files;
     for (let i = 0; i < files.length; i++) {
@@ -151,13 +142,13 @@ class ImageUploader extends React.Component {
     }
   }
 
-  renderUploadedPhotos(){
+  renderUploadedPhotos = () => {
     if (this.props.photos && this.props.photos.length != 0) {
       return (<UploadedPhotosWrapper tagPhotoAsProfile={this.tagPhotoAsProfile} photos={this.props.photos} removePhoto={this.openUploadedModal}/>);
     }
   }
 
-  clearFileQueue() {
+  clearFileQueue = () => {
       this.setState({
         files: [],
         imagePreviewUrls: []

@@ -19,16 +19,6 @@ import * as facebookActions from '../actions/FacebookActions';
  class AnimalListPage extends React.Component {
   constructor(props) {
     super(props);
-    this.onDeleteClick = this.onDeleteClick.bind(this);
-    this.onEditClick = this.onEditClick.bind(this);
-    this.onAddClick = this.onAddClick.bind(this);
-    this.setFilter = this.setFilter.bind(this);
-    this.onHeaderClick = this.onHeaderClick.bind(this);
-    this.onPublishClick = this.onPublishClick.bind(this);
-    this.resetFilters = this.resetFilters.bind(this);
-    this.onPostToFacebook = this.onPostToFacebook.bind(this);
-    this.shouldRespondToFacebookStateInProps = this.shouldRespondToFacebookStateInProps.bind(this);
-    this.onFbAccountChoosen = this.onFbAccountChoosen.bind(this);
     this.state = {
       animalToBeRemoved: null
     };
@@ -50,49 +40,49 @@ import * as facebookActions from '../actions/FacebookActions';
     window.scrollTo(0, 0);
   }
 
-  onDeleteClick(event, id) {
+  onDeleteClick = (event, id) => {
     const animalToBeRemoved = _.find(this.props.animals, {id});
     this.setState({animalToBeRemoved: animalToBeRemoved}, () => {
       $('#removingAnimalModal').modal('open');
     });
   }
 
-  onEditClick(event, idx) {
+  onEditClick = (event, idx) => {
     this.props.push(ANIMALS_URL + '/' + idx);
   }
 
-  onPostToFacebook(event, animal) {
+  onPostToFacebook = (event, animal) => {
     this.props.postAnimalToFacebook(animal);
   }
 
-  onAddClick(){
+  onAddClick = () => {
     this.props.push(ANIMALS_ADD_URL);
   }
 
-  setFilter(e) {
+  setFilter = (e) => {
     this.props.setFilter(e.target.name, e.target.value);
   }
 
-  onHeaderClick(e, header) {
+  onHeaderClick = (e, header) => {
     this.props.setSorting(header);
   }
 
-  onPublishClick(id) {
+  onPublishClick = (id) => {
     let animalToBePublished = _.find(this.props.animals, {id});
     animalToBePublished.status = 'FOR_ADOPTION';
     this.props.saveAnimal(animalToBePublished);
   }
 
-  onFbAccountChoosen(account_token, account_id) {
+  onFbAccountChoosen = (account_token, account_id) => {
     this.props.onFbAccountChoosen(account_token, account_id, this.props.facebookState.fb_animal);
   }
 
-  resetFilters(event){
+  resetFilters = (event) => {
     event.preventDefault();
     this.props.resetFilters();
   }
 
-  shouldRespondToFacebookStateInProps(props) {
+  shouldRespondToFacebookStateInProps = (props) => {
     return props.facebookState && props.facebookState.accounts && props.facebookState.showPostAsPopup;
   }
 
