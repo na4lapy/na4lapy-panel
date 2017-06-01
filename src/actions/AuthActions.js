@@ -21,7 +21,7 @@ import BASE_URL from '../config';
 
 import toast, {deleteAllCookies, SAVE_PASSWORD_SUCCESS_MESSAGE} from '../utils';
 
-let AUTH_URL = BASE_URL + 'auth/'
+let AUTH_URL = BASE_URL + 'auth/';
 export function loginUser(credentials) {
   return dispatch =>  {
     //dispatch login request started
@@ -149,14 +149,14 @@ export function saveNewPassword(passwordSettings){
       type: SAVE_NEW_PASSWORD_SUCCESS,
       isFetching: false,
       isPasswordChanged: true
-    }
+    };
   }
 }
 
 export function resetNewPasswordErrors() {
     return {
       type: RESET_NEW_PASSWORD_ERRORS
-  }
+  };
 }
 
 export function getAreTermsOfUseAccepted() {
